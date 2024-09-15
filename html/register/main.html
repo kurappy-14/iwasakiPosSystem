@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>会計</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div id="logo"><img src="img/ギョウザ亭.png" class="img"></div>
+        <div id="payment" class="hidden">
+            <span id="close">&times;</span>
+            <div class="paygrid">
+                <div class="pay" onclick="cash()">
+                    <img src="img/cash.jpg" class="payimg" style="width: 80%;">
+                    <p>現金</p>
+                </div>
+                <div class="pay" onclick="Credit()">
+                    <img src="img/Credit.png" class="payimg" style="width: 90%;margin-bottom: 15%;">
+                    <p>クレジットカード</p>
+                    <p>または</p>
+                    <p>デビットカード</p>
+                </div>
+                <div class="pay" onclick="traffic()">
+                    <img src="img/traffic.png" class="payimg" style="width: 90%;margin-bottom: 20%;">
+                    <p>交通系IC</p>
+                </div>
+                <div class="pay" onclick="QUICPay()">
+                    <img src="img/QUICPay.png" class="payimg">
+                    <p>QUICPay</p>
+                </div>
+                <div class="pay" onclick="iD()">
+                    <img src="img/iD.png" class="payimg">
+                    <p>iD</p>
+                </div>
+                <div class="pay" onclick="PayPay()">
+                    <img src="img/PayPay.png" class="payimg" style="width: 80%;">
+                    <p>PayPay</p>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="script.js"></script>
+</html>
