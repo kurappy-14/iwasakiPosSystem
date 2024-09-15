@@ -51,7 +51,7 @@
                     // 完了のリストを更新
                     const doneList = document.getElementById('done-items');
                     doneList.innerHTML = ''; // クリアする
-                    data.done.forEach(item => {
+                    data.completed.forEach(item => {
                         const li = document.createElement('li');
                         li.textContent = item;
                         doneList.appendChild(li);
