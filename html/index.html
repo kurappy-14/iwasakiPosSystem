@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>学園祭</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .list {
+            width: 45%;
+            border: 1px solid black;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>学園祭</h1>
+    </header>
+
+    <div class="container">
+        <div class="list" id="cooking-list">
+            <h2>調理中</h2>
+            <ul id="cooking-items"></ul>
+        </div>
+        <div class="list" id="done-list">
+            <h2>完了</h2>
+            <ul id="done-items"></ul>
+        </div>
+    </div>
+
+    <script>
+        function updateLists() {
+            fetch('read.php')
+                .then(response => response.json())
+                .then(data => {
+                    // 調理中のリストを更新
+                    const cookingList = document.getElementById('cooking-items');
+                    cookingList.innerHTML = ''; // クリアする
+                    data.cooking.forEach(item => {
+                        const li = document.createElement('li');
+                        li.textContent = item;
+                        cookingList.appendChild(li);
+                    });
+
+                    // 完了のリストを更新
+                    const doneList = document.getElementById('done-items');
+                    doneList.innerHTML = ''; // クリアする
+                    data.done.forEach(item => {
+                        const li = document.createElement('li');
+                        li.textContent = item;
+                        doneList.appendChild(li);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        // n秒ごとにリストを更新
+        const updateInterval = 5000; // 例えば5秒ごと
+        setInterval(updateLists, updateInterval);
+
+        // 初回のリスト更新
+        updateLists();
+    </script>
+
+</body>
+
+</html>

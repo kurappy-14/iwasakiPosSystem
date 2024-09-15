@@ -1,0 +1,27 @@
+services:
+  web:
+    build: ./apache
+    container_name: php-apache
+    tty: true
+    ports:
+      - "8080:80"
+    volumes:
+      - ./html:/var/www/html
+    depends_on:
+      - db
+
+  db:
+    build: ./mariaDB
+    container_name: mariaDB
+    environment:
+      MYSQL_DATABASE: exampledb
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      TZ: "Asia/Tokyo"
+      LC_ALL: "C.UTF-8"
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
