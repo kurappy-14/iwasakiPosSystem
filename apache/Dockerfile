@@ -7,10 +7,11 @@ COPY ./php.ini /usr/local/etc/php/
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 
 RUN apt-get update && apt-get install -y \
-    vim
+    vim \ 
+    zip
 
 RUN docker-php-ext-install mysqli pdo pdo_mysql
-
+COPY --from=composer/composer:latest-bin /composer /usr/bin/composer
 RUN a2enmod rewrite
 
 WORKDIR /var/www/html/
