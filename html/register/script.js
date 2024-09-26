@@ -142,38 +142,191 @@ function payment(){     //会計を押したときの処理
 
 //ここから支払方法の処理(今は適当にalert入れてます)
 //totalが購入金額(変更しても大丈夫です)
+let flag = true;
+let paymentid;
 
 function cash(){    //現金での支払い
-    alert("現金で"+total+"円の支払い");
+    
 }
 
 function Credit(){  //クレジットカードまたはデビットカードでの支払い
-    let data = { money:amount, type: "CARD_PRESENT"};
-
+    if(flag){
+        flag = false;
+        document.getElementById("waiting").classList.remove("hidden");
         fetch('checkout.php', {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json',
-    },
-        body: JSON.stringify(data),
-    })
-    .then(response => response.json())
-    .then(data => {console.log('Success:', data)})
-    .catch((error) => {console.error('Error:', error)});
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                amount: total,
+                type: 'CARD_PRESENT'
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success'){
+                paymentid = data.result.checkout.id;
+                console.log("id:"+paymentid);
+            } else {
+                console.error('error');
+            }
+            flag = true;
+        })
+        .catch(error => console.error('Error:', error));
+    }
 }
 
 function traffic(){ //交通系ICでの支払い
-    alert("交通系ICで"+total+"円の支払い");
+    if(flag){
+        flag = false;
+        document.getElementById("waiting").classList.remove("hidden");
+        fetch('checkout.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                amount: total,
+                type: 'FELICA_TRANSPORTATION_GROUP'
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success'){
+                paymentid = data.result.checkout.id;
+                console.log("id:"+paymentid);
+            } else {
+                console.error('error');
+            }
+            flag = true;
+        })
+        .catch(error => console.error('Error:', error));
+    }
 }
 
 function QUICPay(){ //QUICPayでの支払い
-    alert("QUICPayで"+total+"円の支払い");
+    if(flag){
+        flag = false;
+        document.getElementById("waiting").classList.remove("hidden");
+        fetch('checkout.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                amount: total,
+                type: 'FELICA_QUICPAY'
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success'){
+                paymentid = data.result.checkout.id;
+                console.log("id:"+paymentid);
+            } else {
+                console.error('error');
+            }
+            flag = true;
+        })
+        .catch(error => console.error('Error:', error));
+    }
 }
 
 function iD(){  //iDでの支払い
-    alert("iDで"+total+"円の支払い");
+    if(flag){
+        flag = false;
+        document.getElementById("waiting").classList.remove("hidden");
+        fetch('checkout.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                amount: total,
+                type: 'FELICA_ID'
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success'){
+                paymentid = data.result.checkout.id;
+                console.log("id:"+paymentid);
+            } else {
+                console.error('error');
+            }
+            flag = true;
+        })
+        .catch(error => console.error('Error:', error));
+    }
 }
 
 function PayPay(){    //PayPayでの支払い
-    alert("PayPayで"+total+"円の支払い");
+    if(flag){
+        flag = false;
+        document.getElementById("waiting").classList.remove("hidden");
+        fetch('checkout.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                amount: total,
+                type: 'PAYPAY'
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success'){
+                paymentid = data.result.checkout.id;
+                console.log("id:"+paymentid);
+            } else {
+                console.error('error');
+            }
+            flag = true;
+        })
+        .catch(error => console.error('Error:', error));
+    }
+}
+
+//支払いキャンセル
+function cancel(){
+    document.getElementById("waiting").classList.add("hidden");
+    fetch('cancel.php', {
+        method: 'POST',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            paymentid: paymentid
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+let situation;
+
+function complete(){
+    fetch('complete.php', {
+        method: 'POST',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            paymentid: paymentid
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success'){
+            situation = data.result.checkout.status;
+            console.log("status:"+situation);
+        } else {
+            console.error('error');
+        }
+    })
+    .catch(error => console.error('Error:', error));
 }

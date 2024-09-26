@@ -4,20 +4,7 @@ require 'vendor/autoload.php';
 $input = file_get_contents("php://input");
 $data = json_decode($input, true);
 
-$amount = $data['amount'];
-$paymenttype = $data['type'];
-
-$amount_money = new \Square\Models\Money();
-$amount_money->setAmount($amount);
-$amount_money->setCurrency('JPY');
-
-$device_options = new \Square\Models\DeviceCheckoutOptions('313CS145B3003834');
-
-$checkout = new \Square\Models\TerminalCheckout($amount_money, $device_options);
-$checkout->setPaymentType($paymenttype);
-
-$idempotency_key = uniqid('', true);
-$body = new \Square\Models\CreateTerminalCheckoutRequest($idempotency_key, $checkout);
+$id = $data['paymentid'];
 
 //クライアントの定義
 $accessToken = 'EAAAl15Tg27RApW-t7v9QbzlWvpSYtO9_B2K1jJu9nIRKVBrOfwTX2PiXdkzw_q9';
@@ -26,7 +13,7 @@ $client = new \Square\SquareClient([
     'environment' => 'production'
 ]);
 
-$api_response = $client->getTerminalApi()->createTerminalCheckout($body);
+$api_response = $client->getTerminalApi()->cancelTerminalCheckout($id);
 
 if ($api_response->isSuccess()) {
     $result = $api_response->getResult();
