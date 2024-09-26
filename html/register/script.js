@@ -148,7 +148,18 @@ function cash(){    //現金での支払い
 }
 
 function Credit(){  //クレジットカードまたはデビットカードでの支払い
-    alert("クレジットカードまたはデビットカードで"+total+"円の支払い");
+    let data = { money:amount, type: "CARD_PRESENT"};
+
+        fetch('checkout.php', {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+    },
+        body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(data => {console.log('Success:', data)})
+    .catch((error) => {console.error('Error:', error)});
 }
 
 function traffic(){ //交通系ICでの支払い
