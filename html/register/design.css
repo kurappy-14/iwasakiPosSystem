@@ -156,3 +156,39 @@ a.shadow {
     text-align: center;
     margin-top: 10%;
 }
+
+.dli-check-circle {
+    display: inline-block;
+    vertical-align: middle;
+    color: #00ccff;
+    line-height: 1;
+    position: relative;
+    width: 20em;
+    height: 20em;
+    border: 2em solid currentColor;
+    border-radius: 50%;
+    box-sizing: content-box;
+  }
+  
+  .dli-check-circle > span {
+    width: 11.6em;
+    height: 5.22em;
+    border: 2em solid currentColor;
+    border-top: 0;
+    border-right: 0;
+    box-sizing: border-box;
+    transform: translateY(-25%) rotate(-45deg);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+  }
+
+  .circle{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }

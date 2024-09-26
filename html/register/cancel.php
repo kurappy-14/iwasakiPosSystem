@@ -7,7 +7,7 @@ $data = json_decode($input, true);
 $id = $data['paymentid'];
 
 //クライアントの定義
-$accessToken = 'EAAAl15Tg27RApW-t7v9QbzlWvpSYtO9_B2K1jJu9nIRKVBrOfwTX2PiXdkzw_q9';
+$accessToken = 'トークン';
 $client = new \Square\SquareClient([
     'accessToken' => $accessToken,
     'environment' => 'production'

@@ -324,9 +324,17 @@ function complete(){
         if (data.status === 'success'){
             situation = data.result.checkout.status;
             console.log("status:"+situation);
+            //支払が完了していたら～
+            if(situation==='COMPLETED'){
+                done();
+            }
         } else {
             console.error('error');
         }
     })
     .catch(error => console.error('Error:', error));
+}
+
+function done(){
+    document.getElementById("done").classList.remove("hidden");
 }
