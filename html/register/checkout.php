@@ -7,11 +7,16 @@ $data = json_decode($input, true);
 $amount = $data['amount'];
 $paymenttype = $data['type'];
 
+Dotenv\Dotenv::createImmutable(__DIR__)->load();
+
+$TOKEN = $_ENV['TOKEN'];
+$device = $_ENV['DEVICE'];
+
 $amount_money = new \Square\Models\Money();
 $amount_money->setAmount($amount);
 $amount_money->setCurrency('JPY');
 
-$device_options = new \Square\Models\DeviceCheckoutOptions('デバイスID');
+$device_options = new \Square\Models\DeviceCheckoutOptions($device);
 
 $checkout = new \Square\Models\TerminalCheckout($amount_money, $device_options);
 $checkout->setPaymentType($paymenttype);
@@ -20,9 +25,8 @@ $idempotency_key = uniqid('', true);
 $body = new \Square\Models\CreateTerminalCheckoutRequest($idempotency_key, $checkout);
 
 //クライアントの定義
-$accessToken = 'トークン';
 $client = new \Square\SquareClient([
-    'accessToken' => $accessToken,
+    'accessToken' => $TOKEN,
     'environment' => 'production'
 ]);
 

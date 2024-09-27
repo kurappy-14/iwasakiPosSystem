@@ -1,15 +1,18 @@
 <?php
 require 'vendor/autoload.php';
 
+Dotenv\Dotenv::createImmutable(__DIR__)->load();
+
+$TOKEN = $_ENV['TOKEN'];
+
 $input = file_get_contents("php://input");
 $data = json_decode($input, true);
 
 $id = $data['paymentid'];
 
 //クライアントの定義
-$accessToken = 'トークン';
 $client = new \Square\SquareClient([
-    'accessToken' => $accessToken,
+    'accessToken' => $TOKEN,
     'environment' => 'production'
 ]);
 

@@ -337,4 +337,7 @@ function complete(){
 
 function done(){
     document.getElementById("done").classList.remove("hidden");
+    setTimeout(() => {
+        location.reload();
+    }, 8000);
 }
