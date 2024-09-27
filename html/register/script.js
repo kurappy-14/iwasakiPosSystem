@@ -2,6 +2,7 @@
 let product = ["ぎょうざ","ギョウザ","餃子","スーパー餃子","アルティメット餃子","緑茶","綾鷹","お～いお茶","Monster","ドリンクセット"];
 //商品の値段を上から配列に入れる
 let price = [10,100,1000,10000,100000,100,500,200,1000,50000]; //値段を確認
+//それぞれの商品の数を格納
 let amount = [];
 let menu = product.length;
 let drink = 5;  //ドリンクが始まる要素番号(使わない場合は適当に大きな数字)
@@ -9,6 +10,8 @@ let set = 9;    //セットメニューが始まる要素番号(使わない場�
 var total = 0;
 
 Createmenu();
+
+//メニュー欄の作成
 function Createmenu(){
     let list = document.createElement("div");
     list.id = "list";
@@ -98,11 +101,13 @@ function Createmenu(){
     checkout.appendChild(check);
 }
 
+//プラスボタンを押したときの処理
 function increase(i){
     amount[i]++;
     update();
 }
 
+//マイナスボタンを押したときの処理
 function decrease(i){
     if(0<amount[i]){
         amount[i]--;
@@ -110,6 +115,7 @@ function decrease(i){
     update();
 }
 
+//直接編集した時の処理
 function change(i,value){
     if(0<=value){
         amount[i.slice(-1)] = value;
@@ -119,6 +125,7 @@ function change(i,value){
     update();
 }
 
+//数と配列amountを更新する
 function update(){
     for(let i=0;i<menu;i++){
         document.getElementById("count"+i).value = amount[i];
@@ -130,6 +137,7 @@ function update(){
         document.getElementById("total").innerHTML = total+"円";
 }
 
+//モーダルウィンドウの閉じるボタンが押されたときの処理
 document.getElementById("close").onclick = function(){
     document.getElementById("payment").classList.add("hidden");
 }
@@ -309,6 +317,7 @@ function cancel(){
 
 let situation;
 
+//完了ボタンを押したときの処理(支払が完了しているか確認する処理)
 function complete(){
     fetch('complete.php', {
         method: 'POST',
@@ -335,6 +344,7 @@ function complete(){
     .catch(error => console.error('Error:', error));
 }
 
+//支払が完了した時の処理
 function done(){
     document.getElementById("done").classList.remove("hidden");
     setTimeout(() => {

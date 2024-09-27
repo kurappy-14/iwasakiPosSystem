@@ -1,14 +1,17 @@
 <?php
+//自動読み込み
 require 'vendor/autoload.php';
 
-Dotenv\Dotenv::createImmutable(__DIR__)->load();
-
-$TOKEN = $_ENV['TOKEN'];
-
+//変数の利用
 $input = file_get_contents("php://input");
 $data = json_decode($input, true);
-
+//javascriptの変数をphpの変数に代入
 $id = $data['paymentid'];
+
+//.envを使用する
+Dotenv\Dotenv::createImmutable(__DIR__)->load();
+//定義した値を変数に代入
+$TOKEN = $_ENV['TOKEN'];
 
 //クライアントの定義
 $client = new \Square\SquareClient([
