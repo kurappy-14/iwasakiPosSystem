@@ -161,6 +161,7 @@ function Credit(){  //クレジットカードまたはデビットカードで�
     if(flag){
         flag = false;
         document.getElementById("waiting").classList.remove("hidden");
+        connect(1);
         fetch('checkout.php', {
             method: 'POST',
             headers: {
@@ -189,6 +190,7 @@ function traffic(){ //交通系ICでの支払い
     if(flag){
         flag = false;
         document.getElementById("waiting").classList.remove("hidden");
+        connect(1);
         fetch('checkout.php', {
             method: 'POST',
             headers: {
@@ -217,6 +219,7 @@ function QUICPay(){ //QUICPayでの支払い
     if(flag){
         flag = false;
         document.getElementById("waiting").classList.remove("hidden");
+        connect(1);
         fetch('checkout.php', {
             method: 'POST',
             headers: {
@@ -245,6 +248,7 @@ function iD(){  //iDでの支払い
     if(flag){
         flag = false;
         document.getElementById("waiting").classList.remove("hidden");
+        connect(1);
         fetch('checkout.php', {
             method: 'POST',
             headers: {
@@ -273,6 +277,7 @@ function PayPay(){    //PayPayでの支払い
     if(flag){
         flag = false;
         document.getElementById("waiting").classList.remove("hidden");
+        connect(1);
         fetch('checkout.php', {
             method: 'POST',
             headers: {
@@ -311,6 +316,7 @@ function cancel(){
     })
     .then(response => response.json())
     .then(data => {
+        connect(-1);
     })
     .catch(error => console.error('Error:', error));
 }
@@ -336,6 +342,7 @@ function complete(){
             //支払が完了していたら～
             if(situation==='COMPLETED'){
                 done();
+                connect(2);
             }
         } else {
             console.error('error');
@@ -350,4 +357,20 @@ function done(){
     setTimeout(() => {
         location.reload();
     }, 8000);
+}
+
+function connect(i){
+    fetch('connect.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            referenceid: paymentid,
+            status: i
+        })
+    })
+    .then(response => response.json())
+    .then(data => {})
+    .catch(error => console.error('Error:', error));
 }
