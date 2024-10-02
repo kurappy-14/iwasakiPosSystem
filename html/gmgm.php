@@ -11,10 +11,15 @@ use Square\Models\Builders\DeviceCheckoutOptionsBuilder;
 use Square\Models\Currency;
 ///home/usec/iwasakiPosSystem/html/vendor/square/square/src/Models/Builders/CreateTerminalCheckoutRequestBuilder.php
 
+//.envを使用する
+Dotenv\Dotenv::createImmutable(__DIR__)->load();
+//定義した値を変数に代入
+$TOKEN = $_ENV['TOKEN'];
+
 $client = SquareClientBuilder::init()
   ->bearerAuthCredentials(
       BearerAuthCredentialsBuilder::init(
-          'TOKEN'
+          $TOKEN
         )
   )
   ->environment(Environment::PRODUCTION)
