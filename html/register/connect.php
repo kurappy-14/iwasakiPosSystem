@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: application/json; charset=utf-8');
 //変数の利用
 $input = file_get_contents("php://input");
 $data = json_decode($input, true);
@@ -34,7 +35,6 @@ try{
     $result = $datalist->get_result();
 
     while ($row = $result->fetch_assoc()) {
-        echo "Order ID: " . $row['order_id'] . ", reference_number: " . $row['reference_number'] . ", provide_status: " . $row['provide_status'] .", order_date: " . $row['order_date'] ."<br>";
         array_push($order_id,$row['order_id']);
         array_push($reference_number,$row['reference_number']);
         array_push($provide_status,$row["provide_status"]);
@@ -74,3 +74,9 @@ try{
 }catch(Exception $e){
     echo $e->getMessage();
 }
+
+if (empty($response)) {
+    $response = ['status' => 'no data'];
+}
+
+echo json_encode($response);

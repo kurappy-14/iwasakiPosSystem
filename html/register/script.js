@@ -9,6 +9,7 @@ let drink = 5;  //ドリンクが始まる要素番号(使わない場合は適�
 let set = 9;    //セットメニューが始まる要素番号(使わない場合は適当に大きな数字)
 var total = 0;
 
+SetProduct();
 Createmenu();
 
 //メニュー欄の作成
@@ -316,7 +317,6 @@ function cancel(){
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data);
         connect(-1);
     })
     .catch(error => console.error('Error:', error));
@@ -346,7 +346,7 @@ function complete(){
                 connect(2);
             }
         } else {
-            console.error('error');
+
         }
     })
     .catch(error => console.error('Error:', error));
@@ -361,7 +361,6 @@ function done(){
 }
 
 function connect(i){
-    console.log(paymentid);
     fetch('connect.php', {
         method: 'POST',
         headers: {
@@ -374,7 +373,23 @@ function connect(i){
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data);
+
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+function SetProduct(){
+    fetch('SetProduct.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+
     })
     .catch(error => console.error('Error:', error));
 }
