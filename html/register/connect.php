@@ -45,7 +45,7 @@ try{
     $searchid = array_search($referenceid,$reference_number);
 
     if($searchid!==false){
-        if($status==-1){
+        if($status===-1){
             $delete1 = $mysqli->prepare("DELETE FROM purchase WHERE order_id= ? ");
             $delete2 = $mysqli->prepare("DELETE FROM orders WHERE order_id= ? ");
             $delete1->bind_param('i',$order_id[$searchid]);
@@ -61,7 +61,7 @@ try{
         //データを挿入する
         $data = $mysqli->prepare("INSERT INTO orders VALUES(?,?,?,?)");
         $id = count($order_id) + 1;
-        $Rid = "id";
+        $Rid = $referenceid;
         $section = 1;
         $date = date('Y-m-d');
         //?の部分に数値を代入

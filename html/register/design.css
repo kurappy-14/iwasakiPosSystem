@@ -1,76 +1,178 @@
-.semipolar-spinner,
-.semipolar-spinner * {
-    box-sizing: border-box;
-}
-
-.semipolar-spinner {
-    height: 300px;
-    width: 300px;
+.sk-fading-circle {
+    width: 320px;
+    /* サイズ - 可変 */
+    height: 320px;
+    /* サイズ - 可変 */
+    margin: 0 auto;
+    /* 上下マージン - 可変 */
     position: relative;
 }
 
-.spinner-container {
-    display: flex;
-    justify-content: center;
-}
-
-.semipolar-spinner .ring {
-    border-radius: 50%;
+.sk-fading-circle .sk-circle {
+    width: 100%;
+    height: 100%;
     position: absolute;
-    border: calc(300px * 0.05) solid transparent;
-    border-top-color: Turquoise;
-    border-left-color: Tomato;
-    animation: semipolar-spinner-animation 2s infinite;
+    left: 0;
+    top: 0;
 }
 
-.semipolar-spinner .ring:nth-child(1) {
-    height: calc(300px - 300px * 0.2 * 0);
-    width: calc(300px - 300px * 0.2 * 0);
-    top: calc(300px * 0.1 * 0);
-    left: calc(300px * 0.1 * 0);
-    animation-delay: calc(2000ms * 0.1 * 4);
-    z-index: 5;
+.sk-fading-circle .sk-circle:before {
+    content: '';
+    display: block;
+    margin: 0 auto;
+    width: 15%;
+    height: 15%;
+    background-color: #1e90ff;
+    /* ベースの色 - 可変 */
+    border-radius: 100%;
+    -webkit-animation: sk-circleFadeDelay 1.2s infinite ease-in-out both;
+    animation: sk-circleFadeDelay 1.2s infinite ease-in-out both;
 }
 
-.semipolar-spinner .ring:nth-child(2) {
-    height: calc(300px - 300px * 0.2 * 1);
-    width: calc(300px - 300px * 0.2 * 1);
-    top: calc(300px * 0.1 * 1);
-    left: calc(300px * 0.1 * 1);
-    animation-delay: calc(2000ms * 0.1 * 3);
-    z-index: 4;
+.sk-fading-circle .sk-circle2 {
+    -webkit-transform: rotate(30deg);
+    -ms-transform: rotate(30deg);
+    transform: rotate(30deg);
 }
 
-.semipolar-spinner .ring:nth-child(3) {
-    height: calc(300px - 300px * 0.2 * 2);
-    width: calc(300px - 300px * 0.2 * 2);
-    top: calc(300px * 0.1 * 2);
-    left: calc(300px * 0.1 * 2);
-    animation-delay: calc(2000ms * 0.1 * 2);
-    z-index: 3;
+.sk-fading-circle .sk-circle3 {
+    -webkit-transform: rotate(60deg);
+    -ms-transform: rotate(60deg);
+    transform: rotate(60deg);
 }
 
-.semipolar-spinner .ring:nth-child(4) {
-    height: calc(300px - 300px * 0.2 * 3);
-    width: calc(300px - 300px * 0.2 * 3);
-    top: calc(300px * 0.1 * 3);
-    left: calc(300px * 0.1 * 3);
-    animation-delay: calc(2000ms * 0.1 * 1);
-    z-index: 2;
+.sk-fading-circle .sk-circle4 {
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
 }
 
-.semipolar-spinner .ring:nth-child(5) {
-    height: calc(300px - 300px * 0.2 * 4);
-    width: calc(300px - 300px * 0.2 * 4);
-    top: calc(300px * 0.1 * 4);
-    left: calc(300px * 0.1 * 4);
-    animation-delay: calc(2000ms * 0.1 * 0);
-    z-index: 1;
+.sk-fading-circle .sk-circle5 {
+    -webkit-transform: rotate(120deg);
+    -ms-transform: rotate(120deg);
+    transform: rotate(120deg);
 }
 
-@keyframes semipolar-spinner-animation {
-    50% {
-        transform: rotate(360deg) scale(0.7);
+.sk-fading-circle .sk-circle6 {
+    -webkit-transform: rotate(150deg);
+    -ms-transform: rotate(150deg);
+    transform: rotate(150deg);
+}
+
+.sk-fading-circle .sk-circle7 {
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.sk-fading-circle .sk-circle8 {
+    -webkit-transform: rotate(210deg);
+    -ms-transform: rotate(210deg);
+    transform: rotate(210deg);
+}
+
+.sk-fading-circle .sk-circle9 {
+    -webkit-transform: rotate(240deg);
+    -ms-transform: rotate(240deg);
+    transform: rotate(240deg);
+}
+
+.sk-fading-circle .sk-circle10 {
+    -webkit-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    transform: rotate(270deg);
+}
+
+.sk-fading-circle .sk-circle11 {
+    -webkit-transform: rotate(300deg);
+    -ms-transform: rotate(300deg);
+    transform: rotate(300deg);
+}
+
+.sk-fading-circle .sk-circle12 {
+    -webkit-transform: rotate(330deg);
+    -ms-transform: rotate(330deg);
+    transform: rotate(330deg);
+}
+
+.sk-fading-circle .sk-circle2:before {
+    -webkit-animation-delay: -1.1s;
+    animation-delay: -1.1s;
+}
+
+.sk-fading-circle .sk-circle3:before {
+    -webkit-animation-delay: -1s;
+    animation-delay: -1s;
+}
+
+.sk-fading-circle .sk-circle4:before {
+    -webkit-animation-delay: -0.9s;
+    animation-delay: -0.9s;
+}
+
+.sk-fading-circle .sk-circle5:before {
+    -webkit-animation-delay: -0.8s;
+    animation-delay: -0.8s;
+}
+
+.sk-fading-circle .sk-circle6:before {
+    -webkit-animation-delay: -0.7s;
+    animation-delay: -0.7s;
+}
+
+.sk-fading-circle .sk-circle7:before {
+    -webkit-animation-delay: -0.6s;
+    animation-delay: -0.6s;
+}
+
+.sk-fading-circle .sk-circle8:before {
+    -webkit-animation-delay: -0.5s;
+    animation-delay: -0.5s;
+}
+
+.sk-fading-circle .sk-circle9:before {
+    -webkit-animation-delay: -0.4s;
+    animation-delay: -0.4s;
+}
+
+.sk-fading-circle .sk-circle10:before {
+    -webkit-animation-delay: -0.3s;
+    animation-delay: -0.3s;
+}
+
+.sk-fading-circle .sk-circle11:before {
+    -webkit-animation-delay: -0.2s;
+    animation-delay: -0.2s;
+}
+
+.sk-fading-circle .sk-circle12:before {
+    -webkit-animation-delay: -0.1s;
+    animation-delay: -0.1s;
+}
+
+@-webkit-keyframes sk-circleFadeDelay {
+
+    0%,
+    39%,
+    100% {
+        opacity: 0;
+    }
+
+    40% {
+        opacity: 1;
+    }
+}
+
+@keyframes sk-circleFadeDelay {
+
+    0%,
+    39%,
+    100% {
+        opacity: 0;
+    }
+
+    40% {
+        opacity: 1;
     }
 }
 
@@ -107,7 +209,7 @@ a.shadow {
 }
 
 
-.btn{
+.btn {
     font-size: 32px;
     font-weight: 700;
     line-height: 1.5;
@@ -132,27 +234,27 @@ a.shadow {
     margin-right: 2%;
 }
 
-.btn1{
+.btn1 {
     color: #fff;
     background-color: #00bfff;
 }
 
-.btn1:hover{
+.btn1:hover {
     color: #fff;
     background: #00bfff;
 }
 
-.btn2{
+.btn2 {
     color: #fff;
     background-color: #7fff00;
 }
 
-.btn2:hover{
+.btn2:hover {
     color: #fff;
     background: #7fff00;
 }
 
-.btnspace{
+.btnspace {
     text-align: center;
     margin-top: 10%;
 }
@@ -168,9 +270,9 @@ a.shadow {
     border: 2em solid currentColor;
     border-radius: 50%;
     box-sizing: content-box;
-  }
-  
-  .dli-check-circle > span {
+}
+
+.dli-check-circle>span {
     width: 11.6em;
     height: 5.22em;
     border: 2em solid currentColor;
@@ -184,11 +286,11 @@ a.shadow {
     right: 0;
     bottom: 0;
     margin: auto;
-  }
+}
 
-  .circle{
+.circle {
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-  }
+}
