@@ -1,5 +1,6 @@
 {
     "require": {
-        "square/square": "^38.1"
+        "square/square": "^38.1",
+        "vlucas/phpdotenv": "^5.4"
     }
 }
