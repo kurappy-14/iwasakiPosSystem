@@ -161,7 +161,6 @@ function Credit(){  //クレジットカードまたはデビットカードで�
     if(flag){
         flag = false;
         document.getElementById("waiting").classList.remove("hidden");
-        connect(1);
         fetch('checkout.php', {
             method: 'POST',
             headers: {
@@ -177,6 +176,7 @@ function Credit(){  //クレジットカードまたはデビットカードで�
             if (data.status === 'success'){
                 paymentid = data.result.checkout.id;
                 console.log("id:"+paymentid);
+                connect(1);
             } else {
                 console.error('error');
             }
@@ -190,7 +190,6 @@ function traffic(){ //交通系ICでの支払い
     if(flag){
         flag = false;
         document.getElementById("waiting").classList.remove("hidden");
-        connect(1);
         fetch('checkout.php', {
             method: 'POST',
             headers: {
@@ -206,6 +205,7 @@ function traffic(){ //交通系ICでの支払い
             if (data.status === 'success'){
                 paymentid = data.result.checkout.id;
                 console.log("id:"+paymentid);
+                connect(1);
             } else {
                 console.error('error');
             }
@@ -219,7 +219,6 @@ function QUICPay(){ //QUICPayでの支払い
     if(flag){
         flag = false;
         document.getElementById("waiting").classList.remove("hidden");
-        connect(1);
         fetch('checkout.php', {
             method: 'POST',
             headers: {
@@ -235,6 +234,7 @@ function QUICPay(){ //QUICPayでの支払い
             if (data.status === 'success'){
                 paymentid = data.result.checkout.id;
                 console.log("id:"+paymentid);
+                connect(1);
             } else {
                 console.error('error');
             }
@@ -248,7 +248,6 @@ function iD(){  //iDでの支払い
     if(flag){
         flag = false;
         document.getElementById("waiting").classList.remove("hidden");
-        connect(1);
         fetch('checkout.php', {
             method: 'POST',
             headers: {
@@ -264,6 +263,7 @@ function iD(){  //iDでの支払い
             if (data.status === 'success'){
                 paymentid = data.result.checkout.id;
                 console.log("id:"+paymentid);
+                connect(1);
             } else {
                 console.error('error');
             }
@@ -277,7 +277,6 @@ function PayPay(){    //PayPayでの支払い
     if(flag){
         flag = false;
         document.getElementById("waiting").classList.remove("hidden");
-        connect(1);
         fetch('checkout.php', {
             method: 'POST',
             headers: {
@@ -293,6 +292,7 @@ function PayPay(){    //PayPayでの支払い
             if (data.status === 'success'){
                 paymentid = data.result.checkout.id;
                 console.log("id:"+paymentid);
+                connect(1);
             } else {
                 console.error('error');
             }
@@ -316,6 +316,7 @@ function cancel(){
     })
     .then(response => response.json())
     .then(data => {
+        console.log(data);
         connect(-1);
     })
     .catch(error => console.error('Error:', error));
@@ -360,6 +361,7 @@ function done(){
 }
 
 function connect(i){
+    console.log(paymentid);
     fetch('connect.php', {
         method: 'POST',
         headers: {
@@ -371,6 +373,8 @@ function connect(i){
         })
     })
     .then(response => response.json())
-    .then(data => {})
+    .then(data => {
+        console.log(data);
+    })
     .catch(error => console.error('Error:', error));
 }

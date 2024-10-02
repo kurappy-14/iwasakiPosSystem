@@ -2,6 +2,8 @@
 //自動読み込み
 require 'vendor/autoload.php';
 
+header("Content-Type: application/json; charset=UTF-8");
+
 //変数の利用
 $input = file_get_contents("php://input");
 $data = json_decode($input, true);
