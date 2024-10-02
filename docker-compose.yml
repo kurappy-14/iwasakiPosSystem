@@ -9,6 +9,9 @@ services:
       - ./html:/var/www/html
     depends_on:
       - db
+    command: > 
+      bash -c "composer install && apache2-foreground"
+
 
   db:
     build: ./mariaDB
