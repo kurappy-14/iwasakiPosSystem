@@ -67,6 +67,8 @@ try{
         //?の部分に数値を代入
         $data->bind_param('ssss',$id,$Rid,$section,$date);
         $data->execute();
+        //orderidを受け渡す
+        $response = ['status' => 'success', 'id' => $id];
     }
 
     //データベースとの接続を解除

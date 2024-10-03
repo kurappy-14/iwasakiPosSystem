@@ -26,7 +26,7 @@ try{
     for ($i = 0; $i < count($product); $i++) {
         //データを挿入する
         $data = $mysqli->prepare("INSERT INTO products VALUES(?,?,?)");
-        $productid = "N" . $i;
+        $productid = "P" . $i;
         $productname = $product[$i];
         $productprice = $price[$i];
         //?の部分に数値を代入

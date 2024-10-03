@@ -351,6 +351,7 @@ function complete(){
             if(situation==='COMPLETED'){
                 done();
                 connect(2);
+                order();
             }
         } else {
 
@@ -367,6 +368,8 @@ function done(){
     }, 8000);
 }
 
+let ordercode;
+
 function connect(i){
     fetch('connect.php', {
         method: 'POST',
@@ -380,7 +383,9 @@ function connect(i){
     })
     .then(response => response.json())
     .then(data => {
-
+        if (data.id) { 
+            ordercode = data.id;
+        }
     })
     .catch(error => console.error('Error:', error));
 }
@@ -394,6 +399,24 @@ function SetProduct(){
         body: JSON.stringify({
             product: product,
             price: price
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+function order(){
+    fetch('order.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            orderid: ordercode,
+            amount: amount
         })
     })
     .then(response => response.json())
