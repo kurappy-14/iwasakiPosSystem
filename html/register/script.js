@@ -8,6 +8,7 @@ let menu = product.length;
 let drink = 5;  //ドリンクが始まる要素番号(使わない場合は適当に大きな数字)
 let set = 9;    //セットメニューが始まる要素番号(使わない場合は適当に大きな数字)
 var total = 0;
+let fluctuation = true;
 
 SetProduct();
 Createmenu();
@@ -141,11 +142,13 @@ function update(){
 //モーダルウィンドウの閉じるボタンが押されたときの処理
 document.getElementById("close").onclick = function(){
     document.getElementById("payment").classList.add("hidden");
+    fluctuation = ture;
 }
 
 
 function payment(){     //会計を押したときの処理
     document.getElementById("payment").classList.remove("hidden");
+    fluctuation = false;
 }
 
 
@@ -385,6 +388,8 @@ function SetProduct(){
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+            product: product,
+            price: price
         })
     })
     .then(response => response.json())
