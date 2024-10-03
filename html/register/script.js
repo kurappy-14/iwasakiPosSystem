@@ -105,16 +105,20 @@ function Createmenu(){
 
 //プラスボタンを押したときの処理
 function increase(i){
-    amount[i]++;
-    update();
+    if(fluctuation){
+        amount[i]++;
+        update();
+    }
 }
 
 //マイナスボタンを押したときの処理
 function decrease(i){
-    if(0<amount[i]){
-        amount[i]--;
+    if(fluctuation){
+        if(0<amount[i]){
+            amount[i]--;
+        }
+        update();
     }
-    update();
 }
 
 //直接編集した時の処理
