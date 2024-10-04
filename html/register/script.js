@@ -146,7 +146,7 @@ function update(){
 //モーダルウィンドウの閉じるボタンが押されたときの処理
 document.getElementById("close").onclick = function(){
     document.getElementById("payment").classList.add("hidden");
-    fluctuation = ture;
+    fluctuation = true;
 }
 
 
