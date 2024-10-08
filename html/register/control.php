@@ -4,8 +4,8 @@ header('Content-Type: application/json; charset=utf-8');
 $input = file_get_contents("php://input");
 $data = json_decode($input, true);
 //javascriptの変数をphpの変数に代入
-$checkout = isset($data['CheckoutID']) ? $data['CheckoutID'] : "NULL";
-$order = isset($data['OrderID']) ? $data['OrderID'] : "NULL";
+$checkout = $data['CheckoutID'];
+$order = $data['OrderID'];
 
 try{
     //データベースと接続
@@ -33,12 +33,33 @@ try{
     $product_code = [];
     $product_name = [];
     $price = [];
+    $test;
 
-
-    //データを挿入する
-    $data1 = $mysqli->prepare("SELECT * FROM orders");
-    $data1->execute();
-    $result1 = $data1->get_result();
+    if($checkout!="" && $order!=""){
+        $data1 = $mysqli->prepare("SELECT * FROM orders WHERE order_id LIKE ? AND reference_number LIKE ?");
+        $order = '%'.$order.'%';
+        $checkout = '%'.$checkout.'%';
+        $data1->bind_param('ss',$order,$checkout);
+        $data1->execute();
+        $result1 = $data1->get_result();
+    }else if ($order!=""){
+        $data1 = $mysqli->prepare("SELECT * FROM orders WHERE order_id LIKE ?");
+        $order = '%'.$order.'%';
+        $data1->bind_param('s',$order);
+        $data1->execute();
+        $result1 = $data1->get_result();
+    }else if ($checkout!=""){
+        $data1 = $mysqli->prepare("SELECT * FROM orders WHERE reference_number LIKE ?");
+        $checkout = '%'.$checkout.'%';
+        $data1->bind_param('s',$checkout);
+        $data1->execute();
+        $result1 = $data1->get_result();
+    }else{
+        //データを挿入する
+        $data1 = $mysqli->prepare("SELECT * FROM orders");
+        $data1->execute();
+        $result1 = $data1->get_result();
+    }
     
     
     //ordersテーブルのデータを配列に挿入
@@ -97,7 +118,7 @@ try{
             'product_code' => $product_code,
             'product_name' => $product_name,
             'price' => $price,
-        ]
+        ],
     ];
 
     //JSONで返却

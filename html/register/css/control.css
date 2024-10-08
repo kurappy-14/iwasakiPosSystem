@@ -43,3 +43,9 @@ th,td{
 thead{
     background-color: skyblue;
 }
+
+#nonetext{
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+}
