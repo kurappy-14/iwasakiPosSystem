@@ -1,0 +1,244 @@
+.img{
+    height: 100%;
+    width: 100%;
+}
+
+#logo{
+    flex-grow: 0;
+    height: 100vh;
+    width: 40vw;
+    position: relative;
+    background-color: maroon;
+}
+
+body{
+    background-color: antiquewhite;
+    display: flex;
+    margin:0;
+    overflow: hidden;
+}
+
+#count{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+    grid-gap: 0px;
+    padding: 20px;
+}
+
+.count{
+    background-color: white;
+    border: 1px solid black;
+    border-right: none;
+    border-left: none;
+    padding: 5px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.plus{
+    background-color: pink;
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+}
+
+.plus:hover{
+    background-color: #FFB6C1;
+    cursor: pointer;
+}
+
+.minus{
+    background-color: lightblue;
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+}
+
+.minus:hover{
+    background-color: #87CEFA;
+    cursor: pointer;
+}
+
+#menu{
+    padding: 10px;
+    font-size:18px;
+    font-weight: bold;
+    margin:10px;
+    margin-left: 20%;
+    display: flex;
+    margin-top: -60px;
+}
+
+h1{
+    text-align: center;
+    font-size: 48px;
+    font-family: 'Hiragino Mincho Pro', 'Hiragino Maru Gothic Pro', 'MS PMincho', 'MS Gothic', serif;
+    margin-bottom: 10%;
+}
+
+p{
+    margin-top: 25px;
+    font-size: 20px;
+    font-family: 'Hiragino Mincho Pro', 'Hiragino Maru Gothic Pro', 'MS PMincho', 'MS Gothic', serif;
+    font-weight: bold;
+}
+
+#list{
+    flex:1;
+}
+
+#price{
+    margin-left: auto;
+}
+
+h2{
+    margin-top: -3%;
+    text-align: center;
+    font-size: 32px;
+    border-bottom: 1px solid black;
+    margin-bottom: 5%;
+    font-family: 'Hiragino Mincho Pro', 'Hiragino Maru Gothic Pro', 'MS PMincho', 'MS Gothic', serif;
+}
+
+#checkout{
+    flex:1;
+    display: flex;
+    margin-top: -2%;
+    margin-left: 30%;
+}
+
+#total{
+    font-size: 36px;
+    padding:5px;
+    margin-left: 30%;
+}
+
+#check{
+    font-size: 36px;
+    border:1px solid black;
+    color: white;
+    background-color: red;
+    padding:5px;
+    margin-left: auto;
+    margin-right: 20%;
+}
+
+#check:hover{
+    cursor: pointer;
+}
+
+.hidden{
+    display:none;
+}
+
+#payment{
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 50vw;
+    height: 50vw;
+    overflow: auto;
+    background-color: white;
+    border: 1px solid #888;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    margin-right: 2%;
+}
+
+#close:hover,#close:focus{
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.pay{
+    border: 2px solid black;
+    margin: 10px;
+    text-align: center;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    border-radius: 10px;
+}
+
+.pay:hover{
+    border-color: blue;
+}
+
+.pay p{
+    margin-top: -5%;
+    font-weight: bold;
+}
+
+.paygrid{
+    display: grid;
+    grid-template-columns: repeat(2,20vw);
+    grid-template-rows: repeat(3,20vw);
+    gap: 10px;
+    margin-top: 5%;
+    justify-content: center;
+    align-content:center;
+}
+
+.payimg{
+    width: 100%;
+    margin-bottom: 10%;
+}
+
+#waiting{
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 50vw;
+    height: 50vw;
+    overflow: auto;
+    background-color: white;
+    border: 1px solid #888;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.wait{
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    margin-top: 10%;
+    margin-bottom: -2%;
+}
+
+.wait2{
+    text-align: center;
+    font-size: 32px;
+}
+
+#done{
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 50vw;
+    height: 50vw;
+    overflow: auto;
+    background-color: white;
+    border: 1px solid #888;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

@@ -8,7 +8,9 @@ let menu = product.length;
 let drink = 5;  //ドリンクが始まる要素番号(使わない場合は適当に大きな数字)
 let set = 9;    //セットメニューが始まる要素番号(使わない場合は適当に大きな数字)
 var total = 0;
+let fluctuation = true;
 
+SetProduct();
 Createmenu();
 
 //メニュー欄の作成
@@ -103,16 +105,20 @@ function Createmenu(){
 
 //プラスボタンを押したときの処理
 function increase(i){
-    amount[i]++;
-    update();
+    if(fluctuation){
+        amount[i]++;
+        update();
+    }
 }
 
 //マイナスボタンを押したときの処理
 function decrease(i){
-    if(0<amount[i]){
-        amount[i]--;
+    if(fluctuation){
+        if(0<amount[i]){
+            amount[i]--;
+        }
+        update();
     }
-    update();
 }
 
 //直接編集した時の処理
@@ -140,11 +146,13 @@ function update(){
 //モーダルウィンドウの閉じるボタンが押されたときの処理
 document.getElementById("close").onclick = function(){
     document.getElementById("payment").classList.add("hidden");
+    fluctuation = true;
 }
 
 
 function payment(){     //会計を押したときの処理
     document.getElementById("payment").classList.remove("hidden");
+    fluctuation = false;
 }
 
 
@@ -161,7 +169,6 @@ function Credit(){  //クレジットカードまたはデビットカードで�
     if(flag){
         flag = false;
         document.getElementById("waiting").classList.remove("hidden");
-        connect(1);
         fetch('checkout.php', {
             method: 'POST',
             headers: {
@@ -177,6 +184,7 @@ function Credit(){  //クレジットカードまたはデビットカードで�
             if (data.status === 'success'){
                 paymentid = data.result.checkout.id;
                 console.log("id:"+paymentid);
+                connect(1);
             } else {
                 console.error('error');
             }
@@ -190,7 +198,6 @@ function traffic(){ //交通系ICでの支払い
     if(flag){
         flag = false;
         document.getElementById("waiting").classList.remove("hidden");
-        connect(1);
         fetch('checkout.php', {
             method: 'POST',
             headers: {
@@ -206,6 +213,7 @@ function traffic(){ //交通系ICでの支払い
             if (data.status === 'success'){
                 paymentid = data.result.checkout.id;
                 console.log("id:"+paymentid);
+                connect(1);
             } else {
                 console.error('error');
             }
@@ -219,7 +227,6 @@ function QUICPay(){ //QUICPayでの支払い
     if(flag){
         flag = false;
         document.getElementById("waiting").classList.remove("hidden");
-        connect(1);
         fetch('checkout.php', {
             method: 'POST',
             headers: {
@@ -235,6 +242,7 @@ function QUICPay(){ //QUICPayでの支払い
             if (data.status === 'success'){
                 paymentid = data.result.checkout.id;
                 console.log("id:"+paymentid);
+                connect(1);
             } else {
                 console.error('error');
             }
@@ -248,7 +256,6 @@ function iD(){  //iDでの支払い
     if(flag){
         flag = false;
         document.getElementById("waiting").classList.remove("hidden");
-        connect(1);
         fetch('checkout.php', {
             method: 'POST',
             headers: {
@@ -264,6 +271,7 @@ function iD(){  //iDでの支払い
             if (data.status === 'success'){
                 paymentid = data.result.checkout.id;
                 console.log("id:"+paymentid);
+                connect(1);
             } else {
                 console.error('error');
             }
@@ -277,7 +285,6 @@ function PayPay(){    //PayPayでの支払い
     if(flag){
         flag = false;
         document.getElementById("waiting").classList.remove("hidden");
-        connect(1);
         fetch('checkout.php', {
             method: 'POST',
             headers: {
@@ -293,6 +300,7 @@ function PayPay(){    //PayPayでの支払い
             if (data.status === 'success'){
                 paymentid = data.result.checkout.id;
                 console.log("id:"+paymentid);
+                connect(1);
             } else {
                 console.error('error');
             }
@@ -343,9 +351,10 @@ function complete(){
             if(situation==='COMPLETED'){
                 done();
                 connect(2);
+                order();
             }
         } else {
-            console.error('error');
+
         }
     })
     .catch(error => console.error('Error:', error));
@@ -359,6 +368,8 @@ function done(){
     }, 8000);
 }
 
+let ordercode;
+
 function connect(i){
     fetch('connect.php', {
         method: 'POST',
@@ -371,6 +382,46 @@ function connect(i){
         })
     })
     .then(response => response.json())
-    .then(data => {})
+    .then(data => {
+        if (data.id) { 
+            ordercode = data.id;
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+function SetProduct(){
+    fetch('SetProduct.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            product: product,
+            price: price
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+function order(){
+    fetch('order.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            orderid: ordercode,
+            amount: amount
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+
+    })
     .catch(error => console.error('Error:', error));
 }
