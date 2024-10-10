@@ -64,39 +64,40 @@
         <!-- 待機中の注文 -->
         <div class="order-column" id="pending-orders">
             <h2>待機中の注文</h2>
-            <? 
+            <?
             $query = "SELECT order_id FROM orders WHERE provide_status = 2;";
             $result = $conn->query($query);
-            
+
 
             ?>
 
             <? for ($i = 0; $i < $result->num_rows; $i++) { ?>
-                <? 
-                    $row = $result->fetch_assoc();
-                    $order_id = $row['order_id'];
-                    
-                    ?>
+                <?
+                $row = $result->fetch_assoc();
+                $order_id = $row['order_id'];
+
+                ?>
 
                 <div class="order" id="">
                     <h3>注文番号: <? echo $order_id ?> </h3>
                     <?
-                            $query = "SELECT p.product_name, pu.quantity FROM purchase pu JOIN products p ON pu.product_code = p.product_code WHERE pu.order_id = $order_id;";
-                            $result2 = $conn->query($query);
+                    $query = "SELECT p.product_name, pu.quantity FROM purchase pu JOIN products p ON pu.product_code = p.product_code WHERE pu.order_id = $order_id;";
+                    $result2 = $conn->query($query);
                     ?>
                     <ul>
                         <? for ($j = 0; $j < $result2->num_rows; $j++) { ?>
-                            <? 
-                                $row2 = $result2->fetch_assoc();
-                                $product_code = $row2['product_name'];
-                                $quantity = $row2['quantity'];
+                            <?
+                            $row2 = $result2->fetch_assoc();
+                            $product_code = $row2['product_name'];
+                            $quantity = $row2['quantity'];
                             ?>
                             <li><? echo $product_code ?>: <? echo $quantity ?> </li>
                         <? } ?>
                     </ul>
                     <div class="button-group">
-                        <button onclick="moveToNextStatus('')">調理中へ</button>
-                        <button onclick="cancelOrder('')">キャンセル</button>
+                        <a href="tocooking.php?order_id=<? echo $order_id ?>">
+                            <button>調理中へ</button>
+                        </a>
                     </div>
                 </div>
             <? } ?>
@@ -105,39 +106,41 @@
         <!-- 調理中の注文 -->
         <div class="order-column" id="cooking-orders">
             <h2>調理中の注文</h2>
-            <? 
+            <?
             $query = "SELECT order_id FROM orders WHERE provide_status = 3;";
             $result = $conn->query($query);
-            
+
 
             ?>
 
             <? for ($i = 0; $i < $result->num_rows; $i++) { ?>
-                <? 
-                    $row = $result->fetch_assoc();
-                    $order_id = $row['order_id'];
-                    
-                    ?>
+                <?
+                $row = $result->fetch_assoc();
+                $order_id = $row['order_id'];
+
+                ?>
 
                 <div class="order" id="">
                     <h3>注文番号: <? echo $order_id ?> </h3>
                     <?
-                            $query = "SELECT p.product_name, pu.quantity FROM purchase pu JOIN products p ON pu.product_code = p.product_code WHERE pu.order_id = $order_id;";
-                            $result2 = $conn->query($query);
+                    $query = "SELECT p.product_name, pu.quantity FROM purchase pu JOIN products p ON pu.product_code = p.product_code WHERE pu.order_id = $order_id;";
+                    $result2 = $conn->query($query);
                     ?>
                     <ul>
                         <? for ($j = 0; $j < $result2->num_rows; $j++) { ?>
-                            <? 
-                                $row2 = $result2->fetch_assoc();
-                                $product_code = $row2['product_name'];
-                                $quantity = $row2['quantity'];
+                            <?
+                            $row2 = $result2->fetch_assoc();
+                            $product_code = $row2['product_name'];
+                            $quantity = $row2['quantity'];
                             ?>
                             <li><? echo $product_code ?>: <? echo $quantity ?> </li>
                         <? } ?>
                     </ul>
                     <div class="button-group">
-                        <button onclick="moveToNextStatus('')">調理中へ</button>
-                        <button onclick="cancelOrder('')">キャンセル</button>
+                        <a href="tocooked.php?order_id=<? echo $order_id ?>">
+                            <button>受け取り待ちにする</button>
+                        </a>
+
                     </div>
                 </div>
             <? } ?>
@@ -146,63 +149,48 @@
         <!-- 受け取り待ちの注文 -->
         <div class="order-column" id="waiting-pickup-orders">
             <h2>受け取り待ちの注文</h2>
-            <? 
+            <?
             $query = "SELECT order_id FROM orders WHERE provide_status = 4;";
             $result = $conn->query($query);
-            
+
 
             ?>
 
             <? for ($i = 0; $i < $result->num_rows; $i++) { ?>
-                <? 
-                    $row = $result->fetch_assoc();
-                    $order_id = $row['order_id'];
-                    
-                    ?>
+                <?
+                $row = $result->fetch_assoc();
+                $order_id = $row['order_id'];
+
+                ?>
 
                 <div class="order" id="">
                     <h3>注文番号: <? echo $order_id ?> </h3>
                     <?
-                            $query = "SELECT p.product_name, pu.quantity FROM purchase pu JOIN products p ON pu.product_code = p.product_code WHERE pu.order_id = $order_id;";
-                            $result2 = $conn->query($query);
+                    $query = "SELECT p.product_name, pu.quantity FROM purchase pu JOIN products p ON pu.product_code = p.product_code WHERE pu.order_id = $order_id;";
+                    $result2 = $conn->query($query);
                     ?>
                     <ul>
                         <? for ($j = 0; $j < $result2->num_rows; $j++) { ?>
-                            <? 
-                                $row2 = $result2->fetch_assoc();
-                                $product_code = $row2['product_name'];
-                                $quantity = $row2['quantity'];
+                            <?
+                            $row2 = $result2->fetch_assoc();
+                            $product_code = $row2['product_name'];
+                            $quantity = $row2['quantity'];
                             ?>
                             <li><? echo $product_code ?>: <? echo $quantity ?> </li>
                         <? } ?>
                     </ul>
                     <div class="button-group">
-                        <button onclick="moveToNextStatus('')">調理中へ</button>
-                        <button onclick="cancelOrder('')">キャンセル</button>
+                    <a href="tofinish.php?order_id=<?echo $order_id?>">
+                        <button>受け取り完了</button>
+                    </a>
+                    <a href="tocooking.php?order_id=<?echo $order_id?>">
+                        <button>戻す</button>
+                    </a>
                     </div>
                 </div>
             <? } ?>
-    </div>
+        </div>
 
-    <script>
-        // ステータスを次に移行する関数
-        function moveToNextStatus(orderId) {
-            alert(orderId + ' を次のステータスに移動します');
-            // 実際のステータス変更処理はここに書くよ！
-        }
-
-        // キャンセル処理
-        function cancelOrder(orderId) {
-            alert(orderId + ' をキャンセルします');
-            // キャンセル処理はここに追加するよ！
-        }
-
-        // 受け取り完了処理
-        function completeOrder(orderId) {
-            alert(orderId + ' の受け取りが完了しました');
-            // 完了処理をここに追加するんだ！
-        }
-    </script>
 
 </body>
 
