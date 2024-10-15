@@ -349,9 +349,10 @@ function complete(){
             console.log("status:"+situation);
             //支払が完了していたら～
             if(situation==='COMPLETED'){
-                done();
                 connect(2);
                 order();
+                postprinter();
+                done();
             }
         } else {
 
@@ -417,6 +418,28 @@ function order(){
         body: JSON.stringify({
             orderid: ordercode,
             amount: amount
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+function postprinter(){
+    let order = [];
+    for (let i = 0; i < product.length; i++) {
+        order.push({ name: product[i], count: amount[i] });
+    }
+    fetch('printer.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            orderid: ordercode,
+            order: order
         })
     })
     .then(response => response.json())
