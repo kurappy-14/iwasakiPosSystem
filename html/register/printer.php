@@ -15,7 +15,7 @@ $order = $data['order'];
     <script type="module">
         import { PrintRequest } from "./receiptPrinter.js"
         document.getElementById("Print").addEventListener("click", async() =>{
-            const req = new PrintRequest(<?php echo $order;?>,<?php echo json_encode($order);?>);
+            const req = new PrintRequest(<?php echo $orderid;?>,<?php echo json_encode($order);?>);
             document.getElementById("result").innerText= "request  sent..." ;
             await req.join();
             document.getElementById("result").innerText= req.status ;
