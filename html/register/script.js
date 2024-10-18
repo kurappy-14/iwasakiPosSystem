@@ -430,8 +430,12 @@ function order(){
 function postprinter(){
     let order = [];
     for (let i = 0; i < product.length; i++) {
-        order.push({ name: product[i], count: amount[i] });
+        if(0<amount[i]){
+            order.push({ name: product[i], count: amount[i] });
+        }
     }
+    console.log(ordercode);
+    console.log(order);
     fetch('printer.php', {
         method: 'POST',
         headers: {
@@ -439,12 +443,12 @@ function postprinter(){
         },
         body: JSON.stringify({
             orderid: ordercode,
-            order: order
+            orderlist: order
         })
     })
     .then(response => response.json())
     .then(data => {
-
+        console.log(data);
     })
     .catch(error => console.error('Error:', error));
 }
