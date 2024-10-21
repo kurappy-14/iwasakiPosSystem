@@ -94,3 +94,9 @@ function Input(event) {
 
 document.getElementById('searchid').addEventListener('input', Input);
 document.getElementById('searchorder').addEventListener('input', Input);
+
+function printer(){
+    let printid = document.getElementById("print").value;
+    let params = `?id=${printid}`;
+    let win = window.open(`Cprinter.php${params}`,"popupWindow","width=1px,height=1px");
+}
