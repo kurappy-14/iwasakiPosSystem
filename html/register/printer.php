@@ -1,13 +1,8 @@
 <?php
-    //変数の利用
-    $input = file_get_contents("php://input");
-    $data = json_decode($input, true);
-    //javascriptの変数をphpの変数に代入
-    $orderid = $data['orderid'];
-    $order = $data['orderlist'];
-    $idtmp = json_encode($orderid, JSON_UNESCAPED_UNICODE);
-    $ordertmp = json_encode($order, JSON_UNESCAPED_UNICODE);
-    //無理！！なんだこれ！！消え去れ!!!!!!!!
+    $ordercode = $_GET['order'];
+    $list = json_decode($_GET['orderlist'], true);
+    $id = json_encode($ordercode,JSON_UNESCAPED_UNICODE);
+    $orderlist = json_encode($list,JSON_UNESCAPED_UNICODE);
     echo <<<EOM
     <!DOCTYPE html>
     <html lang="ja">
@@ -16,11 +11,12 @@
         <title>test</title>
         <script type="module">
                 import { PrintRequest } from "../samples/receiptPrinter/receiptPrinter.js";
-                const orderid = $idtmp;
-                const orderlist = $ordertmp;
+                const orderid = $id;
+                const orderlist = $orderlist;
                 async function post(){
                     const req = new PrintRequest(orderid,orderlist);
                     await req.join();
+                    await window.close();
                 }
                 post();
         </script>

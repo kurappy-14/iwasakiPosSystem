@@ -434,21 +434,6 @@ function postprinter(){
             order.push({ name: product[i], count: amount[i] });
         }
     }
-    console.log(ordercode);
-    console.log(order);
-    fetch('printer.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            orderid: ordercode,
-            orderlist: order
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-    })
-    .catch(error => console.error('Error:', error));
+    let params = `?order=${ordercode}&orderlist=${encodeURIComponent(JSON.stringify(order))}`;
+    let win = window.open(`printer.php${params}`,"popupWindow","width=1px,height=1px");
 }
