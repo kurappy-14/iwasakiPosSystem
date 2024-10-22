@@ -75,8 +75,8 @@ function display(){
             
         let cell4 = document.createElement("td");
         let button = document.createElement("a");
-        button.id = "print"+id[i];
-        button.classList.add("print");
+        button.id = "print"+i;
+        button.classList.add("printer");
         button.addEventListener("click", function() {
             let id = this.id.slice(-1);
             click(id);
@@ -116,6 +116,30 @@ function connect(i){
         body: JSON.stringify({
             referenceid: reference_number[ID],
             status: i
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+function print(){
+    let params = `?id=${id[ID]}`;
+    let win = window.open(`Cprinter.php${params}`,"popupWindow","width=1px,height=1px");
+}
+
+function reback(){
+    let backid = document.getElementById("print").value;
+    fetch('connect.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            referenceid: backid,
+            status: 1
         })
     })
     .then(response => response.json())
