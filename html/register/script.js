@@ -345,36 +345,32 @@ let situation;
 //完了ボタンを押したときの処理(支払が完了しているか確認する処理)
 let completeorder = true;
 function complete(){
-    if(completeorder){
-        completeorder = false;
-        fetch('complete.php', {
-            method: 'POST',
-            headers:{
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                paymentid: paymentid
-            })
+    fetch('complete.php', {
+        method: 'POST',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            paymentid: paymentid
         })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success'){
-                situation = data.result.checkout.status;
-                console.log("status:"+situation);
-                //支払が完了していたら～
-                if(situation==='COMPLETED'){
-                    done();
-                    connect(2);
-                    order();
-                }else{
-                    completeorder = true;
-                }
-            } else {
-                completeorder = true;
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success'){
+            situation = data.result.checkout.status;
+            console.log("status:"+situation);
+            //支払が完了していたら～
+            if(situation==='COMPLETED'){
+                connect(2);
+                order();
+                postprinter();
+                done();
             }
-        })
-        .catch(error => console.error('Error:', error));
-    }
+        } else {
+
+        }
+    })
+    .catch(error => console.error('Error:', error));
 }
 
 //支払が完了した時の処理
@@ -443,21 +439,13 @@ function order(){
     .catch(error => console.error('Error:', error));
 }
 
-function randomstring(length) {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let result = '';
-    const charactersLength = characters.length;
-    for (let i = 0; i < length; i++) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+function postprinter(){
+    let order = [];
+    for (let i = 0; i < product.length; i++) {
+        if(0<amount[i]){
+            order.push({ name: product[i], count: amount[i] });
+        }
     }
-    return result;
-}
-
-function donecash(){
-    document.getElementById("payment").classList.add("hidden");
-    document.getElementById("textdone").textContent = "レジでお支払いをお願い致します";
-    document.getElementById("done").classList.remove("hidden");
-    setTimeout(() => {
-        location.reload();
-    }, 8000);
+    let params = `?order=${ordercode}&orderlist=${encodeURIComponent(JSON.stringify(order))}`;
+    let win = window.open(`printer.php${params}`,"popupWindow","width=1px,height=1px");
 }
