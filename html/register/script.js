@@ -155,14 +155,25 @@ function payment(){     //会計を押したときの処理
     fluctuation = false;
 }
 
+function sleep(ms){
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 //ここから支払方法の処理(今は適当にalert入れてます)
 //totalが購入金額(変更しても大丈夫です)
 let flag = true;
 let paymentid;
 
-function cash(){    //現金での支払い
-    
+let cashconnect = true;
+async function cash(){    //現金での支払い
+    if(cashconnect){
+        cashconnect = false;
+        paymentid = randomstring(10)
+        await connect(1);
+        await sleep(2000);
+        await order();
+        donecash();
+    }
 }
 
 function Credit(){  //クレジットカードまたはデビットカードでの支払い
@@ -332,32 +343,38 @@ function cancel(){
 let situation;
 
 //完了ボタンを押したときの処理(支払が完了しているか確認する処理)
+let completeorder = true;
 function complete(){
-    fetch('complete.php', {
-        method: 'POST',
-        headers:{
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            paymentid: paymentid
+    if(completeorder){
+        completeorder = false;
+        fetch('complete.php', {
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                paymentid: paymentid
+            })
         })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'success'){
-            situation = data.result.checkout.status;
-            console.log("status:"+situation);
-            //支払が完了していたら～
-            if(situation==='COMPLETED'){
-                done();
-                connect(2);
-                order();
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success'){
+                situation = data.result.checkout.status;
+                console.log("status:"+situation);
+                //支払が完了していたら～
+                if(situation==='COMPLETED'){
+                    done();
+                    connect(2);
+                    order();
+                }else{
+                    completeorder = true;
+                }
+            } else {
+                completeorder = true;
             }
-        } else {
-
-        }
-    })
-    .catch(error => console.error('Error:', error));
+        })
+        .catch(error => console.error('Error:', error));
+    }
 }
 
 //支払が完了した時の処理
@@ -421,7 +438,26 @@ function order(){
     })
     .then(response => response.json())
     .then(data => {
-
+        cashconnect = true;
     })
     .catch(error => console.error('Error:', error));
+}
+
+function randomstring(length) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
+
+function donecash(){
+    document.getElementById("payment").classList.add("hidden");
+    document.getElementById("textdone").textContent = "レジでお支払いをお願い致します";
+    document.getElementById("done").classList.remove("hidden");
+    setTimeout(() => {
+        location.reload();
+    }, 8000);
 }
