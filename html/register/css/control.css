@@ -51,6 +51,7 @@ thead{
 }
 
 .print{
+<<<<<<< Updated upstream
     display: flex;
     justify-content: center;
     gap:30px;
@@ -68,4 +69,11 @@ thead{
     border:solid 2px black;
     background-color: skyblue;
     padding:5px;
+=======
+    cursor: pointer;
+}
+
+.print:hover{
+    color:skyblue;
+>>>>>>> Stashed changes
 }
