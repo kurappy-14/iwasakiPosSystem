@@ -449,3 +449,22 @@ function postprinter(){
     let params = `?order=${ordercode}&orderlist=${encodeURIComponent(JSON.stringify(order))}`;
     let win = window.open(`printer.php${params}`,"popupWindow","width=1px,height=1px");
 }
+
+function randomstring(length) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
+
+function donecash(){
+    document.getElementById("payment").classList.add("hidden");
+    document.getElementById("textdone").textContent = "レジでお支払いをお願い致します";
+    document.getElementById("done").classList.remove("hidden");
+    setTimeout(() => {
+        location.reload();
+    }, 8000);
+}
