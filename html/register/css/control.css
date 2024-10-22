@@ -77,3 +77,9 @@ thead{
 .printer:hover{
     color:skyblue;
 }
+
+.title{
+    font-size: 48px;
+    font-weight: bold;
+    text-align: center;
+}
