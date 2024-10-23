@@ -13,7 +13,7 @@
     <div id="payment" class="hidden">
         <span id="close">&times;</span>
         <div class="paygrid">
-            <div class="pay" onclick="cash()">
+            <div class="pay" onclick="cashaffi()">
                 <img src="img/cash.jpg" class="payimg" style="width: 80%;">
                 <p>現金</p>
             </div>
@@ -72,6 +72,16 @@
             <p class="wait">購入ありがとうございます</p>
             <p class="wait2" id="textdone">案内番号をお受け取りください</p>
             <span class="dli-check-circle"><span></span></span>
+        </div>
+    </div>
+    <div id="cashaffi" class="hidden">
+        <p class="wait3">お支払いは現金でよろしいでしょうか</p>
+        <div class="center">
+            <img src="img/cashA.jpg" style="width: 70%;">
+        </div>
+        <div class="btn3">
+            <a class="btn btn2 cubic shadow" onclick="cashcancel()">戻る</a>
+            <a class="btn btn1 cubic shadow" onclick="cash()">確認</a>
         </div>
     </div>
 </body>
