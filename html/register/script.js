@@ -166,10 +166,14 @@ let paymentid;
 
 let cashconnect = true;
 async function cash(){    //現金での支払い
+    document.getElementById("payment").classList.add("hidden");
     document.getElementById("cashaffi").classList.add("hidden");
+    document.getElementById("textdone").textContent = "レジでお支払いをお願い致します";
+    document.getElementById("done").classList.remove("hidden");
     if(cashconnect){
         cashconnect = false;
-        paymentid = randomstring(10)
+        paymentid = randomstring(10);
+        await sleep(2000);
         await connect(1);
         await sleep(2000);
         await order();
@@ -462,28 +466,6 @@ function randomstring(length) {
 }
 
 function donecash(){
-    document.getElementById("payment").classList.add("hidden");
-    document.getElementById("textdone").textContent = "レジでお支払いをお願い致します";
-    document.getElementById("done").classList.remove("hidden");
-    setTimeout(() => {
-        location.reload();
-    }, 8000);
-}
-
-function randomstring(length) {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let result = '';
-    const charactersLength = characters.length;
-    for (let i = 0; i < length; i++) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
-}
-
-function donecash(){
-    document.getElementById("payment").classList.add("hidden");
-    document.getElementById("textdone").textContent = "レジでお支払いをお願い致します";
-    document.getElementById("done").classList.remove("hidden");
     setTimeout(() => {
         location.reload();
     }, 8000);
@@ -508,6 +490,5 @@ function cashcancel(){
 }
 
 function cashaffi(){
-    document.getElementById("payment").classList.add("hidden");
     document.getElementById("cashaffi").classList.remove("hidden");
 }

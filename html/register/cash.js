@@ -78,17 +78,39 @@ function display(){
         button.id = "print"+i;
         button.classList.add("printer");
         button.addEventListener("click", function() {
-            let id = this.id.slice(-1);
-            click(id);
+            if (confirm("清算済みにしますか？")) {
+                let id = this.id.slice(-1);
+                click(id);
+                extraction();
+            } else {
+
+            }
         });
         button.textContent = "支払完了";
         cell4.appendChild(button);
+
+        let cell5 = document.createElement("td");
+        let button2 = document.createElement("a");
+        button2.id = "del"+i;
+        button2.classList.add("del");
+        button2.addEventListener("click", function() {
+            if (confirm("削除しますか？")) {
+                let id = this.id.slice(-1);
+                clickdel(id);
+                extraction();
+            } else {
+
+            }
+        });
+        button2.textContent = "削除";
+        cell5.appendChild(button2);
 
         newtr.appendChild(cell1);
         newtr.appendChild(cell2);
         newtr.appendChild(cell3);
         newtr.appendChild(cell6);
         newtr.appendChild(cell4);
+        newtr.appendChild(cell5);
         table.appendChild(newtr);
         count++;
     }
@@ -98,7 +120,7 @@ function display(){
     }
 }
 
-setInterval(extraction, 5000);
+setInterval(extraction, 3000);
 
 let ID;
 function click(i){
@@ -147,4 +169,9 @@ function reback(){
         
     })
     .catch(error => console.error('Error:', error));
+}
+
+function clickdel(i){
+    ID = i;
+    connect(-1);
 }

@@ -60,7 +60,7 @@ try{
     }else{
         //データを挿入する
         $data = $mysqli->prepare("INSERT INTO orders VALUES(?,?,?,?)");
-        $id = count($order_id) + 1;
+        $id = end($order_id) + 1;
         $Rid = $referenceid;
         $section = 1;
         $date = date('Y-m-d');
