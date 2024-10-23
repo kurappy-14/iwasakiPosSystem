@@ -166,6 +166,7 @@ let paymentid;
 
 let cashconnect = true;
 async function cash(){    //現金での支払い
+    document.getElementById("payment").classList.add("hidden");
     document.getElementById("cashaffi").classList.add("hidden");
     document.getElementById("textdone").textContent = "レジでお支払いをお願い致します";
     document.getElementById("done").classList.remove("hidden");
@@ -488,6 +489,5 @@ function cashcancel(){
 }
 
 function cashaffi(){
-    document.getElementById("payment").classList.add("hidden");
     document.getElementById("cashaffi").classList.remove("hidden");
 }
