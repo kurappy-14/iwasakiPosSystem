@@ -82,7 +82,7 @@ class Numberreceipt{
         const totalWidth = 30;
         const spacesNeeded = totalWidth - nameWidth - count.length;
         
-        return '<text>' + name + ' '.repeat(spacesNeeded) + count + '個&#10;</text>';
+        return '<text>' + name + ' '.repeat(spacesNeeded) + count + '点&#10;</text>';
     }
 
     formatArray(arr) {
