@@ -83,3 +83,11 @@ thead{
     font-weight: bold;
     text-align: center;
 }
+
+.del{
+    cursor: pointer;
+}
+
+.del:hover{
+    color:red;
+}
