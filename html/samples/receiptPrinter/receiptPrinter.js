@@ -1,5 +1,5 @@
 // receiptPrinter.js
-const URL = 'http://192.168.1.90/cgi-bin/epos/service.cgi?devid=local_printer&timeout=10000';
+const URL = 'http://192.168.137.25/cgi-bin/epos/service.cgi?devid=local_printer&timeout=10000';
 const TIMEOUT = 5000
 /*
 
@@ -82,7 +82,7 @@ class Numberreceipt{
         const totalWidth = 30;
         const spacesNeeded = totalWidth - nameWidth - count.length;
         
-        return '<text>' + name + ' '.repeat(spacesNeeded) + count + '&#10</text>';
+        return '<text>' + name + ' '.repeat(spacesNeeded) + count + '個&#10;</text>';
     }
 
     formatArray(arr) {
