@@ -39,7 +39,11 @@ INSERT INTO products (product_code, product_name, price)
 VALUES 
 ('P001', 'Product A', 1000),
 ('P002', 'Product B', 1500),
-('P003', 'Product C', 2000);
+('P003', 'Product C', 2000),
+('G001', '餃子', 150),
+('G002', '生茶', 50),
+('G003', 'カルピスウォーター', 50),
+('G004', 'キリンレモン', 50);
 
 INSERT INTO purchase (order_id, product_code, quantity) 
 VALUES 
