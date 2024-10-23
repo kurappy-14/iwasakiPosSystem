@@ -172,7 +172,8 @@ async function cash(){    //現金での支払い
     document.getElementById("done").classList.remove("hidden");
     if(cashconnect){
         cashconnect = false;
-        paymentid = randomstring(10)
+        paymentid = randomstring(10);
+        await sleep(2000);
         await connect(1);
         await sleep(2000);
         await order();
