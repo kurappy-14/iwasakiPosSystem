@@ -167,17 +167,19 @@ let paymentid;
 let cashconnect = true;
 async function cash(){    //現金での支払い
     document.getElementById("payment").classList.add("hidden");
-    document.getElementById("cashaffi").classList.add("hidden");
-    document.getElementById("textdone").textContent = "レジでお支払いをお願い致します";
-    document.getElementById("done").classList.remove("hidden");
+    document.getElementById("textdone").textContent = "支払いは完了しました";
     if(cashconnect){
         cashconnect = false;
         paymentid = randomstring(10);
         await sleep(2000);
         await connect(1);
         await sleep(2000);
+        await connect(2);
+        await postprinter();
+        await document.getElementById("cashaffi").classList.add("hidden");
+        await document.getElementById("done").classList.remove("hidden");
         await order();
-        donecash();
+        await donecash();
     }
 }
 
