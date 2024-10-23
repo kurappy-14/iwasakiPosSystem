@@ -1,16 +1,12 @@
 let id, reference_number, provide_status, date, orderid, ordercode, quantity, product_code, product_name, price;
 extraction();
 function extraction(){
-    CheckoutID = document.getElementById("searchid").value;
-    OrderID = document.getElementById("searchorder").value;
-    fetch('control.php', {
+    fetch('cash.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            CheckoutID: CheckoutID,
-            OrderID: OrderID
         })
     })
     .then(response => response.json())
@@ -46,39 +42,53 @@ function display(){
         table.deleteRow(i);
     }
     //新しく行を作成し挿入する
-    for(let i=0;i<orderid.length;i++){
+    for(let i=0;i<id.length;i++){
         let index;
         let newtr = document.createElement("tr");
         let cell1 = document.createElement("td");
-        if(!(orderid[i])){
+        if(!(id[i])){
             continue
         }
-        cell1.textContent = orderid[i];
+        cell1.textContent = id[i];
+        cell1.id = "id"+i;
 
-        index = id.indexOf(orderid[i]);
+        index = id.indexOf(id[i]);
         let cell2 = document.createElement("td");
         if(!(reference_number[index])){
             continue
         }
         cell2.textContent = reference_number[index];
-        let cell5 = document.createElement("td");
-        cell5.textContent = provide_status[index];
         let cell6 = document.createElement("td");
         cell6.textContent = date[index];
 
         index = product_code.indexOf(ordercode[i]);
         let cell3 = document.createElement("td");
-        cell3.textContent = product_name[index];
+        let total=0;
+        for(let j=0;j<orderid.length;j++){
+            if(id[i]==orderid[j]){
+                let priceindex = product_code.indexOf(ordercode[j]);
+                let mathtotal = quantity[j] * price[priceindex]
+                total += mathtotal;
+            }
+        }
+        cell3.textContent = total;
             
         let cell4 = document.createElement("td");
-        cell4.textContent = quantity[i];
+        let button = document.createElement("a");
+        button.id = "print"+i;
+        button.classList.add("printer");
+        button.addEventListener("click", function() {
+            let id = this.id.slice(-1);
+            click(id);
+        });
+        button.textContent = "支払完了";
+        cell4.appendChild(button);
 
         newtr.appendChild(cell1);
         newtr.appendChild(cell2);
         newtr.appendChild(cell3);
-        newtr.appendChild(cell4);
-        newtr.appendChild(cell5);
         newtr.appendChild(cell6);
+        newtr.appendChild(cell4);
         table.appendChild(newtr);
         count++;
     }
@@ -88,15 +98,53 @@ function display(){
     }
 }
 
-function Input(event) {
-    extraction();
+setInterval(extraction, 5000);
+
+let ID;
+function click(i){
+    ID = i;
+    connect(2);
+    print();
 }
 
-document.getElementById('searchid').addEventListener('input', Input);
-document.getElementById('searchorder').addEventListener('input', Input);
+function connect(i){
+    fetch('connect.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            referenceid: reference_number[ID],
+            status: i
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        
+    })
+    .catch(error => console.error('Error:', error));
+}
 
-function printer(){
-    let printid = document.getElementById("print").value;
-    let params = `?id=${printid}`;
+function print(){
+    let params = `?id=${id[ID]}`;
     let win = window.open(`Cprinter.php${params}`,"popupWindow","width=1px,height=1px");
+}
+
+function reback(){
+    let backid = document.getElementById("print").value;
+    fetch('connect.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            referenceid: backid,
+            status: 1
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        
+    })
+    .catch(error => console.error('Error:', error));
 }
