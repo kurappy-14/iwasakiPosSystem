@@ -118,7 +118,7 @@ function display(){
     }
 }
 
-setInterval(extraction, 5000);
+setInterval(extraction, 3000);
 
 let ID;
 function click(i){
