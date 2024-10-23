@@ -161,8 +161,17 @@ function payment(){     //会計を押したときの処理
 let flag = true;
 let paymentid;
 
-function cash(){    //現金での支払い
-    
+let cashconnect = true;
+async function cash(){    //現金での支払い
+    document.getElementById("cashaffi").classList.add("hidden");
+    if(cashconnect){
+        cashconnect = false;
+        paymentid = randomstring(10)
+        await connect(1);
+        await sleep(2000);
+        await order();
+        donecash();
+    }
 }
 
 function Credit(){  //クレジットカードまたはデビットカードでの支払い
@@ -424,4 +433,46 @@ function order(){
 
     })
     .catch(error => console.error('Error:', error));
+}
+
+function randomstring(length) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
+
+function donecash(){
+    document.getElementById("payment").classList.add("hidden");
+    document.getElementById("textdone").textContent = "レジでお支払いをお願い致します";
+    document.getElementById("done").classList.remove("hidden");
+    setTimeout(() => {
+        location.reload();
+    }, 8000);
+}
+
+function cashcancel(){
+    document.getElementById("cashaffi").classList.add("hidden");
+    fetch('cancel.php', {
+        method: 'POST',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            paymentid: paymentid
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        connect(-1);
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+function cashaffi(){
+    document.getElementById("payment").classList.add("hidden");
+    document.getElementById("cashaffi").classList.remove("hidden");
 }
