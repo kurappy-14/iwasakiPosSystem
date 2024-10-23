@@ -81,6 +81,7 @@ function display(){
             if (confirm("清算済みにしますか？")) {
                 let id = this.id.slice(-1);
                 click(id);
+                extraction();
             } else {
 
             }
@@ -96,6 +97,7 @@ function display(){
             if (confirm("削除しますか？")) {
                 let id = this.id.slice(-1);
                 clickdel(id);
+                extraction();
             } else {
 
             }
