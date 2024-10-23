@@ -177,7 +177,7 @@ async function cash(){    //現金での支払い
         await connect(1);
         await sleep(2000);
         await order();
-        donecash();
+        await donecash();
     }
 }
 
