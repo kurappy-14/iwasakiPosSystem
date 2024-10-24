@@ -385,7 +385,7 @@ function complete(){
 
 //支払が完了した時の処理
 function done(){
-    document.getElementById("waitingfor").classList.remove("hidden");
+    document.getElementById("waitingfor").classList.add("hidden");
     document.getElementById("done").classList.remove("hidden");
     setTimeout(() => {
         location.reload();
