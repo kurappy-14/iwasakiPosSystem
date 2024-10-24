@@ -51,8 +51,6 @@ class Numberreceipt{
             '<feed unit="15"/>'+
             '<text align="center"/>'+
             this.formatArray(this.order)+
-            '<feed unit="24"/>'+
-            '<text>番号札はお品物交換時に&#10;回収させていただきます&#10;</text>'+
             '<feed unit="15"/>'+
             '<text>------------------------------&#10;</text>'+
             '<feed unit="15"/>'+
