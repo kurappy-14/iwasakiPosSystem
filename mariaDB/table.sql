@@ -52,7 +52,11 @@ INSERT INTO products (product_code, product_name, price) VALUES
 ('P002', 'Pasta', 1000),
 ('P003', 'Salad', 800),
 ('P004', 'Soup', 600),
-('P005', 'Dessert', 500);
+('P005', 'Dessert', 500),
+('G001', '餃子', 150),
+('G002', '生茶', 50),
+('G003', 'カルピスウォーター', 50),
+('G004', 'キリンレモン', 50);
 
 -- purchaseテーブルへのデータ挿入（全ての注文に2種類以上の商品が含まれるように）
 INSERT INTO purchase (order_id, product_code, quantity) VALUES
