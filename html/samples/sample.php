@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 }
 
 // テーブル名を指定
-$table = "purchase";
+$table = "orders";
 
 // カラムとレコードを取得するSQLクエリ
 $sql = "SELECT * FROM $table";
