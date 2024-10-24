@@ -1,16 +1,13 @@
-//商品名を上から配列に入れる
-let product = ["ぎょうざ","生茶","カルピスウォーター","キリンレモン"];
-//商品の値段を上から配列に入れる
-let price = [150,50,50,50]; //値段を確認
-//それぞれの商品の数を格納
+let food = [{name:"ぎょうざ",price:150}];
+let drink = [{name:"生茶",price:50},{name:"カルピスウォーター",price:50},{name:"キリンレモン",price:50}];
+let set = [];
+let product = [];
+SetProduct();
 let amount = [];
 let menu = product.length;
-let drink = 1;  //ドリンクが始まる要素番号(使わない場合は適当に大きな数字)
-let set = 99;    //セットメニューが始まる要素番号(使わない場合は適当に大きな数字)
 var total = 0;
 let fluctuation = true;
 
-//SetProduct();
 Createmenu();
 
 //メニュー欄の作成
@@ -25,11 +22,11 @@ function Createmenu(){
     title.textContent = "料理";
     list.appendChild(title);
     for(let i=0;i<menu;i++){
-        if(drink==i){
+        if((food.length)==i){
             title = document.createElement("h2");
             title.textContent = "ドリンク";
             list.appendChild(title);
-        }else if(set==i){
+        }else if((food.length+drink.length)==i){
             title = document.createElement("h2");
             title.textContent = "セットメニュー";
             list.appendChild(title);
@@ -37,10 +34,10 @@ function Createmenu(){
         let div = document.createElement("div");
         div.id = "menu";
         let productname = document.createElement("p");
-        productname.textContent = product[i];
+        productname.textContent = product[i].name;
         div.appendChild(productname);        
         let productprice = document.createElement("p");
-        productprice.textContent = price[i]+"円";
+        productprice.textContent = product[i].price+"円";
         productprice.id = "price";
         div.appendChild(productprice);
 
@@ -138,7 +135,7 @@ function update(){
     }
     total = 0;
     for(let i=0;i<menu;i++){
-        total += price[i]*amount[i];
+        total += product[i].price*amount[i];
     }
         document.getElementById("total").innerHTML = total+"円";
 }
@@ -411,6 +408,7 @@ function connect(i){
 }
 
 function SetProduct(){
+    /*
     fetch('SetProduct.php', {
         method: 'POST',
         headers: {
@@ -426,6 +424,13 @@ function SetProduct(){
 
     })
     .catch(error => console.error('Error:', error));
+    */
+   for(let i=0;i<food.length;i++){
+    product.push(food[i]);
+   }
+   for(let j=0;j<drink.length;j++){
+    product.push(drink[j]);
+   }
 }
 
 function order(){
@@ -450,7 +455,7 @@ function postprinter(){
     let order = [];
     for (let i = 0; i < product.length; i++) {
         if(0<amount[i]){
-            order.push({ name: product[i], count: amount[i] });
+            order.push({ name: product[i].name, count: amount[i] });
         }
     }
     let params = `?order=${ordercode}&orderlist=${encodeURIComponent(JSON.stringify(order))}`;
