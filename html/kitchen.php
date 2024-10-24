@@ -40,6 +40,12 @@
             margin-right: 5px;
         }
     </style>
+    <script>
+        // 5秒ごとにページをリロード
+        setTimeout(function() {
+            location.reload();
+        }, 3000);
+    </script>
 </head>
 
 <body>
