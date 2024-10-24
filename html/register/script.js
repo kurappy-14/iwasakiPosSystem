@@ -1,16 +1,16 @@
 //商品名を上から配列に入れる
-let product = ["ぎょうざ","生茶","カルピスウォーター","キリンレモン"];
+let product = ["ぎょうざ","ギョウザ","餃子","スーパー餃子","アルティメット餃子","緑茶","綾鷹","お～いお茶","Monster","ドリンクセット"];
 //商品の値段を上から配列に入れる
 let price = [150,50,50,50]; //値段を確認
 //それぞれの商品の数を格納
 let amount = [];
 let menu = product.length;
 let drink = 1;  //ドリンクが始まる要素番号(使わない場合は適当に大きな数字)
-let set = 99;    //セットメニューが始まる要素番号(使わない場合は適当に大きな数字)
+let set = Infinity;    //セットメニューが始まる要素番号(使わない場合は適当に大きな数字)
 var total = 0;
 let fluctuation = true;
 
-//SetProduct();
+SetProduct();
 Createmenu();
 
 //メニュー欄の作成
