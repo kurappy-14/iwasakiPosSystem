@@ -4,18 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>学園祭</title>
-    <link rel="stylesheet" href="css/style.css">
-    <style>
-        .container {
-            display: flex;
-            justify-content: space-between;
-        }
-        .list {
-            width: 45%;
-            border: 1px solid black;
-            padding: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -24,19 +13,27 @@
     </header>
 
     <div class="container">
-        <div class="list" id="cooking-list">
-            <h2>調理中</h2>
-            <ul id="cooking-items"></ul>
+        <div class="border">
+            <div class="textborder1">
+                <h2>調理中</h2>
+            </div>
+            <div class="list" id="cooking-list">
+                <ul id="cooking-items"></ul>
+            </div>
         </div>
-        <div class="list" id="done-list">
-            <h2>完了</h2>
-            <ul id="done-items"></ul>
+        <div class="border">
+            <div class="textborder2">
+                <h2>完了</h2>
+            </div>
+            <div class="list" id="done-list">
+                <ul id="done-items"></ul>
+            </div>
         </div>
     </div>
 
     <script>
         function updateLists() {
-            fetch('read.php')
+            fetch('../samples/read.php')
                 .then(response => response.json())
                 .then(data => {
                     // 調理中のリストを更新
@@ -61,7 +58,7 @@
         }
 
         // n秒ごとにリストを更新
-        const updateInterval = 5000; // 例えば5秒ごと
+        const updateInterval = 500; // 例えば5秒ごと
         setInterval(updateLists, updateInterval);
 
         // 初回のリスト更新

@@ -272,3 +272,19 @@ h2{
 .btn3{
     text-align: center;
 }
+
+#waitingfor{
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 50vw;
+    height: 50vw;
+    overflow: auto;
+    background-color: white;
+    border: 1px solid #888;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

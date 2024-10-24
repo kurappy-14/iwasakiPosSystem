@@ -165,6 +165,7 @@ let cashconnect = true;
 async function cash(){    //現金での支払い
     document.getElementById("payment").classList.add("hidden");
     document.getElementById("textdone").textContent = "支払いは完了しました";
+    document.getElementById("waitingfor").classList.remove("hidden");
     if(cashconnect){
         cashconnect = false;
         paymentid = randomstring(10);
@@ -174,6 +175,7 @@ async function cash(){    //現金での支払い
         await connect(2);
         await postprinter();
         await document.getElementById("cashaffi").classList.add("hidden");
+        document.getElementById("waitingfor").classList.add("hidden");
         await document.getElementById("done").classList.remove("hidden");
         await order();
         await donecash();
@@ -349,36 +351,41 @@ let situation;
 //完了ボタンを押したときの処理(支払が完了しているか確認する処理)
 let completeorder = true;
 function complete(){
-    fetch('complete.php', {
-        method: 'POST',
-        headers:{
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            paymentid: paymentid
+    if(completeorder){
+        document.getElementById("waitingfor").classList.remove("hidden");
+        completeorder = false;
+        fetch('complete.php', {
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                paymentid: paymentid
+            })
         })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'success'){
-            situation = data.result.checkout.status;
-            console.log("status:"+situation);
-            //支払が完了していたら～
-            if(situation==='COMPLETED'){
-                connect(2);
-                order();
-                postprinter();
-                done();
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success'){
+                situation = data.result.checkout.status;
+                console.log("status:"+situation);
+                //支払が完了していたら～
+                if(situation==='COMPLETED'){
+                    connect(2);
+                    order();
+                    postprinter();
+                    done();
+                }
+            } else {
+                completeorder = true;
             }
-        } else {
-
-        }
-    })
-    .catch(error => console.error('Error:', error));
+        })
+        .catch(error => console.error('Error:', error));
+    }
 }
 
 //支払が完了した時の処理
 function done(){
+    document.getElementById("waitingfor").classList.remove("hidden");
     document.getElementById("done").classList.remove("hidden");
     setTimeout(() => {
         location.reload();
