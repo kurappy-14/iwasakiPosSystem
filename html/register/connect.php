@@ -63,7 +63,7 @@ try{
         $id = end($order_id) + 1;
         $Rid = $referenceid;
         $section = 1;
-        $date = date('Y-m-d');
+        $date = date('Y-m-d H:i:s');
         //?の部分に数値を代入
         $data->bind_param('ssss',$id,$Rid,$section,$date);
         $data->execute();
