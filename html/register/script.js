@@ -331,6 +331,7 @@ function PayPay(){    //PayPayでの支払い
 function cancel(){
     if (confirm("キャンセルしますか？")) {
         document.getElementById("waiting").classList.add("hidden");
+        flag=true;
         fetch('cancel.php', {
             method: 'POST',
             headers:{
