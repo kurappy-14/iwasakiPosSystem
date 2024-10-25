@@ -506,10 +506,11 @@ function cashcancel(){
     })
     .catch(error => console.error('Error:', error));
     }else{
-        
+
     }
 }
 
 function cashaffi(){
+    document.getElementById("totalcash").textContent = total+"円";
     document.getElementById("cashaffi").classList.remove("hidden");
 }
