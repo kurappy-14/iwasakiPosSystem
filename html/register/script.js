@@ -356,6 +356,8 @@ let completeorder = true;
 function complete(){
     if(completeorder){
         document.getElementById("waitingfor").classList.remove("hidden");
+        document.getElementById("waiting").classList.add("hidden");
+        document.getElementById("payment").classList.add("hidden");
         completeorder = false;
         fetch('complete.php', {
             method: 'POST',
@@ -380,9 +382,20 @@ function complete(){
                 }
             } else {
                 completeorder = true;
+                alert("未完了です");
+                document.getElementById("waitingfor").classList.add("hidden");
+                document.getElementById("waiting").classList.remove("hidden");
+                document.getElementById("payment").classList.remove("hidden");
             }
         })
-        .catch(error => console.error('Error:', error));
+        .catch(error => {
+            alert("エラー");
+            console.error('Error:', error);
+            completeorder = true;
+            document.getElementById("waitingfor").classList.add("hidden");
+            document.getElementById("waiting").classList.remove("hidden");
+            document.getElementById("payment").classList.remove("hidden");
+          });
     }
 }
 
