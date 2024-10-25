@@ -380,6 +380,12 @@ function complete(){
                     order();
                     postprinter();
                     done();
+                }else{
+                    completeorder = true;
+                    alert("未完了です");
+                    document.getElementById("waitingfor").classList.add("hidden");
+                    document.getElementById("waiting").classList.remove("hidden");
+                    document.getElementById("payment").classList.remove("hidden");
                 }
             } else {
                 completeorder = true;
