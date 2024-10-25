@@ -329,21 +329,24 @@ function PayPay(){    //PayPayでの支払い
 
 //支払いキャンセル
 function cancel(){
-    document.getElementById("waiting").classList.add("hidden");
-    fetch('cancel.php', {
-        method: 'POST',
-        headers:{
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            paymentid: paymentid
+    if (confirm("キャンセルしますか？")) {
+        document.getElementById("waiting").classList.add("hidden");
+        fetch('cancel.php', {
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                paymentid: paymentid
+            })
         })
-    })
-    .then(response => response.json())
-    .then(data => {
-        connect(-1);
-    })
-    .catch(error => console.error('Error:', error));
+        .then(response => response.json())
+        .then(data => {
+            connect(-1);
+        })
+        .catch(error => console.error('Error:', error));
+    } else {
+    }
 }
 
 let situation;
@@ -486,6 +489,7 @@ function donecash(){
 }
 
 function cashcancel(){
+    if (confirm("キャンセルしますか？")) {
     document.getElementById("cashaffi").classList.add("hidden");
     fetch('cancel.php', {
         method: 'POST',
@@ -501,6 +505,9 @@ function cashcancel(){
         connect(-1);
     })
     .catch(error => console.error('Error:', error));
+    }else{
+        
+    }
 }
 
 function cashaffi(){
