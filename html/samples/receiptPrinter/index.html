@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <script type="module">
+        import { PrintRequest } from "./receiptPrinter.js"
+
+        // const req = new PrintRequest(12, [{name:"hoge", count:34}, {name:"ﾎｹﾞ", count:99}]);
+
+        document.getElementById("Print").addEventListener("click", async() =>{
+            const req = new PrintRequest(15, [{name:"hoge", count:34}, {name:"ﾎｹﾞ", count:99}]);
+            document.getElementById("result").innerText= "request  sent..." ;
+            await req.join();
+            document.getElementById("result").innerText= req.status ;
+        });
+    </script>
+</head>
+<body>
+    <div style="text-align: center;">
+        <button id="Print">Print</button>
+        <div id="result">
+            result
+        </div>
+    </div>
+</body>
+</html>

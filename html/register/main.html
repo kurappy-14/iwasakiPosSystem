@@ -1,43 +1,109 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>会計</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <div id="logo"><img src="img/ギョウザ亭.png" class="img"></div>
-        <div id="payment" class="hidden">
-            <span id="close">&times;</span>
-            <div class="paygrid">
-                <div class="pay" onclick="cash()">
-                    <img src="img/cash.jpg" class="payimg" style="width: 80%;">
-                    <p>現金</p>
-                </div>
-                <div class="pay" onclick="Credit()">
-                    <img src="img/Credit.png" class="payimg" style="width: 90%;margin-bottom: 15%;">
-                    <p>クレジットカード</p>
-                    <p>または</p>
-                    <p>デビットカード</p>
-                </div>
-                <div class="pay" onclick="traffic()">
-                    <img src="img/traffic.png" class="payimg" style="width: 90%;margin-bottom: 20%;">
-                    <p>交通系IC</p>
-                </div>
-                <div class="pay" onclick="QUICPay()">
-                    <img src="img/QUICPay.png" class="payimg">
-                    <p>QUICPay</p>
-                </div>
-                <div class="pay" onclick="iD()">
-                    <img src="img/iD.png" class="payimg">
-                    <p>iD</p>
-                </div>
-                <div class="pay" onclick="PayPay()">
-                    <img src="img/PayPay.png" class="payimg" style="width: 80%;">
-                    <p>PayPay</p>
-                </div>
+
+<head>
+    <meta charset="UTF-8">
+    <title>会計</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/design.css">
+</head>
+
+<body>
+    <div id="logo"><img src="img/ギョウザ亭.png" class="img"></div>
+    <div id="payment" class="hidden">
+        <span id="close">&times;</span>
+        <div class="paygrid">
+            <div class="pay" onclick="cashaffi()">
+                <img src="img/cash.jpg" class="payimg" style="width: 80%;">
+                <p>現金</p>
+            </div>
+            <div class="pay" onclick="Credit()">
+                <img src="img/Credit.png" class="payimg" style="width: 90%;margin-bottom: 15%;">
+                <p>クレジットカード</p>
+                <p>または</p>
+                <p>デビットカード</p>
+            </div>
+            <div class="pay" onclick="traffic()">
+                <img src="img/traffic.png" class="payimg" style="width: 90%;margin-bottom: 20%;">
+                <p>交通系IC</p>
+            </div>
+            <div class="pay" onclick="QUICPay()">
+                <img src="img/QUICPay.png" class="payimg">
+                <p>QUICPay</p>
+            </div>
+            <div class="pay" onclick="iD()">
+                <img src="img/iD.png" class="payimg">
+                <p>iD</p>
+            </div>
+            <div class="pay" onclick="PayPay()">
+                <img src="img/PayPay.png" class="payimg" style="width: 80%;">
+                <p>PayPay</p>
             </div>
         </div>
-    </body>
-    <script src="script.js"></script>
+    </div>
+
+    <div id="waiting" class="hidden">
+        <p class="wait">支払い受付中</p>
+        <p class="wait2">横の端末から支払いをお願い致します</p>
+        <div class="spinner-container">
+            <div class="sk-fading-circle">
+                <div class="sk-circle1 sk-circle"></div>
+                <div class="sk-circle2 sk-circle"></div>
+                <div class="sk-circle3 sk-circle"></div>
+                <div class="sk-circle4 sk-circle"></div>
+                <div class="sk-circle5 sk-circle"></div>
+                <div class="sk-circle6 sk-circle"></div>
+                <div class="sk-circle7 sk-circle"></div>
+                <div class="sk-circle8 sk-circle"></div>
+                <div class="sk-circle9 sk-circle"></div>
+                <div class="sk-circle10 sk-circle"></div>
+                <div class="sk-circle11 sk-circle"></div>
+                <div class="sk-circle12 sk-circle"></div>
+            </div>
+        </div>
+        <div class="btnspace">
+            <a class="btn btn2 cubic shadow" onclick="cancel()">戻る</a>
+            <a class="btn btn1 cubic shadow" onclick="complete()">完了</a>
+        </div>
+    </div>
+
+    <div id="done" class="hidden">
+        <div class="circle">
+            <p class="wait">購入手続き完了</p>
+            <p class="wait2" id="textdone">案内番号を渡してください</p>
+            <span class="dli-check-circle"><span></span></span>
+        </div>
+    </div>
+    <div id="cashaffi" class="hidden">
+        <p class="wait3">現金での支払いを受付中</p>
+        <p id="totalcash">合計金額.exe</p>
+        <div class="center">
+            <img src="img/cashA.jpg" style="width: 70%;">
+        </div>
+        <div class="btn3">
+            <a class="btn btn2 cubic shadow" onclick="cashcancel()">戻る</a>
+            <a class="btn btn1 cubic shadow" onclick="cash()">確認</a>
+        </div>
+    </div>
+    <div id="waitingfor" class="hidden">
+        <p class="wait4">接続中</p>
+        <div class="spinner-container">
+            <div class="sk-fading-circle">
+                <div class="sk-circle1 sk-circle"></div>
+                <div class="sk-circle2 sk-circle"></div>
+                <div class="sk-circle3 sk-circle"></div>
+                <div class="sk-circle4 sk-circle"></div>
+                <div class="sk-circle5 sk-circle"></div>
+                <div class="sk-circle6 sk-circle"></div>
+                <div class="sk-circle7 sk-circle"></div>
+                <div class="sk-circle8 sk-circle"></div>
+                <div class="sk-circle9 sk-circle"></div>
+                <div class="sk-circle10 sk-circle"></div>
+                <div class="sk-circle11 sk-circle"></div>
+                <div class="sk-circle12 sk-circle"></div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="script.js"></script>
 </html>

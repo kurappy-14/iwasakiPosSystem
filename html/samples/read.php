@@ -20,7 +20,7 @@ if ($conn->connect_error) {
 $table = "orders";
 
 // カラムとレコードを取得するSQLクエリ(調理中)
-$sql = "SELECT order_id FROM $table where provide_status = 1";
+$sql = "SELECT order_id FROM $table where provide_status = 2 or provide_status = 3";
 $result = $conn->query($sql);
 
 // レコードを格納する配列
@@ -41,7 +41,7 @@ if ($result->num_rows > 0) {
 }
 
 // カラムとレコードを取得するSQLクエリ(調理完了)
-$sql = "SELECT order_id FROM $table where provide_status = 2";
+$sql = "SELECT order_id FROM $table where provide_status = 4";
 $result = $conn->query($sql);
 
 // レコードを格納する配列
