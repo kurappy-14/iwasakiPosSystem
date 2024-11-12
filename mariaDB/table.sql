@@ -13,20 +13,14 @@ CREATE TABLE orders (
     provide_status INT,                       -- INT型に変更
     order_date DATETIME
 );
--- 2. categoriesテーブルの作成
-CREATE TABLE categories (
-    category_id VARCHAR(255) PRIMARY KEY, -- 主キー
-    category_name VARCHAR(255)
-);
 
 -- 3. productsテーブルの作成
 CREATE TABLE products (
     product_code VARCHAR(255) PRIMARY KEY, -- 主キー
-    category_id VARCHAR(255),              -- 外部キー
+    category_id VARCHAR(255),             
     product_name VARCHAR(255),
     price INT,
     stockpile INT,
-    FOREIGN KEY (category_id) REFERENCES categories(category_id)
 );
 
 -- 4. purchaseテーブルの作成
@@ -52,10 +46,6 @@ INSERT INTO orders (order_id, call_number, payment_type, reference_number, provi
 (9, 109, '現金', 'REF109', 1, '2023-01-01 14:00:00'),
 (10, 110, 'クレジットカード', 'REF110', 1, '2023-01-01 14:15:00');
 
-
-INSERT INTO categories (category_id, category_name) VALUES
-('C001', 'ドリンク'),
-('C002', 'フード');
 
 
 INSERT INTO products (product_code, category_id, product_name, price, stockpile) VALUES
