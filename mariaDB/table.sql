@@ -14,7 +14,7 @@ CREATE TABLE orders (
     order_date DATETIME
 );
 
--- 3. productsテーブルの作成
+-- 2. productsテーブルの作成
 CREATE TABLE products (
     product_code VARCHAR(255) PRIMARY KEY, -- 主キー
     category_id VARCHAR(255),             
@@ -23,7 +23,7 @@ CREATE TABLE products (
     stockpile INT,
 );
 
--- 4. purchaseテーブルの作成
+-- 3. purchaseテーブルの作成
 CREATE TABLE purchase (
     order_id INT,                     
     product_code VARCHAR(255),        -- 外部キー
