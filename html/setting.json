@@ -1,0 +1,17 @@
+{
+    "Category":[
+        {"name":"食べ物","weight":1},
+        {"name":"飲み物","weight":2},
+        {"name":"非表示","weight":0}
+    ],
+    "paytype":{
+        "JCB":true,
+        "Visa":true,
+        "QUICPay":true,
+        "iD":true,
+        "IC":true,
+        "PayPay":true,
+        "その他":true
+    },
+    "printer":true
+}

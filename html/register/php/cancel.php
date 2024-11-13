@@ -7,7 +7,7 @@ require '../vendor/autoload.php';
 $input = file_get_contents("php://input");
 $data = json_decode($input, true);
 //javascriptの変数をphpの変数に代入
-$id = $data['paymentid'];
+$id = $data['referenceid'];
 
 //.envを使用する
 Dotenv\Dotenv::createImmutable(__DIR__)->load();

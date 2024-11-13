@@ -17,7 +17,7 @@ CREATE TABLE orders (
 -- 2. productsテーブルの作成
 CREATE TABLE products (
     product_code VARCHAR(255) PRIMARY KEY, -- 主キー
-    category_id VARCHAR(255),             
+    category_name VARCHAR(255),             
     product_name VARCHAR(255),
     price INT,
     stockpile INT,
@@ -48,7 +48,7 @@ INSERT INTO orders (order_id, call_number, payment_type, reference_number, provi
 
 
 
-INSERT INTO products (product_code, category_id, product_name, price, stockpile) VALUES
+INSERT INTO products (product_code, category_name, product_name, price, stockpile) VALUES
 ('P001', 'C001', 'コーヒー', 300, 50),
 ('P002', 'C001', 'オレンジジュース', 250, 40),
 ('P003', 'C002', 'ハンバーガー', 500, 30),

@@ -6,7 +6,7 @@ require '../vendor/autoload.php';
 $input = file_get_contents("php://input");
 $data = json_decode($input, true);
 //javascriptの変数をphpの変数に代入
-$amount = $data['amount'];
+$total = $data['total'];
 $paymenttype = $data['type'];
 
 //.envを使用する
@@ -17,7 +17,7 @@ $device = $_ENV['DEVICE'];
 
 //支払情報の設定
 $amount_money = new \Square\Models\Money();
-$amount_money->setAmount($amount);
+$amount_money->setAmount($total);
 $amount_money->setCurrency('JPY');
 
 //ここからよくわからん

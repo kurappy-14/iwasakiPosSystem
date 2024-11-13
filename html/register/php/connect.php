@@ -4,8 +4,11 @@ header('Content-Type: application/json; charset=utf-8');
 $input = file_get_contents("php://input");
 $data = json_decode($input, true);
 //javascriptの変数をphpの変数に代入
+$printer = $data['printer'];
 $referenceid = isset($data['referenceid']) ? $data['referenceid'] : 0;
+$collnumber = $data['callnumber'];
 $status = $data['status'];
+$paytype = $data['paytype'];
 
 $host = "hostname";
 $user = "username";
@@ -14,7 +17,6 @@ $db = "databasename";
 
 try{
     //データベースと接続
-    //$mysqli = new mysqli($host,$user,$password,$db);
     $mysqli = new mysqli("mariaDB","user","password","exampledb");
 
     if( $mysqli->connect_errno ) {
@@ -26,8 +28,6 @@ try{
 
     $order_id = [];
     $reference_number = [];
-    $provide_status = [];
-    $date = [];
 
     $datalist = $mysqli->prepare("SELECT * FROM orders");
     //実行する
@@ -37,8 +37,6 @@ try{
     while ($row = $result->fetch_assoc()) {
         array_push($order_id,$row['order_id']);
         array_push($reference_number,$row['reference_number']);
-        array_push($provide_status,$row["provide_status"]);
-        array_push($date,$row["order_date"]);
     }
 
     //配列からIDを検索する見つかった場合は番号を返す。見つからなかった場合false
@@ -53,22 +51,36 @@ try{
             $delete1->execute();
             $delete2->execute();
         }else{
-            $update = $mysqli->prepare("UPDATE orders SET provide_status = ? WHERE order_id = ?");
-            $update->bind_param('ii',$status,$order_id[$searchid]);
+            $update = $mysqli->prepare("UPDATE orders SET provide_status = ?,callnumber = ? WHERE order_id = ?");
+            $update->bind_param('iii',$status,$callnumber,$order_id[$searchid]);
             $update->execute();
         }
     }else{
         //データを挿入する
-        $data = $mysqli->prepare("INSERT INTO orders VALUES(?,?,?,?)");
-        $id = end($order_id) + 1;
-        $Rid = $referenceid;
-        $section = 1;
-        $date = date('Y-m-d H:i:s');
-        //?の部分に数値を代入
-        $data->bind_param('ssss',$id,$Rid,$section,$date);
-        $data->execute();
-        //orderidを受け渡す
-        $response = ['status' => 'success', 'id' => $id];
+        if($printer){
+            $data = $mysqli->prepare("INSERT INTO orders VALUES(?,?,?,?,?,?)");
+            $id = end($order_id) + 1;
+            $callnumber = $id;
+            $Rid = $referenceid;
+            $section = 1;
+            $date = date('Y-m-d H:i:s');
+            //?の部分に数値を代入
+            $data->bind_param('ssssss',$id,$callnumber,$paytype,$Rid,$section,$date);
+            $data->execute();
+            //orderidを受け渡す
+            $response = ['status' => 'success', 'id' => $id];
+        }else{
+            $data = $mysqli->prepare("INSERT INTO orders VALUES(?,?,?,?,?,?)");
+            $id = end($order_id) + 1;
+            $Rid = $referenceid;
+            $section = 1;
+            $date = date('Y-m-d H:i:s');
+            //?の部分に数値を代入
+            $data->bind_param('ssssss',$id,$callnumber,$paytype,$Rid,$section,$date);
+            $data->execute();
+            //orderidを受け渡す
+            $response = ['status' => 'success', 'id' => $id];
+        }
     }
 
     //データベースとの接続を解除

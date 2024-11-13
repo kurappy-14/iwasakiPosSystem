@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Cash register</title>
+        <link rel="stylesheet" href="css/register.css">
+    </head>
+    <body>
+        <div class="color1">
+            <div id="header">
+                <div id="header1">
+                    <h1 class="title">メニュー</h1>
+                </div>
+                <div id="header2"></div>
+            </div>
+            <div id="menu"></div>
+        </div>
+        <div id="payment" class="hidden">
+            <span id="close">&times;</span>
+            <p class="paytitle">支払方法の選択</p>
+            <div class="paybox" id="cash">
+                <p>現金</p>
+            </div>
+            <div class="paybox" id="JCB">
+                <p>JCB/Diners Club/Discover</p>
+            </div>
+            <div class="paybox" id="Visa">
+                <p>Visa/Mastercard/Amex</p>
+            </div>
+            <div class="paybox" id="QUICPay">
+                <p>QUICPay</p>
+            </div>
+            <div class="paybox" id="iD">
+                <p>iD</p>
+            </div>
+            <div class="paybox" id="IC">
+                <p>交通系IC</p>
+            </div>
+            <div class="paybox" id="PayPay">
+                <p>PayPay</p>
+            </div>
+            <div class="paybox" id="etc">
+                <p>その他</p>
+            </div>
+        </div>
+        <div id="paywait" class="hidden">
+            <p id="waittitle">＜JCB/DinersClub/Discover＞</p>
+            <p id="waittotal">合計金額</p>
+              <div class="spin">
+                <div class="circle"></div>
+              </div>
+              <div class="waittext">
+                <h2>支払いが終了したら完了を押してください</h2>
+              </div>
+            <div class="waitbutton">
+                <button id="payreturn">戻る</button>
+                <button id="paycomplete">完了</button>
+            </div>
+        </div>
+    </body>
+    <script src="js/register.js"></script>
+</html>
