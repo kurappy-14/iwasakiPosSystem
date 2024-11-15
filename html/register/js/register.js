@@ -572,6 +572,19 @@ function purchase(){
     document.getElementById("callidinput").classList.add("hidden");
     document.getElementById("purchase").classList.remove("hidden");
     postprinter();
+    fetch('php/ReduceStock.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            MENU: MENU,
+            quantity: quantity,
+        })
+    })
+    .then(response => response.json())
+    .then(data => {})
+    .catch(error => console.error('Error:', error));
     setTimeout(() => {
         location.reload();
     }, 8000);

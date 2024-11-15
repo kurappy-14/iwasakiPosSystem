@@ -1,6 +1,6 @@
 <?php
 //自動読み込み
-require '../vendor/autoload.php';
+require '../../vendor/autoload.php';
 
 //変数の利用
 $input = file_get_contents("php://input");
