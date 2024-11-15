@@ -1,0 +1,104 @@
+/* General styling */
+.container {
+    width: 80%;
+    margin: auto;
+}
+
+/* Header styling */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+/* Menu styling */
+.menu {
+    display: flex;
+    gap: 20px;
+}
+
+.menu a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.menu a:hover {
+    text-decoration: underline;
+}
+
+/* Content styling */
+.content {
+    padding: 20px;
+}
+
+.footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #f1f1f1;
+}
+
+
+
+
+.dashbord-content table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.dashbord-content table thead tr td {
+    background-color: #666;
+    color: #fff;
+    padding: 10px;
+}
+
+.dashbord-content table tbody tr td{
+    padding: 10px;
+    background-color: #d3d3d3;
+    border-bottom: 1px solid #f1f1f1;
+}
+.dashbord-content table tbody tr td:nth-child(2n) {
+    background-color: #e7e7e7;
+}
+
+.dashbord-content#payment-log table tbody tr td{
+    width: 70px;
+}
+.dashbord-content#payment-log table tbody tr td:nth-child(3){
+    width:220px;
+}
+.dashbord-content#payment-log table tbody tr td:last-child{
+    width: calc(100% - 360px);
+}
+#sum{
+    font-weight: bold;
+    font-size: 20px;
+    color: #333;
+}
+
+
+.hidden {
+    display: none;
+}
+
+
+
+button#add-product{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 100%;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+
+}
