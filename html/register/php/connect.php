@@ -5,7 +5,7 @@ $input = file_get_contents("php://input");
 $data = json_decode($input, true);
 //javascriptの変数をphpの変数に代入
 $printer = $data['printer'];
-$referenceid = isset($data['referenceid']) ? $data['referenceid'] : 0;
+$referenceid = $data['referenceid'];
 $collnumber = $data['callnumber'];
 $status = $data['status'];
 $paytype = $data['paytype'];
@@ -43,17 +43,20 @@ try{
     $searchid = array_search($referenceid,$reference_number);
 
     if($searchid!==false){
-        if($status===-1){
+        if($status===-1){   //-1ならデータベースから削除する
             $delete1 = $mysqli->prepare("DELETE FROM purchase WHERE order_id= ? ");
             $delete2 = $mysqli->prepare("DELETE FROM orders WHERE order_id= ? ");
             $delete1->bind_param('i',$order_id[$searchid]);
             $delete2->bind_param('i',$order_id[$searchid]);
             $delete1->execute();
             $delete2->execute();
-        }else{
-            $update = $mysqli->prepare("UPDATE orders SET provide_status = ?,callnumber = ? WHERE order_id = ?");
-            $update->bind_param('iii',$status,$callnumber,$order_id[$searchid]);
+        }else{  //存在していて1か2なら状態を更新する
+            $update = $mysqli->prepare("UPDATE orders SET provide_status = ? WHERE order_id = ?");
+            $update->bind_param('ii',$status,$order_id[$searchid]);
             $update->execute();
+            $update2 = $mysqli->prepare("UPDATE orders SET call_number = ? WHERE order_id = ?");
+            $update2->bind_param('ii',$callnumber,$order_id[$searchid]);
+            $update2->execute();
         }
     }else{
         //データを挿入する
@@ -61,25 +64,21 @@ try{
             $data = $mysqli->prepare("INSERT INTO orders VALUES(?,?,?,?,?,?)");
             $id = end($order_id) + 1;
             $callnumber = $id;
-            $Rid = $referenceid;
-            $section = 1;
             $date = date('Y-m-d H:i:s');
             //?の部分に数値を代入
-            $data->bind_param('ssssss',$id,$callnumber,$paytype,$Rid,$section,$date);
+            $data->bind_param('ssssss',$id,$callnumber,$paytype,$referenceid,$status,$date);
             $data->execute();
             //orderidを受け渡す
-            $response = ['status' => 'success', 'id' => $id];
+            $response = ['status' => 'success', 'id' => $id, 'callid' => $callnumber];
         }else{
             $data = $mysqli->prepare("INSERT INTO orders VALUES(?,?,?,?,?,?)");
             $id = end($order_id) + 1;
-            $Rid = $referenceid;
-            $section = 1;
             $date = date('Y-m-d H:i:s');
             //?の部分に数値を代入
-            $data->bind_param('ssssss',$id,$callnumber,$paytype,$Rid,$section,$date);
+            $data->bind_param('ssssss',$id,$callnumber,$paytype,$referenceid,$status,$date);
             $data->execute();
             //orderidを受け渡す
-            $response = ['status' => 'success', 'id' => $id];
+            $response = ['status' => 'success', 'id' => $id, 'callid' => $callnumber];
         }
     }
 

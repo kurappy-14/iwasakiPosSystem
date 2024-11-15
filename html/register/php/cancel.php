@@ -7,12 +7,9 @@ require '../vendor/autoload.php';
 $input = file_get_contents("php://input");
 $data = json_decode($input, true);
 //javascriptの変数をphpの変数に代入
+$TOKEN = $data['TOKEN'];
+$device = $data['DEVICEID'];
 $id = $data['referenceid'];
-
-//.envを使用する
-Dotenv\Dotenv::createImmutable(__DIR__)->load();
-//定義した値を変数に代入
-$TOKEN = $_ENV['TOKEN'];
 
 //クライアントの定義
 $client = new \Square\SquareClient([

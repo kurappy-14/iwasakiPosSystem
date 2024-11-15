@@ -20,7 +20,7 @@ CREATE TABLE products (
     category_name VARCHAR(255),             
     product_name VARCHAR(255),
     price INT,
-    stockpile INT,
+    stockpile INT
 );
 
 -- 3. purchaseテーブルの作成

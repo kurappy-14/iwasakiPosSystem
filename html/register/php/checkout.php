@@ -6,14 +6,10 @@ require '../vendor/autoload.php';
 $input = file_get_contents("php://input");
 $data = json_decode($input, true);
 //javascriptの変数をphpの変数に代入
+$TOKEN = $data['TOKEN'];
+$device = $data['DEVICEID'];
 $total = $data['total'];
 $paymenttype = $data['type'];
-
-//.envを使用する
-Dotenv\Dotenv::createImmutable(__DIR__)->load();
-//定義した値を変数に代入
-$TOKEN = $_ENV['TOKEN'];
-$device = $_ENV['DEVICE'];
 
 //支払情報の設定
 $amount_money = new \Square\Models\Money();
