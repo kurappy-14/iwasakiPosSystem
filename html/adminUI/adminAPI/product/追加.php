@@ -1,3 +1,21 @@
+<?// setting.jsonの読み込み
+$jsonFilePath = '../../../setting.json';
+if (file_exists($jsonFilePath)) {
+    $jsonData = file_get_contents($jsonFilePath);
+    $settings = json_decode($jsonData, true);
+    $categories = $settings['Category'];
+
+    // 重みでソート（重みが0は最後に）
+    usort($categories, function ($a, $b) {
+        if ($a['weight'] == $b['weight']) {
+            return 0;
+        }
+        return ($a['weight'] == 0) ? 1 : (($b['weight'] == 0) ? -1 : $a['weight'] - $b['weight']);
+    });
+} else {
+    $categories = [];
+}
+?>
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -18,9 +36,17 @@
             <label for="product_name">商品名:</label>
             <input type="text" id="product_name" name="product_name" required><br>
 
+            <!-- カテゴリ名（プルダウン） -->
             <label for="category_name">カテゴリ名:</label>
-            <input type="text" id="category_name" name="category_name" required><br>
+            <select id="category_name" name="category_name">
+                <?php foreach ($categories as $category): ?>
+                    <option value="<?= htmlspecialchars($category['name']) ?>">
+                        <?= htmlspecialchars($category['name']) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select><br><br>
 
+            
             <label for="price">価格:</label>
             <input type="number" id="price" name="price" required><br>
 
@@ -105,7 +131,8 @@
         color: #333;
     }
 
-    .add-product-form input {
+    .add-product-form input ,
+    .add-product-form select {
         width: 100%;
         padding: 10px;
         margin-bottom: 14px;
