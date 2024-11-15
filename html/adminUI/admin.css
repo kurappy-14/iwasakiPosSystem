@@ -95,10 +95,153 @@ button#add-product{
     margin-bottom: 5px;
     width: 100%;
     padding: 10px;
-    background-color: #333;
+    background-color: #28a745;
     color: #fff;
     border: none;
     border-radius: 20px;
     cursor: pointer;
 
+}
+button#add-product:hover {
+    background-color: #218838;
+}
+
+
+
+
+
+
+/* Category編集のスタイル */
+#category-editor {
+    margin-top: 20px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#category-editor h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#category-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.category-item ,
+.category-add-item{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f1f1f1;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+}
+
+.category-item input {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 150px;
+}
+
+.category-item button {
+    padding: 8px 16px;
+    font-size: 14px;
+    background-color: #ff6f61;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.category-item button:hover {
+    background-color: #ff3e2d;
+}
+
+.category-item button:focus {
+    outline: none;
+}
+
+#add-category {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#add-category:hover {
+    background-color: #218838;
+}
+
+#add-category:focus {
+    outline: none;
+}
+
+/* 編集や削除ボタンのスペース調整 */
+.category-item input[type="text"],
+.category-item input[type="number"] {
+    width: 200px;
+}
+
+.category-item button {
+    width: 100px;
+}
+
+/* リストの背景色調整 */
+.category-item:nth-child(odd) {
+    background-color: #fafafa;
+}
+
+.category-item:nth-child(even) {
+    background-color: #f0f0f0;
+}
+
+/* 全体の保存ボタン */
+button#save-categories {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button#save-categories:hover {
+    background-color: #0056b3;
+}
+
+button#save-categories:focus {
+    outline: none;
+}
+
+/* 新しいカテゴリ追加フォームの入力フィールドを横並びに */
+div#new-category-form{
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+#category-editor input[type="text"],
+#category-editor input[type="number"] {
+    display: inline-block;
+    width: 45%;  /* 並べるために幅を調整 */
+    margin-right: 1%;  /* 2つの入力フィールドの間隔を空ける */
+}
+
+/* 最後の入力フィールドのマージン調整 */
+#category-editor input[type="number"] {
+    margin-right: 0;  /* 2番目の入力フィールドの右側の余白をなくす */
 }

@@ -14,6 +14,7 @@
             <h1>Admin</h1>
             <nav id="top-menu" class="menu">
                 <a href="#product-editor">商品の追加-編集</a>
+                <a href="#category-editor">カテゴリの追加-編集</a>
                 <a href="#payment-log">決済履歴-売り上げの表示</a>
                 <a href="#function-toggle">機能の設定</a>
                 <a href="#other-settings">その他の設定</a>
@@ -40,11 +41,21 @@
                 </tbody>
             </table>
             <button id="add-product">商品の追加</button>
-
-
-
             <script src="js/product.js"></script>
+        </div>
 
+        <div id="category-editor" class="dashbord-content hidden">
+            <h2>カテゴリの追加-編集</h2>
+            <ul id="category-list"></ul>
+            <script src="js/category.js"></script>
+            <button id="save-categories" onclick="saveCategories()">全て保存</button>
+            <!-- カテゴリ追加フォーム -->
+            <h3>新しいカテゴリを追加</h3>
+            <div id="new-category-form">
+                <input type="text" id="new-category-name" class="category-add-item" placeholder="カテゴリ名" />
+                <input type="number" id="new-category-weight" class="category-add-item" placeholder="重み" />
+            </div>
+            <button id="add-category" onclick="addCategory()">カテゴリ追加</button>
         </div>
 
         <div id="payment-log" class="dashbord-content hidden">

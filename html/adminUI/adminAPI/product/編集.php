@@ -23,6 +23,24 @@ $stmt->bind_param("s", $product_code);
 $stmt->execute();
 $result = $stmt->get_result();
 $product = $result->fetch_assoc();
+
+// setting.jsonの読み込み
+$jsonFilePath = '../../../setting.json';
+if (file_exists($jsonFilePath)) {
+    $jsonData = file_get_contents($jsonFilePath);
+    $settings = json_decode($jsonData, true);
+    $categories = $settings['Category'];
+
+    // 重みでソート（重みが0は最後に）
+    usort($categories, function($a, $b) {
+        if ($a['weight'] == $b['weight']) {
+            return 0;
+        }
+        return ($a['weight'] == 0) ? 1 : (($b['weight'] == 0) ? -1 : $a['weight'] - $b['weight']);
+    });
+} else {
+    $categories = [];
+}
 ?>
 
 <?php if ($product): ?>
@@ -33,10 +51,16 @@ $product = $result->fetch_assoc();
         <input type="text" id="product_name" name="product_name"
             value="<?= htmlspecialchars($product['product_name']) ?>"><br><br>
 
-        <!-- カテゴリ名 -->
+        <!-- カテゴリ名（プルダウン） -->
         <label for="category_name">カテゴリ名:</label>
-        <input type="text" id="category_name" name="category_name"
-            value="<?= htmlspecialchars($product['category_name']) ?>"><br><br>
+        <select id="category_name" name="category_name">
+            <?php foreach ($categories as $category): ?>
+                <option value="<?= htmlspecialchars($category['name']) ?>"
+                    <?= $product['category_name'] === $category['name'] ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($category['name']) ?>
+                </option>
+            <?php endforeach; ?>
+        </select><br><br>
 
         <!-- 価格 -->
         <label for="price">価格:</label>
@@ -96,6 +120,7 @@ $conn->close();
 
 
 
+
 <style>
     /* ページ全体のスタイル */
     body {
@@ -139,7 +164,8 @@ $conn->close();
 
     /* 入力フィールド */
     input[type="text"],
-    input[type="number"] {
+    input[type="number"],
+    select {
         padding: 10px;
         font-size: 16px;
         border: 1px solid #ccc;

@@ -4,6 +4,7 @@ window.onload = init;
 
 
 function init() {
+    console.log("admin.js loaded");
     var menu = document.getElementById("top-menu");
     for (var i = 0; i < menu.children.length; i++) {
         menu.children[i].addEventListener("click", function() {
@@ -23,6 +24,7 @@ function init() {
 
 
 function update_dashbord(id){
+    console.log(id);
     var dashbord_contents = document.getElementsByClassName("dashbord-content");
     for (var i = 0; i < dashbord_contents.length; i++) {
         dashbord_contents[i].classList.add("hidden");
