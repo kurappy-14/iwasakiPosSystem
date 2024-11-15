@@ -1,24 +1,36 @@
 {
-    "Category":[
-        {"name":"ゲテモノ","weight":3},
-        {"name":"食べ物","weight":1},
-        {"name":"飲み物","weight":2},
-        {"name":"非表示","weight":0}
+    "Category": [
+        {
+            "name": "食べ物",
+            "weight": 2
+        },
+        {
+            "name": "非表示",
+            "weight": 0
+        },
+        {
+            "name": "飲み物",
+            "weight": 1
+        },
+        {
+            "name": "タカシマ",
+            "weight": 3
+        }
     ],
-    "paytype":{
-        "cash":true,
-        "JCB":true,
-        "Visa":true,
-        "QUICPay":true,
-        "iD":true,
-        "IC":true,
-        "PayPay":true,
-        "others":true
+    "paytype": {
+        "cash": true,
+        "JCB": true,
+        "Visa": true,
+        "QUICPay": true,
+        "iD": true,
+        "IC": true,
+        "PayPay": true,
+        "others": true
     },
-    "printer":true,
-    "environment":{
-        "TOKEN":"Your_TOKEN",
-        "DEVICE":"Your_Device_ID",
-        "PrinterIP":"Your_Printer_IP"
+    "printer": true,
+    "environment": {
+        "TOKEN": "Your_TOKEN",
+        "DEVICE": "Your_Device_ID",
+        "PrinterIP": "Your_Printer_IP"
     }
 }
