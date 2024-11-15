@@ -9,7 +9,7 @@
 
 <body>
     <header>
-        <h1>学園祭</h1>
+        <h1 id="STORENAME">店名</h1>
     </header>
 
     <div class="container2">
@@ -29,7 +29,15 @@
             differenceheight = document.documentElement.clientHeight-1080;
             newdefaultrow = 10 + Math.floor(differenceheight/80);
             document.querySelector('ul').style.gridTemplateRows = `repeat(${newdefaultrow}, 1fr)`;
+            fetch('../setting.json')
+            .then(response => response.json())
+            .then(data => {
+                STORENAME = data.STORENAME;
+                document.getElementById("STORENAME").textContent = STORENAME;
+            })
+            .catch(error => console.error('Error', error));
         }
+
         function updateLists() {
             fetch('read.php')
                 .then(response => response.json())
