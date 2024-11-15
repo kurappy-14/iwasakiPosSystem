@@ -1,4 +1,5 @@
 {
+    "STORENAME": "タカシマ家",
     "Category": [
         {
             "name": "飲み物",
@@ -19,18 +20,18 @@
     ],
     "paytype": {
         "cash": true,
-        "JCB": true,
-        "Visa": true,
-        "QUICPay": true,
-        "iD": true,
-        "IC": true,
-        "PayPay": true,
-        "others": true
+        "JCB": false,
+        "Visa": false,
+        "QUICPay": false,
+        "iD": false,
+        "IC": false,
+        "PayPay": false,
+        "others": false
     },
     "printer": true,
     "environment": {
-        "TOKEN": "Your_TOKEN",
-        "DEVICE": "Your_Device_ID",
-        "PrinterIP": "Your_Printer_IP"
+        "TOKEN": "貴様のトークン",
+        "DEVICE": "貴様のデバイス",
+        "PrinterIP": "貴様のプリンター"
     }
 }
