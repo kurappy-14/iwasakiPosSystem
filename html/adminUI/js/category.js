@@ -43,7 +43,7 @@ function fetchCategories() {
 function saveCategories() {
     const categoryItems = document.querySelectorAll('.category-item');
     const updatedCategories = [];
-
+    console.log(categoryItems);
     categoryItems.forEach(item => {
         const name = item.querySelector('.category-name').value;
         const weight = parseInt(item.querySelector('.category-weight').value, 10);
@@ -61,7 +61,7 @@ function saveCategories() {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                alert('保存しました！');
+                alert('保存しました！\n関連する商品のカテゴリを再設定してください');
                 fetchCategories();  // 再度カテゴリを読み込み直す
             } else {
                 alert('保存に失敗しました。');

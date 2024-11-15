@@ -131,7 +131,8 @@ button#add-product:hover {
     padding-left: 0;
 }
 
-.category-item {
+.category-item ,
+.category-add-item{
     display: flex;
     align-items: center;
     gap: 20px;

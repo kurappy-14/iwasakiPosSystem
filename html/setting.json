@@ -1,20 +1,20 @@
 {
     "Category": [
         {
-            "name": "食べ物",
-            "weight": 2
-        },
-        {
-            "name": "非表示",
-            "weight": 0
-        },
-        {
             "name": "飲み物",
             "weight": 1
         },
         {
-            "name": "タカシマ",
+            "name": "食べ物",
+            "weight": 2
+        },
+        {
+            "name": "ちせのん",
             "weight": 3
+        },
+        {
+            "name": "非表示",
+            "weight": 0
         }
     ],
     "paytype": {
