@@ -6,7 +6,7 @@ $data = json_decode($input, true);
 //javascriptの変数をphpの変数に代入
 $printer = $data['printer'];
 $referenceid = $data['referenceid'];
-$collnumber = $data['callnumber'];
+$callnumber = $data['callnumber'];
 $status = $data['status'];
 $paytype = $data['paytype'];
 
