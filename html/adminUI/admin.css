@@ -245,3 +245,134 @@ div#new-category-form{
 #category-editor input[type="number"] {
     margin-right: 0;  /* 2番目の入力フィールドの右側の余白をなくす */
 }
+
+
+
+/* 全体レイアウト */
+#settings-container {
+    display: flex;
+    justify-content: left;
+    gap: 30px; /* コンテンツの間隔を設定 */
+  
+}
+
+/* 支払い方法設定 */
+#settings-A,
+#settings-B{
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    max-width: 45%; /* 横並びで並ぶように幅を調整 */
+}
+
+/* チェックボックスエリア */
+#paytype-settings label,
+#printer-setting label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+/* チェックボックス */
+#paytype-settings input[type="checkbox"],
+#printer-setting input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+}
+
+/* 環境設定のセクション */
+#settings-B {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    max-width: 45%; /* 横並びで並ぶように幅を調整 */
+    display: flex;
+    flex-direction: column; /* 縦に並べる */
+    gap: 10px; /* 入力フィールドの間隔 */
+}
+
+/* ラベル */
+#settings-B label {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+/* テキスト入力フィールド */
+#settings-B input[type="text"],
+#settings-B input[type="password"] {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%; /* 入力フィールドが幅いっぱいになるように */
+    box-sizing: border-box; /* 内側の余白を含める */
+}
+
+/* テキスト入力フィールドのフォーカス時のスタイル */
+#settings-B input[type="text"]:focus,
+#settings-B input[type="password"]:focus {
+    outline: none;
+    border-color: #4CAF50;
+}
+/* トークンとデバイスIDの表示/非表示ボタンのスタイル */
+.input-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+label button.hide {
+    padding: 2px 10px;
+    font-size: 10px;
+    color: #5b5b5b;
+    background-color: #b7b7b7;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+label button.hide:hover {
+    background-color: #a0a0a0;
+}
+label button.show {
+    padding: 2px 10px;
+    font-size: 10px;
+    color: #b7b7b7;
+    background-color: #5b5b5b;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+label button.show:hover {
+    background-color: #4e4e4e;
+}
+
+
+.input-container button:hover {
+    background-color: #45a049;
+}
+
+
+/* 更新ボタン */
+button#updateSettings {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button#updateSettings:hover {
+    background-color: #45a049;
+}
+
