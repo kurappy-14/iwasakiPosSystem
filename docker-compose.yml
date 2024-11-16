@@ -10,7 +10,7 @@ services:
     depends_on:
       - db
     command: > 
-      bash -c "composer install && apache2-foreground"
+      bash -c "composer install && chmod 777 /var/www/html/setting.json && apache2-foreground"
 
 
   db:
