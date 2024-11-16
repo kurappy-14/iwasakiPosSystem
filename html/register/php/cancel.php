@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: application/json; charset=utf-8');
 //自動読み込み
 require '../vendor/autoload.php';
 
@@ -6,13 +7,9 @@ require '../vendor/autoload.php';
 $input = file_get_contents("php://input");
 $data = json_decode($input, true);
 //javascriptの変数をphpの変数に代入
-$id = $data['paymentid'];
-
-
-//.envを使用する
-Dotenv\Dotenv::createImmutable(__DIR__)->load();
-//定義した値を変数に代入
-$TOKEN = $_ENV['TOKEN'];
+$TOKEN = $data['TOKEN'];
+$device = $data['DEVICEID'];
+$id = $data['referenceid'];
 
 //クライアントの定義
 $client = new \Square\SquareClient([
@@ -20,7 +17,7 @@ $client = new \Square\SquareClient([
     'environment' => 'production'
 ]);
 
-$api_response = $client->getTerminalApi()->getTerminalCheckout($id);
+$api_response = $client->getTerminalApi()->cancelTerminalCheckout($id);
 
 if ($api_response->isSuccess()) {
     $result = $api_response->getResult();

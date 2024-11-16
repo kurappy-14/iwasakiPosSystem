@@ -4,8 +4,9 @@ header('Content-Type: application/json; charset=utf-8');
 $input = file_get_contents("php://input");
 $data = json_decode($input, true);
 //javascriptの変数をphpの変数に代入
-$product = $data['product'];
-$price = $data['price'];
+$orderid = $data['orderid'];
+$quantity = $data['quantity'];
+$productcode = $data['productcode'];
 
 try{
     //データベースと接続
@@ -19,19 +20,14 @@ try{
     //文字コードを設定
     $mysqli->set_charset('utf8');
 
-    $reset = $mysqli->prepare("DELETE FROM products");
-    //実行する
-    $reset->execute();
-
-    for ($i = 0; $i < count($product); $i++) {
-        //データを挿入する
-        $data = $mysqli->prepare("INSERT INTO products VALUES(?,?,?)");
-        $productid = "P" . $i;
-        $productname = $product[$i];
-        $productprice = $price[$i];
-        //?の部分に数値を代入
-        $data->bind_param('sss',$productid,$productname,$productprice);
-        $data->execute();
+    for ($i = 0; $i < count($quantity); $i++) {
+        if(0<$quantity[$i]){
+            //データを挿入する
+            $data = $mysqli->prepare("INSERT INTO purchase VALUES(?,?,?)");
+            //?の部分に数値を代入
+            $data->bind_param('ssi', $orderid, $productcode[$i], $quantity[$i]);
+            $data->execute();
+        }
     }
     
     //データベースとの接続を解除
@@ -39,5 +35,6 @@ try{
     echo json_encode(['status' => 'success', 'message' => 'Data inserted successfully']);
 } catch (Exception $e) {
     // エラーメッセージをJSONで返す
-    echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
+    echo json_encode(['status' => 'error', 'message' => 'An error occurred: ' . $e->getMessage()]);
+    exit;
 }
