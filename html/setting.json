@@ -20,9 +20,9 @@
     ],
     "paytype": {
         "cash": true,
-        "JCB": false,
-        "Visa": false,
-        "QUICPay": false,
+        "JCB": true,
+        "Visa": true,
+        "QUICPay": true,
         "iD": false,
         "IC": false,
         "PayPay": false,
