@@ -77,8 +77,44 @@ function setting(){
     .catch(error => console.error('Error', error));
 }
 
+setInterval(observeproduct,1000);
+function observeproduct(){
+    AllZero = quantity.every(value => value === 0);
+    if(AllZero){
+        MENU = [];
+        categoryquantity = [];
+        fetch('php/GetProduct.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({})
+        })
+        .then(response => response.json())
+        .then(data => {
+            product = data.product;
+            category.forEach(category => {
+                product.forEach(product => {
+                  if (product.category_name === category.name && 0 < category.weight) {
+                    MENU.push(product);
+                  }
+                });
+            });
+            MENU.forEach(product => {
+                if (categoryquantity[product.category_name]) {
+                  categoryquantity[product.category_name] += 1;
+                } else {
+                  categoryquantity[product.category_name] = 1;
+                }
+            });
+            setproduct();
+        })
+        .catch(error => console.error('Error:', error));
+    }
+}
 function setproduct(){
     let menudiv = document.getElementById("menu");  //menudivを指定
+    menudiv.innerHTML = "";
     let operationdiv;   //操作中のdiv
     let countproduct = 0;   //現在のカテゴリの位置
     for(let i=0;i<MENU.length;i++){
@@ -200,6 +236,7 @@ function setproduct(){
         operationdiv.appendChild(box);
     }
     let header = document.getElementById("header2");
+    header.innerHTML = "";
     //合計と会計ボタンを作成
     let totaltext = document.createElement("p");
     totaltext.id = "total";
