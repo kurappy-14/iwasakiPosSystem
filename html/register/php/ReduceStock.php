@@ -17,8 +17,14 @@ try{
     //文字コードを設定
     $mysqli->set_charset('utf8');
         for($i=0;$i<count($MENU);$i++){
-            $newquantity = $MENU[$i]['stockpile'] - $quantity[$i];
             $productcode = $MENU[$i]['product_code'];
+            $getstock = $mysqli->prepare("SELECT stockpile FROM products WHERE product_code = ?");
+            $getstock->bind_param('s',$productcode);
+            $getstock->execute();
+            $getstock->bind_result($stockpile);
+            $getstock->fetch();
+            $getstock->close();
+            $newquantity = $stockpile - $quantity[$i];
             $update = $mysqli->prepare("UPDATE products SET stockpile = ? WHERE product_code = ?");
             $update->bind_param('is',$newquantity,$productcode);
             $update->execute();
