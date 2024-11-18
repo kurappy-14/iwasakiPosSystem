@@ -248,6 +248,16 @@ function setproduct(){
     checkoutbutton.addEventListener("click", function(event) {
         document.getElementById("payment").classList.remove("hidden");
         enablecount = false;
+        fetch('php/lock.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({})
+        })
+        .then(response => response.json())
+        .then(data => {})
+        .catch(error => console.error('Error:', error));
     });
     //menudivに合計と会計ボタンを追加
     header.appendChild(totaltext);
@@ -327,6 +337,16 @@ document.getElementById("payreturn").onclick = function(){
         .then(data => {
             connect(-1);
         })
+        .catch(error => console.error('Error:', error));
+        fetch('php/unlock.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({})
+        })
+        .then(response => response.json())
+        .then(data => {})
         .catch(error => console.error('Error:', error));
     }
 }
@@ -609,18 +629,29 @@ function purchase(){
     document.getElementById("callidinput").classList.add("hidden");
     document.getElementById("purchase").classList.remove("hidden");
     postprinter();
-    fetch('php/ReduceStock.php', {
+    fetch('php/unlock.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-            MENU: MENU,
-            quantity: quantity,
-        })
+        body: JSON.stringify({})
     })
     .then(response => response.json())
-    .then(data => {})
+    .then(data => {
+        fetch('php/ReduceStock.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                MENU: MENU,
+                quantity: quantity,
+            })
+        })
+        .then(response => response.json())
+        .then(data => {})
+        .catch(error => console.error('Error:', error));
+    })
     .catch(error => console.error('Error:', error));
     setTimeout(() => {
         location.reload();
