@@ -38,6 +38,7 @@
             differenceheight = document.documentElement.clientHeight-1080;
             newdefaultrow = 10 + Math.floor(differenceheight/80);
             document.querySelector('ul').style.gridTemplateRows = `repeat(${newdefaultrow}, 1fr)`;
+            document.getElementById('done-items').style.gridTemplateRows = `repeat(${newdefaultrow}, 1fr)`;
             fetch('../setting.json')
             .then(response => response.json())
             .then(data => {
