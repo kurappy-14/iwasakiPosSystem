@@ -7,9 +7,10 @@ try {
     if( $mysqli->connect_errno ) {
         echo $mysqli->connect_errno . ' : ' . $mysqli->connect_error;
     }
-    // テーブルをロック
-    $query = "UNLOCK TABLES";
-    $mysqli->query($query);
+    // テーブルをアンロック
+    $lock = $mysqli->prepare("UNLOCK TABLES");
+    //実行する
+    $lock->execute();
     
    //データベースとの接続を解除
    $mysqli->close();

@@ -8,8 +8,9 @@ try {
         echo $mysqli->connect_errno . ' : ' . $mysqli->connect_error;
     }
     // テーブルをロック
-    $query = "LOCK TABLES products WRITE";
-    $mysqli->query($query);
+    $lock = $mysqli->prepare("LOCK TABLES products WRITE");
+    //実行する
+    $lock->execute();
     
    //データベースとの接続を解除
    $mysqli->close();
