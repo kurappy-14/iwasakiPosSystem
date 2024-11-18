@@ -83,33 +83,7 @@ function observeproduct(){
     if(AllZero){
         MENU = [];
         categoryquantity = [];
-        fetch('php/GetProduct.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({})
-        })
-        .then(response => response.json())
-        .then(data => {
-            product = data.product;
-            category.forEach(category => {
-                product.forEach(product => {
-                  if (product.category_name === category.name && 0 < category.weight) {
-                    MENU.push(product);
-                  }
-                });
-            });
-            MENU.forEach(product => {
-                if (categoryquantity[product.category_name]) {
-                  categoryquantity[product.category_name] += 1;
-                } else {
-                  categoryquantity[product.category_name] = 1;
-                }
-            });
-            setproduct();
-        })
-        .catch(error => console.error('Error:', error));
+        setting();
     }
 }
 function setproduct(){
