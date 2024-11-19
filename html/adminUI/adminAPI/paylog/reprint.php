@@ -89,8 +89,11 @@ class PrintRequest
         foreach ($order as $item) {
             $name = $item['name'];
             $count = strval($item['count']);
-            $nameWidth = mb_strlen($name, 'UTF-8');
-            $spacesNeeded = 30 - $nameWidth - strlen($count);
+            //　nameのバイト数を取得
+            $nameWidth = mb_strwidth($name, 'UTF-8');
+            $countWidth = mb_strwidth($count, 'UTF-8');
+            $spacesNeeded = 28 - ($nameWidth + $countWidth);
+
             $formatted .= '<text>' . $name . str_repeat(' ', $spacesNeeded) . $count . '点&#10;</text>';
         }
         return $formatted;
