@@ -638,24 +638,29 @@ function purchase(){
     })
     .then(response => response.json())
     .then(data => {
-        fetch('php/ReduceStock.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                MENU: MENU,
-                quantity: quantity,
-            })
-        })
-        .then(response => response.json())
-        .then(data => {})
-        .catch(error => console.error('Error:', error));
+        ReduceStock();
     })
     .catch(error => console.error('Error:', error));
     setTimeout(() => {
         location.reload();
-    }, 8000);
+    },5000);
+}
+
+async function ReduceStock(){
+    await sleep(1000);
+    await fetch('php/ReduceStock.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            MENU: MENU,
+            quantity: quantity,
+        })
+    })
+    .then(response => response.json())
+    .then(data => {})
+    .catch(error => console.error('Error:', error));
 }
 
 //レシートを印刷する処理
@@ -669,6 +674,11 @@ async function postprinter(){
     //プリンターにリクエストを送る
     const req = new PrintRequest(callid,order);
     await req.join();
+}
+
+//遅延関数
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 
