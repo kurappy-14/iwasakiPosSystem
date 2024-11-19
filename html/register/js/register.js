@@ -77,8 +77,18 @@ function setting(){
     .catch(error => console.error('Error', error));
 }
 
+setInterval(observeproduct,1000);
+function observeproduct(){
+    AllZero = quantity.every(value => value === 0);
+    if(AllZero){
+        MENU = [];
+        categoryquantity = [];
+        setting();
+    }
+}
 function setproduct(){
     let menudiv = document.getElementById("menu");  //menudivを指定
+    menudiv.innerHTML = "";
     let operationdiv;   //操作中のdiv
     let countproduct = 0;   //現在のカテゴリの位置
     for(let i=0;i<MENU.length;i++){
@@ -200,6 +210,7 @@ function setproduct(){
         operationdiv.appendChild(box);
     }
     let header = document.getElementById("header2");
+    header.innerHTML = "";
     //合計と会計ボタンを作成
     let totaltext = document.createElement("p");
     totaltext.id = "total";
