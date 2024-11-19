@@ -1,5 +1,5 @@
 {
-    "STORENAME": "タカシマ家",
+    "STORENAME": "ここに店名を入力",
     "Category": [
         {
             "name": "飲み物",
@@ -10,28 +10,24 @@
             "weight": 2
         },
         {
-            "name": "ちせのん",
-            "weight": 3
-        },
-        {
             "name": "非表示",
             "weight": 0
         }
     ],
     "paytype": {
         "cash": true,
-        "JCB": true,
-        "Visa": true,
-        "QUICPay": true,
+        "JCB": false,
+        "Visa": false,
+        "QUICPay": false,
         "iD": false,
         "IC": false,
         "PayPay": false,
         "others": false
     },
-    "printer": true,
+    "printer": false,
     "environment": {
-        "TOKEN": "貴様のトークン",
-        "DEVICE": "貴様のデバイス",
-        "PrinterIP": "貴様のプリンター"
+        "TOKEN": "ここにトークンを入力",
+        "DEVICE": "ここにデバイスIDを入力",
+        "PrinterIP": "ここにプリンターのIPを入力"
     }
 }
