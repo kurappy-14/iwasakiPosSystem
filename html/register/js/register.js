@@ -617,13 +617,13 @@ async function postprinter(){
 //ページベースカラー変更
 document.getElementById("black").addEventListener("click", () => {
     if(enablecount){
-        window.location.href = "registerW.html";
+        window.location.href = "register.html";
     }
 });
 
 document.getElementById("white").addEventListener("click", () => {
     if(enablecount){
-        window.location.href = "register.html";
+        window.location.href = "registerB.html";
     }
 });
 
