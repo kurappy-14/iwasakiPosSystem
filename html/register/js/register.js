@@ -614,6 +614,19 @@ async function postprinter(){
     await req.join();
 }
 
+//ページベースカラー変更
+document.getElementById("black").addEventListener("click", () => {
+    if(enablecount){
+        window.location.href = "registerW.html";
+    }
+});
+
+document.getElementById("white").addEventListener("click", () => {
+    if(enablecount){
+        window.location.href = "register.html";
+    }
+});
+
 
 // receiptPrinter.js
 //const URL = PrinterIP;
