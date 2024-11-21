@@ -59,6 +59,17 @@ function updateStatus(orderId, currentStatus) {
         nextStatus = 3; // 「準備中」→「調理中」
     } else if (currentStatus === 3) {
         nextStatus = 4; // 「調理中」→「提供待ち」
+        
+            // 提供待ちになったらその番号の音声を再生
+            if (orderId < 11) { // 今は10番までなら再生
+                const audiolist = [`./zundamon/お呼び出しします.wav`, `./zundamon/${orderId}番.wav`, `./zundamon/のお客様.wav`, `./zundamon/お料理が完成いたしました.wav`];
+                playZundamonVoice(audiolist);
+            } else {
+                return;
+            }
+        
+        // 確実に`orderID`と`番`の音声は分けるべきだと思う
+
     } else if (currentStatus === 4) {
         if(!confirm('提供完了にしますか？')) {
             return; // キャンセルの場合は何もしない
@@ -72,28 +83,29 @@ function updateStatus(orderId, currentStatus) {
     fetch(`api/update_status.php?order_id=${orderId}&status=${nextStatus}`)
         .then(() => {
             fetchOrders(); // ステータス更新後に再取得
-
-            // 提供完了になったらその番号の音声を再生
-            if (nextStatus === 5 && orderId < 11) { // 今は10番までなら再生
-                const audiolist = [`../zundamon/お呼び出しします.mp3`, `../zundamon/${orderId}番.mp3`, `../zundamon/のお客様.mp3`, `../zundamon/お料理が完成いたしました.mp3`];
-                playZundamonVoice(audiolist);
-            }
         });
-        // 確実に`orderID`と`番`の音声は分けるべきだと思う
 }
 
-function playZundamonVoice(audiolist) {
-
+async function playZundamonVoice(audiolist) {
     for (let i = 0; i < audiolist.length; i++) {
         const audio = new Audio(audiolist[i]);
-        audio.play();
-        audio.onended = () => {
-            count++;
-            if (count === audiolist.length) {
-                return;
-            }
+        console.log(`再生中: ${audiolist[i]}`); // ログを追加
+
+        try {
+            await playAudio(audio);
+            console.log(`再生成功: ${audiolist[i]}`);
+        } catch (error) {
+            console.error(`再生失敗: ${audiolist[i]}`, error);
         }
     }
+}
+
+function playAudio(audio) {
+    return new Promise((resolve, reject) => {
+        audio.play().then(() => {
+            audio.onended = resolve;
+        }).catch(reject);
+    });
 }
 
 // 前のステータスに戻すボタンを作成
