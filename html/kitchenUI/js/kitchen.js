@@ -70,9 +70,31 @@ function updateStatus(orderId, currentStatus) {
 
     // ステータスを更新
     fetch(`api/update_status.php?order_id=${orderId}&status=${nextStatus}`)
-        .then(() => fetchOrders()); // ステータス更新後に再取得
+        .then(() => {
+            fetchOrders(); // ステータス更新後に再取得
+
+            // 提供完了になったらその番号の音声を再生
+            if (nextStatus === 5 && orderId < 11) { // 今は10番までなら再生
+                const audiolist = [`../zundamon/お呼び出しします.mp3`, `../zundamon/${orderId}番.mp3`, `../zundamon/のお客様.mp3`, `../zundamon/お料理が完成いたしました.mp3`];
+                playZundamonVoice(audiolist);
+            }
+        });
+        // 確実に`orderID`と`番`の音声は分けるべきだと思う
 }
 
+function playZundamonVoice(audiolist) {
+
+    for (let i = 0; i < audiolist.length; i++) {
+        const audio = new Audio(audiolist[i]);
+        audio.play();
+        audio.onended = () => {
+            count++;
+            if (count === audiolist.length) {
+                return;
+            }
+        }
+    }
+}
 
 // 前のステータスに戻すボタンを作成
 function getRevertButton(currentStatus, orderId) {
