@@ -23,22 +23,22 @@ try{
     $checkcallnumber->store_result();
     //データが存在するか確認
     if (0 < $checkcallnumber->num_rows) {
-        $checkcallnumber2 = $mysqli->prepare("SELECT call_number FROM orders WHERE call_number = ? AND && provide_status != 5");
+        //状態を確認
+        $checkcallnumber2 = $mysqli->prepare("SELECT call_number FROM orders WHERE call_number = ? AND provide_status != 5");
         $checkcallnumber2->bind_param('s',$callnumber);
         $checkcallnumber2->execute();
         $checkcallnumber2->store_result();
-        if (0 < $checkcallnumber2->num_rows) {
+        if (0 < $checkcallnumber2->num_rows) {//調理中or受け渡し待ちならerrorを返す
             $data = ['status' => 'error'];
-        }else{
+        }else{//受け渡し済みならsuccessを返す
             $data = ['status' => 'success'];
         }
-    } else {
+    } else {//データが存在しないならsuccessを返す
         $data = ['status' => 'success'];
     }
-
     //データベースとの接続を解除
     $mysqli->close();
-    //product配列を返す
+    //結果を返す
     echo json_encode($data);
 } catch (Exception $e) {
     // エラーメッセージをJSONで返す

@@ -582,7 +582,6 @@ document.getElementById("Confirmid").addEventListener("click", function() {
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             if(data.status=="success"){
                 connect(2);
                 order();
