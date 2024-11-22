@@ -571,9 +571,29 @@ function typed(e) {
 document.getElementById("Confirmid").addEventListener("click", function() {
     if(0<document.getElementById("inputid").value.length){
         callid = document.getElementById("inputid").value;
-        connect(2);
-        order();
-        purchase();
+        fetch('php/chackcallnumberDuplication.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                callnumber: callid,
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            if(data.status=="success"){
+                connect(2);
+                order();
+                purchase();
+            }else{
+                alert("調理中又は受け渡し完了していない番号です")
+            }
+        })
+        .catch(error => console.error('Error:', error));
+
+        
     }
 });
 
