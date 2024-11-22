@@ -615,17 +615,13 @@ async function postprinter(){
 }
 
 //ページベースカラー変更
-document.getElementById("black").addEventListener("click", () => {
-    if(enablecount){
-        window.location.href = "register.html";
+document.getElementById("toggle").addEventListener("change", function () {
+    if (this.checked) {
+      document.getElementById("css").href = "css/registerB.css";
+    } else {
+        document.getElementById("css").href = "css/register.css";
     }
-});
-
-document.getElementById("white").addEventListener("click", () => {
-    if(enablecount){
-        window.location.href = "registerB.html";
-    }
-});
+  });
 
 
 // receiptPrinter.js
