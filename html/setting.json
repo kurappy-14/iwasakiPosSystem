@@ -16,12 +16,12 @@
     ],
     "paytype": {
         "cash": true,
-        "JCB": false,
-        "Visa": false,
-        "QUICPay": false,
-        "iD": false,
-        "IC": false,
-        "PayPay": false,
+        "JCB": true,
+        "Visa": true,
+        "QUICPay": true,
+        "iD": true,
+        "IC": true,
+        "PayPay": true,
         "others": false
     },
     "printer": true,
