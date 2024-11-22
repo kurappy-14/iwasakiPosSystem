@@ -24,10 +24,10 @@
         "PayPay": false,
         "others": false
     },
-    "printer": false,
+    "printer": true,
     "environment": {
         "TOKEN": "ここにトークンを入力",
         "DEVICE": "ここにデバイスIDを入力",
-        "PrinterIP": "ここにプリンターのIPを入力"
+        "PrinterIP": "192.168.137.25"
     }
 }

@@ -130,3 +130,12 @@ function toggleVisibility(inputId) {
     }
 }
 
+
+
+
+function testPrinterIP(){
+    fetch('adminAPI/settings_io/printTest.php')
+    .then(
+        alert('印刷テストを行いました')
+    )
+}

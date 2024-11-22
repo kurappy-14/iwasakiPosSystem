@@ -62,6 +62,17 @@ $json_data = json_encode($result, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 // echo $json_data;
 // JSONデータをPHP配列にデコード
 $data = json_decode($json_data, true);
+
+
+
+// 商品の名前と個数をname,countのjsonにまとめる
+$products = [];
+foreach ($data['products'] as $product) {
+    $products[] = [
+        'name' => $product['product_name'],
+        'count' => $product['quantity']
+    ];
+}
 ?>
 
 <!DOCTYPE html>
@@ -153,6 +164,7 @@ $data = json_decode($json_data, true);
             text-align: right;
         }
     </style>
+
 </head>
 
 <body>
@@ -212,6 +224,7 @@ $data = json_decode($json_data, true);
     <p><strong>注文日:</strong> <?php echo htmlspecialchars($data['order']['order_date']); ?></p>
 
     <h2>購入商品一覧</h2>
+
     <table>
         <thead>
             <tr>
@@ -238,6 +251,41 @@ $data = json_decode($json_data, true);
             </tr>
         </tfoot>
     </table>
+    <?
+    // ファイルのパスを指定して読み込む
+    $jsonFilePath = '../../../setting.json';
+    if (file_exists($jsonFilePath)) {
+        // ファイル内容を読み込む
+        $jsonData = file_get_contents($jsonFilePath);
+        $jsonData = json_decode($jsonData, true);
+    } else {
+        $jsonData = json_encode(['error' => 'settings.json file not found']);
+    }
+    ?>
+    <? if ($jsonData["printer"] == 1): ?>
+        <script>
+            function printReceipt(call_number, products) {
+                fetch('reprint.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        call_number: call_number,
+                        products: products
+                    })
+                }).then(response => response.json())
+                    .then(data => {
+                            alert('印刷を実行しました');
+                    })
+                    .catch(error => {
+                        alert('エラーが発生しました');
+                    });
+            }
+
+        </script>
+        <button onclick='printReceipt(<?= $data["order"]["call_number"] ?>, <?= json_encode($products) ?>)'>レシートを印刷</button>
+    <? endif ?>
 
 </body>
 
