@@ -33,7 +33,9 @@ function fetchOrders() {
                 `;
                         
                 // ステータスごとに適切なエリアに表示
-                console.log(order.provide_status);
+                
+                // デバッグのため、一度非表示にします by hatomato
+                // console.log(order.provide_status);
                 if (order.provide_status === 2) {
                     document.getElementById('preparing-orders').appendChild(orderElement);
                 } else if (order.provide_status === 3) {
@@ -45,11 +47,13 @@ function fetchOrders() {
         });
 }
 
-
-
+// 音声再生用のキュー
+const voicequeue = [];
+let voiceWaitingFlag = false; // 音声再生待ちフラグ
+let queueDeletedFlag = false; // キュー削除フラグ
 
 // ステータスを更新する
-function updateStatus(orderId, currentStatus) {
+async function updateStatus(orderId, currentStatus) {
     let nextStatus;
 
     // 現在のステータスに応じて次のステータスを決定
@@ -60,19 +64,25 @@ function updateStatus(orderId, currentStatus) {
     } else if (currentStatus === 3) {
         nextStatus = 4; // 「調理中」→「提供待ち」
         
-            // 提供待ちになったらその番号の音声を再生
-            if (orderId < 11) { // 今は10番までなら再生
-                const audiolist = [`./zundamon/お呼び出しします.wav`, `./zundamon/注文番号.wav`, `./zundamon/${orderId}番.wav`, `./zundamon/のお客様.wav`, `./zundamon/お料理が完成いたしました.wav`];
-                // const audiolist = [`./himari/お呼び出しします.wav`, `./himari/注文番号.wav`,`./himari/${orderId}番.wav`, `./himari/のお客様.wav`, `./himari/お料理が完成いたしました.wav`];
-                playZundamonVoice(audiolist);
-            } else {
-                return;
-            }
-        
-        // 確実に`orderID`と`番`の音声は分けるべきだと思う
+        // 提供待ちになったらその番号の音声を再生
+        if (orderId < 11) { // 今は10番までなら再生
+            voicequeue.push(orderId);
+            setTimeout(() => {
+                if (voiceWaitingFlag == false) { // フラグが立っていない場合のみ再生
+                    voiceWaitingFlag = true; // ここでフラグを立てる
+                    console.log(`通常再生開始`);
+                    playZundamonVoice(voicequeue);
+                } else {
+                    // すでに上の行で再生中の場合はreturn
+                    return;
+                }
+            }, 5000); // 5秒待ってから音声再生
+        } else {
+            return;
+        }
 
     } else if (currentStatus === 4) {
-        if(!confirm('提供完了にしますか？')) {
+        if (!confirm('提供完了にしますか？')) {
             return; // キャンセルの場合は何もしない
         }
         nextStatus = 5; // 「提供待ち」→「提供完了」
@@ -87,18 +97,29 @@ function updateStatus(orderId, currentStatus) {
         });
 }
 
-async function playZundamonVoice(audiolist) {
+async function playZundamonVoice(voicequeue) {
+    const audiolist = [];
+    audiolist.push(`./zundamon/お呼び出しします.wav`);
+    audiolist.push(`./zundamon/注文番号.wav`);
+    for (let i = 0; i < voicequeue.length; i++) {
+        audiolist.push(`./zundamon/${voicequeue[i]}番.wav`);
+    }
+    audiolist.push(`./zundamon/のお客様.wav`);
+    audiolist.push(`./zundamon/お料理が完成いたしました.wav`);
+
     for (let i = 0; i < audiolist.length; i++) {
         const audio = new Audio(audiolist[i]);
         console.log(`再生中: ${audiolist[i]}`); // ログを追加
 
         try {
             await playAudio(audio);
-            console.log(`再生成功: ${audiolist[i]}`);
+            // console.log(`再生成功: ${audiolist[i]}`);
+            voicequeue.shift();
         } catch (error) {
             console.error(`再生失敗: ${audiolist[i]}`, error);
         }
     }
+    voiceWaitingFlag = false; // 再生が終わったらフラグを戻す
 }
 
 function playAudio(audio) {
@@ -124,6 +145,10 @@ function getRevertButton(currentStatus, orderId) {
 
 // 前のステータスに戻す
 function revertStatus(orderId, previousStatus) {
+    if (voicequeue.includes(orderId)) {
+        voicequeue.splice(voicequeue.indexOf(orderId), 1);
+    }
+
     fetch(`api/update_status.php?order_id=${orderId}&status=${previousStatus}`)
         .then(() => fetchOrders()); // ステータス更新後に再取得
 }
