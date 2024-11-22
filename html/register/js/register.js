@@ -614,6 +614,38 @@ async function postprinter(){
     await req.join();
 }
 
+//ロード時にカラーを取得して変更する
+window.addEventListener("DOMContentLoaded", () => {
+    let checkbox = document.getElementById("toggle");
+
+    // 現在のURLのクエリパラメータを取得
+    const nowURL = new URLSearchParams(window.location.search);
+    const checkboxState = nowURL.get("toggle");
+
+    // クエリパラメータが "1" の場合、チェックをオンにする
+    if (checkboxState === "1") {
+        checkbox.checked = true;
+        document.getElementById("css").href = "css/registerB.css";
+    } else if(checkboxState === "0" || checkboxState == null) {
+        checkbox.checked = false;
+        document.getElementById("css").href = "css/register.css";
+    }
+    //チェックボックスを押した時にURLを更新＆ページベースカラー変更
+    checkbox.addEventListener("change", () => {
+        const newURL = new URLSearchParams(window.location.search);
+        if (checkbox.checked) {
+            newURL.set("toggle", "1");
+            document.getElementById("css").href = "css/registerB.css";
+        } else {
+            newURL.set("toggle","0");
+            document.getElementById("css").href = "css/register.css";
+        }
+        // URLを更新
+        const updateURL = `${window.location.pathname}?${newURL.toString()}`;
+        window.history.replaceState(null, "", updateURL);
+    });
+});
+
 
 // receiptPrinter.js
 //const URL = PrinterIP;
