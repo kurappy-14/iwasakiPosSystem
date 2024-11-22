@@ -62,7 +62,8 @@ function updateStatus(orderId, currentStatus) {
         
             // 提供待ちになったらその番号の音声を再生
             if (orderId < 11) { // 今は10番までなら再生
-                const audiolist = [`./zundamon/お呼び出しします.wav`, `./zundamon/${orderId}番.wav`, `./zundamon/のお客様.wav`, `./zundamon/お料理が完成いたしました.wav`];
+                const audiolist = [`./zundamon/お呼び出しします.wav`, `./zundamon/注文番号.wav`, `./zundamon/${orderId}番.wav`, `./zundamon/のお客様.wav`, `./zundamon/お料理が完成いたしました.wav`];
+                // const audiolist = [`./himari/お呼び出しします.wav`, `./himari/注文番号.wav`,`./himari/${orderId}番.wav`, `./himari/のお客様.wav`, `./himari/お料理が完成いたしました.wav`];
                 playZundamonVoice(audiolist);
             } else {
                 return;
