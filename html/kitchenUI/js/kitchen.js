@@ -73,20 +73,15 @@ async function updateStatus(orderId, currentStatus,call_number) {
                     voiceWaitingFlag = true; // ここでフラグを立てる
                     console.log(`通常再生開始`);
                     playZundamonVoice(voicequeue, tempvoicequeue);
-                } else {
-                    // すでに上の行で再生中の場合はreturn
-                    return;
+                } else { // フラグが立っている場合はQueueに追加
+                    console.log(`再生中なので別のQueueに追加します:${call_number}`);
+                    tempvoicequeue.push(call_number);
                 }
             }, 5000); // 5秒待ってから音声再生
         } else {
             return;
         }
-        // すでに再生中の場合は別のQueueに追加
-        if(voiceWaitingFlag && call_number < 10000) { // &&から先いる？
-            console.log(`再生中なので別のQueueに追加します:${call_number}`);
-            tempvoicequeue.push(call_number);
-        }
-
+    
     } else if (currentStatus === 4) {
         if (!confirm('提供完了にしますか？')) {
             return; // キャンセルの場合は何もしない
@@ -108,10 +103,11 @@ async function playZundamonVoice(voicequeue, tempvoicequeue) {
     audiolist.push(`./zundamon/お呼び出しします.mp3`);
     audiolist.push(`./zundamon/注文番号.mp3`);
     for (let i = 0; i < voicequeue.length; i++) {
-        makeAudioList(voicequeue, audiolist, i);
+        await makeAudioList(voicequeue, audiolist, i);
     }
     audiolist.push(`./zundamon/のお客様.mp3`);
     audiolist.push(`./zundamon/お料理が完成いたしました.mp3`);
+
 
     for (let i = 0; i < audiolist.length; i++) {
         const audio = new Audio(audiolist[i]);
@@ -128,12 +124,19 @@ async function playZundamonVoice(voicequeue, tempvoicequeue) {
 
     console.log(`(」・ω・)」ずん!(/・ω・)/だー!`);
 
+    await moveVoiceInTempQueue(tempvoicequeue, voicequeue);
+}
+
+async function moveVoiceInTempQueue(tempvoicequeue, voicequeue) {
     // 再生待ちのQueueがある場合はtempvoicequeueをvoicequeueに移し替えて再生
     // playZundamonVoiceの再帰呼び出し
     if(tempvoicequeue.length > 0) {
-        voicequeue = tempvoicequeue;
-        tempvoicequeue = [];
+        while(tempvoicequeue.length > 0) {
+            voicequeue.push(tempvoicequeue[0]);
+            tempvoicequeue.shift();
+        }
         console.log(voicequeue);
+        console.log(tempvoicequeue);
         playZundamonVoice(voicequeue, tempvoicequeue);
     }else if(tempvoicequeue.length == 0) {
         voiceWaitingFlag = false; // 再生が終わったらフラグを戻す
@@ -141,7 +144,7 @@ async function playZundamonVoice(voicequeue, tempvoicequeue) {
         console.log(`これは出ないはずのログだよ！`);
         return;
     }
-}
+} 
 
 function playAudio(audio) {
     return new Promise((resolve, reject) => {
