@@ -1,231 +1,193 @@
-// 一定時間ごとにデータを更新する
 const refreshInterval = 1000; // 1秒ごとに更新
 
+// 注文データを取得してUIを更新
 function fetchOrders() {
     fetch('api/get_orders.php')
         .then(response => response.json())
         .then(data => {
-            document.getElementById('preparing-orders').innerHTML = '';
-            document.getElementById('cooking-orders').innerHTML = '';
-            document.getElementById('pickup-orders').innerHTML = '';
-            
+            const statusContainers = {
+                2: document.getElementById('preparing-orders'),
+                3: document.getElementById('cooking-orders'),
+                4: document.getElementById('pickup-orders'),
+            };
+
+            Object.values(statusContainers).forEach(container => container.innerHTML = '');
+
             data.forEach(order => {
-                
-                const orderElement = document.createElement('div');
-                orderElement.classList.add('order');
-                orderElement.innerHTML = `
-                    <div class="order-header">
-                        <div class="order-info">
-                            <b>注文ID: ${order.order_id}</b>
-                            <b>呼び出し番号: ${order.call_number}</b>
-                        </div>
-                        <button onclick="updateStatus(${order.order_id}, ${order.provide_status},${order.call_number})">次へ</button>
-                        ${getRevertButton(order.provide_status, order.order_id)}
-                    </div>
-                    <div class="order-body">
-                        ${order.details.map(item => `
-                            <div class="order-item">
-                                <span>商品名: ${item.product_name}</span>
-                                <span>個数: ${item.quantity}</span>
-                            </div>
-                        `).join('')}
-                    </div>
-                `;
-                        
-                // ステータスごとに適切なエリアに表示
-                
-                // デバッグのため、一度非表示にします by hatomato
-                // console.log(order.provide_status);
-                if (order.provide_status === 2) {
-                    document.getElementById('preparing-orders').appendChild(orderElement);
-                } else if (order.provide_status === 3) {
-                    document.getElementById('cooking-orders').appendChild(orderElement);
-                } else if (order.provide_status === 4) {
-                    document.getElementById('pickup-orders').appendChild(orderElement);
-                }
+                const orderElement = createOrderElement(order);
+                const container = statusContainers[order.provide_status];
+                if (container) container.appendChild(orderElement);
             });
         });
 }
 
-// 音声再生用のキュー
-const voicequeue = [];
-const tempvoicequeue = [];
-let voiceWaitingFlag = false; // 音声再生待ちフラグ
-let queueDeletedFlag = false; // キュー削除フラグ
+// 注文要素を作成
+function createOrderElement(order) {
+    const orderElement = document.createElement('div');
+    orderElement.classList.add('order');
+    orderElement.innerHTML = `
+        <div class="order-header">
+            <div class="order-info">
+                <b>注文ID: ${order.order_id}</b>
+                <b>呼び出し番号: ${order.call_number}</b>
+            </div>
+            <button onclick="updateStatus(${order.order_id}, ${order.provide_status}, ${order.call_number})">次へ</button>
+            ${getRevertButton(order.order_id, order.provide_status, order.call_number)}
+        </div>
+        <div class="order-body">
+            ${order.details.map(item => `
+                <div class="order-item">
+                    <span>商品名: ${item.product_name}</span>
+                    <span>個数: ${item.quantity}</span>
+                </div>
+            `).join('')}
+        </div>
+    `;
+    return orderElement;
+}
 
 // ステータスを更新する
-async function updateStatus(orderId, currentStatus,call_number) {
-    let nextStatus;
+async function updateStatus(orderId, currentStatus, callNumber) {
+    const nextStatus = getNextStatus(currentStatus);
+    if (!nextStatus || (currentStatus === 4 && !confirm('提供完了にしますか？'))) return;
 
-    // 現在のステータスに応じて次のステータスを決定
-    if (currentStatus === 1) {
-        nextStatus = 2; // 「決済待ち」→「準備中」
-    } else if (currentStatus === 2) {
-        nextStatus = 3; // 「準備中」→「調理中」
-    } else if (currentStatus === 3) {
-        nextStatus = 4; // 「調理中」→「提供待ち」
-        
-        // 提供待ちになったらその番号の音声を再生
-        if (call_number < 10000) { // 今は9999番までなら再生
-            voicequeue.push(call_number);
-            setTimeout(() => {
-                if (voiceWaitingFlag == false) { // フラグが立っていない場合のみ再生
-                    voiceWaitingFlag = true; // ここでフラグを立てる
-                    console.log(`通常再生開始`);
-                    playZundamonVoice(voicequeue, tempvoicequeue);
-                } else { // フラグが立っている場合はQueueに追加
-                    console.log(`再生中なので別のQueueに追加します:${call_number}`);
-                    tempvoicequeue.push(call_number);
-                }
-            }, 5000); // 5秒待ってから音声再生
-        } else {
-            return;
-        }
-    
-    } else if (currentStatus === 4) {
-        if (!confirm('提供完了にしますか？')) {
-            return; // キャンセルの場合は何もしない
-        }
-        nextStatus = 5; // 「提供待ち」→「提供完了」
-    } else {
-        return; // それ以上進めない（既に「提供完了」の場合）
+    if (nextStatus === 4 && callNumber < 10000) {
+        addNumber(callNumber);
     }
 
-    // ステータスを更新
     fetch(`api/update_status.php?order_id=${orderId}&status=${nextStatus}`)
-        .then(() => {
-            fetchOrders(); // ステータス更新後に再取得
-        });
+        .then(fetchOrders);
 }
 
-async function playZundamonVoice(voicequeue, tempvoicequeue) {
-    const audiolist = [];
-    audiolist.push(`./zundamon/お呼び出しします.mp3`);
-    audiolist.push(`./zundamon/注文番号.mp3`);
-    for (let i = 0; i < voicequeue.length; i++) {
-        await makeAudioList(voicequeue, audiolist, i);
+// 次のステータスを取得
+function getNextStatus(currentStatus) {
+    switch (currentStatus) {
+        case 1: return 2;
+        case 2: return 3;
+        case 3: return 4;
+        case 4: return 5;
+        default: return null;
     }
-    audiolist.push(`./zundamon/のお客様.mp3`);
-    audiolist.push(`./zundamon/お料理が完成いたしました.mp3`);
-
-
-    for (let i = 0; i < audiolist.length; i++) {
-        const audio = new Audio(audiolist[i]);
-        console.log(`再生中: ${audiolist[i]}`); // ログを追加
-
-        try {
-            await playAudio(audio);
-            // console.log(`再生成功: ${audiolist[i]}`);
-            voicequeue.shift();
-        } catch (error) {
-            console.error(`再生失敗: ${audiolist[i]}`, error);
-        }
-    }
-
-    console.log(`(」・ω・)」ずん!(/・ω・)/だー!`);
-
-    await moveVoiceInTempQueue(tempvoicequeue, voicequeue);
 }
 
-async function moveVoiceInTempQueue(tempvoicequeue, voicequeue) {
-    // 再生待ちのQueueがある場合はtempvoicequeueをvoicequeueに移し替えて再生
-    // playZundamonVoiceの再帰呼び出し
-    if(tempvoicequeue.length > 0) {
-        while(tempvoicequeue.length > 0) {
-            voicequeue.push(tempvoicequeue[0]);
-            tempvoicequeue.shift();
-        }
-        console.log(voicequeue);
-        console.log(tempvoicequeue);
-        playZundamonVoice(voicequeue, tempvoicequeue);
-    }else if(tempvoicequeue.length == 0) {
-        voiceWaitingFlag = false; // 再生が終わったらフラグを戻す
-    }else {
-        console.log(`これは出ないはずのログだよ！`);
-        return;
-    }
-} 
+// 呼び出し待ちのキュー？
+const waitingNumbers = [];
+// 音声再生中かどうか
+let isPlaying = false;
+// ?
+let callWaitTimeoutId = null;
 
-function playAudio(audio) {
+function addNumber(callNumber) {
+    // キューにない場合のみ追加
+    if (!waitingNumbers.includes(callNumber))
+        waitingNumbers.push(callNumber);
+
+    // 音声再生中でなければ、2秒後に再生処理を実行
+    if (!isPlaying) {
+        // 既にタイムアウトが設定されている場合はキャンセル
+        if (callWaitTimeoutId !== null) {
+            clearTimeout(callWaitTimeoutId);
+        }
+        // 2秒後に再生処理を実行,その後タイムアウトIDをnullにする
+        callWaitTimeoutId = setTimeout(() => {
+            callWaitTimeoutId = null;
+            processVoiceQueue();
+        }, 2000);
+    }
+}
+
+function removeNumber(callNumber) {
+    // 消したい番号がキューにある場合、その番号を削除
+    const index = waitingNumbers.indexOf(callNumber);
+    if (index >= 0) waitingNumbers.splice(index, 1);
+    // 再生中でなければ、2秒後に再生処理を実行
+    if (!isPlaying) {
+        if (callWaitTimeoutId !== null) {
+            clearTimeout(callWaitTimeoutId);
+        }
+        callWaitTimeoutId = setTimeout(() => {
+            callWaitTimeoutId = null;
+            processVoiceQueue();
+        }, 2000);
+    }
+}
+
+// 呼び出し番号の音声再生キューを処理
+async function processVoiceQueue() {
+    isPlaying = true;
+    
+    while (waitingNumbers.length) {
+        const numberFiles = [];
+        waitingNumbers.sort();
+
+        while (waitingNumbers.length) {
+            const number = waitingNumbers.shift();
+            numberFiles.push(...generateVoiceFiles(number));
+        }
+        
+        await playVoiceFiles(numberFiles);
+        await new Promise(resolve => setTimeout(resolve, 2000));
+    }
+    isPlaying = false;
+}
+
+// 呼び出し番号の音声ファイルを再生
+async function playVoiceFiles(numberFiles) {
+    const audioFiles = [
+        './zundamon/お呼び出しします.mp3',
+        './zundamon/注文番号.mp3',
+        ...numberFiles,
+        './zundamon/のお客様.mp3',
+        './zundamon/お料理が完成いたしました.mp3',
+    ];
+
+    for (const file of audioFiles) {
+        await playAudio(file);
+    }
+}
+
+// 呼び出し番号を音声ファイルに変換
+function generateVoiceFiles(number) {
+    const files = [];
+    const units = [1000, 100, 10, 1];
+    for (const unit of units) {
+        const value = Math.floor(number / unit) * unit;
+        if (value > 0) {
+            files.push(`zundamon/${value}${unit > 1 ? '' : '番'}.mp3`);
+            number %= unit;
+        }
+    }
+    return files;
+}
+
+// 音声再生
+function playAudio(src) {
     return new Promise((resolve, reject) => {
-        audio.play().then(() => {
-            audio.onended = resolve;
-        }).catch(reject);
+        const audio = new Audio(src);
+        audio.onended = resolve;
+        audio.onerror = reject;
+        audio.play();
     });
 }
 
-function makeAudioList(voicequeue, audiolist,i) {
-    // voicequeueをコピーそれを割っていく
-    // voicequeueはそのまま残す
-    voicequeueCopy = voicequeue[i];
-    console.log(`Added to makeAudioList: ${voicequeueCopy}`);
-    // 1000以上の場合は`1000の位`をとる
-    while(voicequeueCopy != 0) {
-        if (voicequeueCopy > 1000 && voicequeueCopy % 1000 != 0) {
-            audiolist.push(`zundamon/${Math.floor(voicequeueCopy/1000)*1000}.mp3`);
-            voicequeueCopy = voicequeueCopy % 1000;
-        }
-        // 1000の倍数の場合は`1000の位"番"`をとる
-        if(voicequeueCopy % 1000 == 0) {
-            audiolist.push(`zundamon/${Math.floor(voicequeueCopy/1000)*1000}番.mp3`);
-            voicequeueCopy = voicequeueCopy % 1000;
-            break;
-        }
-        // 1000未満100以上の場合は`100の位`をとる
-        if(voicequeueCopy > 100 && voicequeueCopy % 100 != 0){
-            audiolist.push(`zundamon/${Math.floor(voicequeueCopy/100)*100}.mp3`);
-            voicequeueCopy = voicequeueCopy % 100;
-        }
-        // 100の倍数の場合は`100の位"番"`をとる
-        if(voicequeueCopy % 100 == 0) {
-            audiolist.push(`zundamon/${Math.floor(voicequeueCopy/100)*100}番.mp3`);
-            voicequeueCopy = voicequeueCopy % 100;
-            break;
-        }
-        // 100未満10以上の場合は`10の位`をとる
-        if(voicequeueCopy > 10 && voicequeueCopy % 10 != 0){
-            audiolist.push(`zundamon/${Math.floor(voicequeueCopy/10)*10}.mp3`)
-            voicequeueCopy = voicequeueCopy % 10;
-        }
-        // 10の倍数の場合は`10の位"番"`をとる
-        if(voicequeueCopy % 10 == 0) {
-            audiolist.push(`zundamon/${Math.floor(voicequeueCopy/10)*10}番.mp3`);
-            voicequeueCopy = voicequeueCopy % 10;
-            break;
-        }
-        // 10未満の場合は`1の位"番"`をとる
-        if (voicequeueCopy > 0) {
-            audiolist.push(`zundamon/${voicequeueCopy}番.mp3`);
-            voicequeueCopy = 0;
-            break;
-        }
-    }
+// 戻すボタンの生成
+function getRevertButton(orderId, currentStatus, callNumber) {
+    const previousStatus = currentStatus === 3 ? 2 : currentStatus === 4 ? 3 : null;
+    return previousStatus ? `<button onclick="revertStatus(${orderId}, ${previousStatus}, ${callNumber})">戻す</button>` : '';
 }
 
-// 前のステータスに戻すボタンを作成
-function getRevertButton(currentStatus, orderId) {
-    let revertButton = '';
+// ステータスを戻す
+function revertStatus(orderId, previousStatus, callNumber) {
 
-    if (currentStatus === 3) { // 「調理中」の場合
-        revertButton = `<button onclick="revertStatus(${orderId}, 2)">戻す</button>`;
-    } else if (currentStatus === 4) { // 「提供待ち」の場合
-        revertButton = `<button onclick="revertStatus(${orderId}, 3)">戻す</button>`;
-    }
-
-    return revertButton;
-}
-
-// 前のステータスに戻す
-function revertStatus(orderId, previousStatus) {
-    if (voicequeue.includes(orderId)) {
-        voicequeue.splice(voicequeue.indexOf(orderId), 1);
+    if (previousStatus === 3 && callNumber < 10000){
+        removeNumber(callNumber);
     }
 
     fetch(`api/update_status.php?order_id=${orderId}&status=${previousStatus}`)
-        .then(() => fetchOrders()); // ステータス更新後に再取得
+        .then(fetchOrders);
 }
 
-// ページ読み込み時にデータを取得し、定期的に更新
+// ページ読み込み時の処理
 window.onload = () => {
     fetchOrders();
     setInterval(fetchOrders, refreshInterval);
