@@ -51,6 +51,7 @@ async function updateStatus(orderId, currentStatus, callNumber) {
     const nextStatus = getNextStatus(currentStatus);
     if (!nextStatus || (currentStatus === 4 && !confirm('提供完了にしますか？'))) return;
 
+    // callNumberの記述はいらないが、一応範囲が9999までなので書いている
     if (nextStatus === 4 && callNumber < 10000) {
         addNumber(callNumber);
     }
@@ -66,7 +67,8 @@ function getNextStatus(currentStatus) {
         case 2: return 3;
         case 3: return 4;
         case 4: return 5;
-        default: return null;
+        // currentStatusがなにかしらのエラーでなかった時のために一応おいてあるっぽい
+        default: console.log("currentStatusがnullです"); return null;
     }
 }
 
@@ -78,7 +80,7 @@ let isPlaying = false;
 let callWaitTimeoutId = null;
 
 function addNumber(callNumber) {
-    // キューにない場合のみ追加
+    // キューに追加したいcallNumberが存在しない場合のみ追加
     if (!waitingNumbers.includes(callNumber))
         waitingNumbers.push(callNumber);
 
@@ -89,6 +91,7 @@ function addNumber(callNumber) {
             clearTimeout(callWaitTimeoutId);
         }
         // 2秒後に再生処理を実行,その後タイムアウトIDをnullにする
+        // setTimeoutは非同期処理なので、他に影響を及ぼさないぞ！！
         callWaitTimeoutId = setTimeout(() => {
             callWaitTimeoutId = null;
             processVoiceQueue();
@@ -109,6 +112,10 @@ function removeNumber(callNumber) {
             callWaitTimeoutId = null;
             processVoiceQueue();
         }, 2000);
+    } else {
+        // 作業中につきコメントアウト
+        // 再生中の場合、再生中の番号を削除
+        // deleteNumberFromPlayingQueue(callNumber);
     }
 }
 
@@ -153,7 +160,9 @@ function generateVoiceFiles(number) {
     for (const unit of units) {
         const value = Math.floor(number / unit) * unit;
         if (value > 0) {
-            files.push(`zundamon/${value}${unit > 1 ? '' : '番'}.mp3`);
+            // デバッグ用
+            // console.log(`zundamon/${value}${number % unit == 0 || value < 10 ? '番' : ''}.mp3`);
+            files.push(`zundamon/${value}${number % unit == 0 || value < 10 ? '番' : ''}.mp3`);
             number %= unit;
         }
     }
@@ -169,6 +178,17 @@ function playAudio(src) {
         audio.play();
     });
 }
+
+// これはリストから完全に消すので関数名などをdeleteにしています
+const deleteNumberListFromPlayingQueue = [];
+
+function deleteNumberFromQueue(number) {
+    deleteNumberListFromPlayingQueue.push(...generateVoiceFiles(number));
+    for (const number of deleteNumberListFromPlayingQueue) {
+
+    }
+}
+
 
 // 戻すボタンの生成
 function getRevertButton(orderId, currentStatus, callNumber) {
