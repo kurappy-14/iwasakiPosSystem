@@ -6,22 +6,27 @@
 
 /* Header styling */
 .header {
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px;
+    padding: 10px 0px;
     background-color: #333;
     color: #fff;
+    top: 0;
 }
 
 .header h1 {
-    margin: 0;
+    padding-left: 20px;
+    margin:0;
 }
 
 /* Menu styling */
 .menu {
+    margin:0;
     display: flex;
     gap: 20px;
+    padding-right: 20px;
 }
 
 .menu a {
@@ -43,6 +48,8 @@
     text-align: center;
     padding: 10px;
     background-color: #f1f1f1;
+    width: 100%;
+    bottom: 0;
 }
 
 
@@ -175,7 +182,7 @@ button#add-product:hover {
     background-color: #28a745;
     color: #fff;
     border: none;
-    border-radius: 20px;
+    border-radius: 4px;
     cursor: pointer;
     margin-top: 20px;
 }
@@ -214,7 +221,7 @@ button#save-categories {
     background-color: #007bff;
     color: #fff;
     border: none;
-    border-radius: 20px;
+    border-radius: 4px;
     cursor: pointer;
     margin-top: 20px;
 }
