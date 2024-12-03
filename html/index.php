@@ -33,7 +33,7 @@ require $AUTH_FILE_PATH;
 <body>
     <h1>中継</h1>
     <nav id="top-menu" class="menu">
-        <a href="adminUI/admin.html">管理者画面</a>
+        <a href="adminUI/admin.php">管理者画面</a>
         <a href="announcementPanel/index.html">呼び出しパネル（大）</a>
         <a href="announcementPanel/division1.html">呼び出しパネル（小1）</a>
         <a href="announcementPanel/division2.html">呼び出しパネル（小2）</a>
