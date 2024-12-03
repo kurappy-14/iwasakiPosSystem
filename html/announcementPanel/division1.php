@@ -1,3 +1,8 @@
+<?php
+$AUTH_FILE_PATH = getenv('AUTH_FILE_PATH');
+require $AUTH_FILE_PATH;
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -12,13 +17,13 @@
         <h1 id="STORENAME">店名</h1>
     </header>
 
-    <div class="container2">
+    <div class="container1">
         <div class="border">
-            <div class="textborder2">
-                <h2>完了</h2>
+            <div class="textborder1">
+                <h2>調理中</h2>
             </div>
-            <div class="list" id="done-list">
-                <ul id="done-items"></ul>
+            <div class="list" id="cooking-list">
+                <ul id="cooking-items"></ul>
             </div>
         </div>
     </div>
@@ -42,13 +47,13 @@
             fetch('read.php')
                 .then(response => response.json())
                 .then(data => {
-                    // 完了のリストを更新
-                    const doneList = document.getElementById('done-items');
-                    doneList.innerHTML = ''; // クリアする
-                    data.completed.forEach(item => {
+                    // 調理中のリストを更新
+                    const cookingList = document.getElementById('cooking-items');
+                    cookingList.innerHTML = ''; // クリアする
+                    data.cooking.forEach(item => {
                         const li = document.createElement('li');
                         li.textContent = item;
-                        doneList.appendChild(li);
+                        cookingList.appendChild(li);
                     });
                 })
                 .catch(error => console.error('Error:', error));

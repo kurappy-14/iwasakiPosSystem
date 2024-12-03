@@ -1,7 +1,7 @@
 let id, reference_number, provide_status, date, orderid, ordercode, quantity, product_code, product_name, price;
 extraction();
 function extraction(){
-    fetch('cash.php', {
+    fetch('cash_control.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

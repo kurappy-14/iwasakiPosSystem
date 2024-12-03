@@ -36,10 +36,10 @@ require $AUTH_FILE_PATH;
     <h1>中継</h1>
     <nav id="top-menu" class="menu">
         <a href="adminUI/admin.php">管理者画面</a>
-        <a href="announcementPanel/index.html">呼び出しパネル（大）</a>
-        <a href="announcementPanel/division1.html">呼び出しパネル（小1）</a>
-        <a href="announcementPanel/division2.html">呼び出しパネル（小2）</a>
-        <a href="kitchenUI/kitchen.html">キッチン画面</a>
-        <a href="register/register.html">レジ画面</a>
+        <a href="announcementPanel/full.php">呼び出しパネル（大）</a>
+        <a href="announcementPanel/division1.php">呼び出しパネル（小1）</a>
+        <a href="announcementPanel/division2.php">呼び出しパネル（小2）</a>
+        <a href="kitchenUI/kitchen_mng.php">キッチン画面</a>
+        <a href="register/register.php">レジ画面</a>
     </nav>
 </html>

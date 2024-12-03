@@ -1,12 +1,17 @@
+<?php
+$AUTH_FILE_PATH = getenv('AUTH_FILE_PATH');
+require $AUTH_FILE_PATH;
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>管理画面</title>
+        <title>注文履歴管理</title>
         <link rel="stylesheet" href="css/control.css">
     </head>
     <body>
-        <h1 class="title">管理画面</h1>
+        <h1 class="title">注文履歴管理</h1>
         <hr />
         <div class="div1">
             <div class="div2">
