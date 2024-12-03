@@ -1,3 +1,8 @@
+<?php
+$AUTH_FILE_PATH = getenv('AUTH_FILE_PATH');
+require $AUTH_FILE_PATH;
+?>
+
 <!DOCTYPE html>
 <html>
 
