@@ -1,5 +1,13 @@
 <?php
+
 session_start();
+
+$loginEnabled = getenv('LOGIN_ENABLED') === 'true';
+
+if ($loginEnabled && (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] == true)) {
+    header('Location: index.php');
+    exit;
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $inputUser = $_POST['username'] ?? '';
@@ -29,11 +37,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html>
 <head>
     <title>ログイン</title>
+    <link rel="stylesheet" type="text/css" href="login_styles.css">
 </head>
 <body>
     <h1>ログイン</h1>
     <?php if (isset($error)): ?>
-        <p style="color: red;"><?php echo $error; ?></p>
+    <p class="error"><?php echo $error; ?></p>
     <?php endif; ?>
     <form method="post" action="login.php">
         <label for="username">ユーザー名:</label>

@@ -21,6 +21,8 @@ require $AUTH_FILE_PATH;
             align-items: center;
         }
         a{
+            text-align: center;
+            width: 16em;
             margin: 10px;
             padding: 10px;
             border: 1px solid black;
