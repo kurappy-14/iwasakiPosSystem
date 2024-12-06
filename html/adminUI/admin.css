@@ -1,14 +1,19 @@
+/* General styling */
+
 body {
     margin:0;
 }
 
-/* General styling */
 .container {
     width: 80%;
     margin: auto;
 }
 
-/* Header styling */
+.hidden { display: none; }
+
+/* ----------------------------- Header & Footer styling ----------------------------- */
+
+/* Header styling ----------------------------- */
 .header {
     width: 100%;
     display: flex;
@@ -20,35 +25,24 @@ body {
     top: 0;
     position: sticky;
 }
-
-.header h1 {
-    padding-left: 20px;
+.header > * {
+    padding: 0 20px;
     margin:0;
 }
 
 /* Menu styling */
 .menu {
-    margin:0;
     display: flex;
     gap: 20px;
-    padding-right: 20px;
 }
-
 .menu a {
     color: #fff;
     text-decoration: none;
     font-size: 16px;
 }
+.menu a:hover { text-decoration: underline; }
 
-.menu a:hover {
-    text-decoration: underline;
-}
-
-/* Content styling */
-.content {
-    padding: 20px;
-}
-
+/* Footer styling ----------------------------- */
 .footer {
     text-align: center;
     padding: 10px;
@@ -58,7 +52,10 @@ body {
 }
 
 
+/* ----------------------------- Content styling ----------------------------- */
 
+
+/* テーブルのスタイル ----------------------------- */
 
 .dashbord-content table {
     width: 100%;
@@ -96,34 +93,7 @@ body {
 }
 
 
-.hidden {
-    display: none;
-}
-
-
-
-button#add-product{
-    margin-top: 5px;
-    margin-bottom: 5px;
-    width: 100%;
-    padding: 10px;
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-
-}
-button#add-product:hover {
-    background-color: #218838;
-}
-
-
-
-
-
-
-/* Category編集のスタイル */
+/* Category編集のスタイル ----------------------------- */
 #category-editor {
     margin-top: 20px;
     background-color: #f9f9f9;
@@ -155,51 +125,6 @@ button#add-product:hover {
     border: 1px solid #ddd;
 }
 
-.category-item input {
-    padding: 8px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 150px;
-}
-
-.category-item button {
-    padding: 8px 16px;
-    font-size: 14px;
-    background-color: #ff6f61;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.category-item button:hover {
-    background-color: #ff3e2d;
-}
-
-.category-item button:focus {
-    outline: none;
-}
-
-#add-category {
-    width: 100%;
-    padding: 10px;
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 20px;
-}
-
-#add-category:hover {
-    background-color: #218838;
-}
-
-#add-category:focus {
-    outline: none;
-}
-
 /* 編集や削除ボタンのスペース調整 */
 .category-item input[type="text"],
 .category-item input[type="number"] {
@@ -217,26 +142,6 @@ button#add-product:hover {
 
 .category-item:nth-child(even) {
     background-color: #f0f0f0;
-}
-
-/* 全体の保存ボタン */
-button#save-categories {
-    width: 100%;
-    padding: 12px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 20px;
-}
-
-button#save-categories:hover {
-    background-color: #0056b3;
-}
-
-button#save-categories:focus {
-    outline: none;
 }
 
 /* 新しいカテゴリ追加フォームの入力フィールドを横並びに */
@@ -258,7 +163,7 @@ div#new-category-form{
     margin-right: 0;  /* 2番目の入力フィールドの右側の余白をなくす */
 }
 
-
+/* function-toggleのスタイル ----------------------------- */
 
 /* 全体レイアウト */
 #settings-container {
@@ -314,23 +219,6 @@ div#new-category-form{
     margin-bottom: 5px;
 }
 
-/* テキスト入力フィールド */
-#settings-B input[type="text"],
-#settings-B input[type="password"] {
-    padding: 8px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 100%; /* 入力フィールドが幅いっぱいになるように */
-    box-sizing: border-box; /* 内側の余白を含める */
-}
-
-/* テキスト入力フィールドのフォーカス時のスタイル */
-#settings-B input[type="text"]:focus,
-#settings-B input[type="password"]:focus {
-    outline: none;
-    border-color: #4CAF50;
-}
 /* トークンとデバイスIDの表示/非表示ボタンのスタイル */
 .input-container {
     display: flex;
@@ -338,53 +226,26 @@ div#new-category-form{
     gap: 10px;
 }
 
-label button.hide {
+label button.hide, label button.show {
     padding: 2px 10px;
     font-size: 10px;
-    color: #5b5b5b;
-    background-color: #b7b7b7;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+}
+
+label button.hide {
+    color: #5b5b5b;
+    background-color: #b7b7b7;
 }
 label button.hide:hover {
     background-color: #a0a0a0;
 }
 label button.show {
-    padding: 2px 10px;
-    font-size: 10px;
     color: #b7b7b7;
     background-color: #5b5b5b;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
 }
 label button.show:hover {
     background-color: #4e4e4e;
 }
-
-
-.input-container button:hover {
-    background-color: #45a049;
-}
-
-
-/* 更新ボタン */
-button#updateSettings {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #4CAF50;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button#updateSettings:hover {
-    background-color: #45a049;
-}
-
