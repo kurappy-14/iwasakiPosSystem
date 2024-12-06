@@ -110,7 +110,7 @@ function removeNumber(callNumber) {
         }
         callWaitTimeoutId = setTimeout(() => {
             callWaitTimeoutId = null;
-            processVoiceQueue();
+            startVoiceSession();
         }, 2000);
     } else {
         // 作業中につきコメントアウト
@@ -120,37 +120,33 @@ function removeNumber(callNumber) {
 }
 
 // 呼び出し番号の音声再生キューを処理
-async function processVoiceQueue() {
+async function startVoiceSession() {
     isPlaying = true;
     
+    //新たな番号が追加されなくなるまで繰り返す
     while (waitingNumbers.length) {
-        const numberFiles = [];
-        waitingNumbers.sort();
-
-        while (waitingNumbers.length) {
-            const number = waitingNumbers.shift();
-            numberFiles.push(...generateVoiceFiles(number));
-        }
-        
-        await playVoiceFiles(numberFiles);
+        await playVoiceFiles();
         await new Promise(resolve => setTimeout(resolve, 2000));
     }
     isPlaying = false;
 }
 
 // 呼び出し番号の音声ファイルを再生
-async function playVoiceFiles(numberFiles) {
-    const audioFiles = [
-        './zundamon/お呼び出しします.mp3',
-        './zundamon/注文番号.mp3',
-        ...numberFiles,
-        './zundamon/のお客様.mp3',
-        './zundamon/お料理が完成いたしました.mp3',
-    ];
+async function playVoiceFiles() {
 
-    for (const file of audioFiles) {
-        await playAudio(file);
+    await playAudio('./zundamon/お呼び出しします.mp3');
+    await playAudio('./zundamon/注文番号.mp3');
+
+    while (waitingNumbers.length) {
+        waitingNumbers.sort();
+        const number = waitingNumbers.shift();
+        for (const file of generateVoiceFiles(number)) {
+            await playAudio(file);
+        }
     }
+
+    await playAudio('./zundamon/のお客様.mp3');
+    await playAudio('./zundamon/お料理が完成いたしました.mp3');
 }
 
 // 呼び出し番号を音声ファイルに変換
