@@ -94,7 +94,7 @@ function addNumber(callNumber) {
         // setTimeoutは非同期処理なので、他に影響を及ぼさないぞ！！
         callWaitTimeoutId = setTimeout(() => {
             callWaitTimeoutId = null;
-            processVoiceQueue();
+            startVoiceSession();
         }, 2000);
     }
 }
