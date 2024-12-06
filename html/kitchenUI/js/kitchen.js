@@ -112,10 +112,6 @@ function removeNumber(callNumber) {
             callWaitTimeoutId = null;
             processVoiceQueue();
         }, 2000);
-    } else {
-        // 作業中につきコメントアウト
-        // 再生中の場合、再生中の番号を削除
-        // deleteNumberFromPlayingQueue(callNumber);
     }
 }
 
@@ -160,8 +156,6 @@ function generateVoiceFiles(number) {
     for (const unit of units) {
         const value = Math.floor(number / unit) * unit;
         if (value > 0) {
-            // デバッグ用
-            // console.log(`zundamon/${value}${number % unit == 0 || value < 10 ? '番' : ''}.mp3`);
             files.push(`zundamon/${value}${number % unit == 0 || value < 10 ? '番' : ''}.mp3`);
             number %= unit;
         }
@@ -178,17 +172,6 @@ function playAudio(src) {
         audio.play();
     });
 }
-
-// これはリストから完全に消すので関数名などをdeleteにしています
-const deleteNumberListFromPlayingQueue = [];
-
-function deleteNumberFromQueue(number) {
-    deleteNumberListFromPlayingQueue.push(...generateVoiceFiles(number));
-    for (const number of deleteNumberListFromPlayingQueue) {
-
-    }
-}
-
 
 // 戻すボタンの生成
 function getRevertButton(orderId, currentStatus, callNumber) {
