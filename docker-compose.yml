@@ -1,7 +1,7 @@
 services:
   web:
     build: ./apache
-    container_name: iwasakipos_web
+    container_name: apache
     tty: true
     ports:
       - "8080:80"
@@ -21,7 +21,7 @@ services:
 
   db:
     build: ./mariaDB
-    container_name: iwasakipos_db
+    container_name: mariaDB
     environment:
       MYSQL_DATABASE: exampledb
       MYSQL_ROOT_PASSWORD: example
