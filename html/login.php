@@ -4,10 +4,10 @@ session_start();
 
 $loginEnabled = getenv('LOGIN_ENABLED') === 'true';
 
-// if ($loginEnabled && (!isset($_SESSION['authenticated']) && $_SESSION['authenticated'] === true)) {
-//     header('Location: index.php');
-//     exit;
-// }
+if (isset($_SESSION['authenticated']) && $_SESSION['authenticated'] === true) {
+    header('Location: index.php');
+    exit;
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $inputUser = $_POST['username'] ?? '';
