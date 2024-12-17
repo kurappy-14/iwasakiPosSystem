@@ -152,7 +152,7 @@ loadSettings().then(settings => {
 async function playVoiceFiles() {
 
     await playAudio(`./${whoSpeak}/お呼び出しします.mp3`);
-    await playAudio(`./${whoSpeak}/注文番号.mp3`);
+    await playAudio(`./${whoSpeak}/呼び出し番号.mp3`);
 
     while (waitingNumbers.length) {
         waitingNumbers.sort();
