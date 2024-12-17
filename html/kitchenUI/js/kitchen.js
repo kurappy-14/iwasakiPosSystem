@@ -127,11 +127,32 @@ async function startVoiceSession() {
     isPlaying = false;
 }
 
+// 2つ上のディレクトリにあるsetting.jsonから設定を読み込む
+async function loadSettings() {
+    const response = await fetch('../../setting.json');
+    const settings = await response.json();
+    return settings;
+}
+
+let whoSpeak = "zundamon";
+
+loadSettings().then(settings => {
+    const isZundamon = settings.isZundamon;
+
+    if (isZundamon) {
+        console.log("Zundamon mode");
+        whoSpeak = "zundamon";
+    } else {
+        console.log("Himari mode");
+        whoSpeak = "himari";
+    }
+});
+
 // 呼び出し番号の音声ファイルを再生
 async function playVoiceFiles() {
 
-    await playAudio('./zundamon/お呼び出しします.mp3');
-    await playAudio('./zundamon/注文番号.mp3');
+    await playAudio(`./${whoSpeak}/お呼び出しします.mp3`);
+    await playAudio(`./${whoSpeak}/注文番号.mp3`);
 
     while (waitingNumbers.length) {
         waitingNumbers.sort();
@@ -141,8 +162,8 @@ async function playVoiceFiles() {
         }
     }
 
-    await playAudio('./zundamon/のお客様.mp3');
-    await playAudio('./zundamon/お料理が完成いたしました.mp3');
+    await playAudio(`./${whoSpeak}/のお客様.mp3`);
+    await playAudio(`./${whoSpeak}/お料理が完成いたしました.mp3`);
 }
 
 // 呼び出し番号を音声ファイルに変換
@@ -152,7 +173,7 @@ function generateVoiceFiles(number) {
     for (const unit of units) {
         const value = Math.floor(number / unit) * unit;
         if (value > 0) {
-            files.push(`zundamon/${value}${number % unit == 0 || value < 10 ? '番' : ''}.mp3`);
+            files.push(`${whoSpeak}/${value}${number % unit == 0 || value < 10 ? '番' : ''}.mp3`);
             number %= unit;
         }
     }

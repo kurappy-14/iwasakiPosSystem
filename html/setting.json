@@ -30,5 +30,6 @@
         "DEVICE": "ここにデバイスIDを入力",
         "PrinterIP": "ここにプリンターのIPを入力"
     },
-    "enableVoiceVoxSpeak": true
+    "enableVoiceVoxSpeak": true,
+    "isZundamon": true
 }
