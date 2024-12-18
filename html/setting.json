@@ -24,7 +24,7 @@
         "PayPay": true,
         "others": true
     },
-    "printer": false,
+    "printer": true,
     "environment": {
         "TOKEN": "ここにトークンを入力",
         "DEVICE": "ここにデバイスIDを入力",

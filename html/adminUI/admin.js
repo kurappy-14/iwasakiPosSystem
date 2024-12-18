@@ -130,3 +130,67 @@ function toggleVisibility(inputId) {
     }
 }
 
+
+
+
+function testPrinterIP() {
+    fetch('adminAPI/settings_io/printTest.php')
+        .then(
+            alert('印刷テストを行いました')
+        )
+}
+
+
+
+
+
+function importSetting() {
+    const fileInput = document.getElementById('import');
+    const file = fileInput.files[0];
+
+    if (!file) {
+        alert('ファイルを選択してね！');
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    fetch('adminAPI/settings_io/import.php', {
+        method: 'POST',
+        body: formData,
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('設定がインポートされたよ！');
+                loadSettings();
+            } else {
+                alert(`エラーが発生しました: ${data.message}`);
+            }
+        })
+        .catch(error => {
+            console.error('エラー:', error);
+            alert('通信エラーが発生しちゃったみたい...');
+        });
+}
+
+
+function resetDB() {
+    if (confirm('本当にリセットしますか？')) {
+        if (confirm('リセットすると全てのデータが消えますがよろしいですか？')) {
+            if (confirm('マ？')) {
+                fetch('adminAPI/reset_db.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('データベースをリセットしました');
+                    } else {
+                        alert('データベースのリセットに失敗しました');
+                    }
+                })
+
+            }
+        }
+    }
+}

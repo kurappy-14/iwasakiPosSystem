@@ -1,11 +1,11 @@
 html, body {
     margin: 0px;
     padding: 0px;
-    background-color: #efefef;
+    background-color: black;
 }
 
 .color1 {
-    color:black;
+    color:white;
     margin-bottom: 10vh;
 }
 
@@ -31,9 +31,9 @@ html, body {
 .box{
     height: 100px;
     width: 29vw;
-    border: solid 1px #666666;
+    border: solid 1px #3d3d3d;
     border-radius: 15px;
-    background-color: white;
+    background-color: #1c1c1c;
     display:flex;
     justify-content: space-between;
     .boxitem1{
@@ -56,14 +56,14 @@ html, body {
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #d0d0d0;
-            color: black;
+            background-color: #3d3d3d;
+            color: white;
             border-radius: 50%;
             transition: background-color 0.3s ease;
             border:none;
         }
         button:hover{
-            background-color: #b9b9b9;
+            background-color: #262626;
         }
         
         .minus{
@@ -83,12 +83,12 @@ html, body {
 
     .price{
         font-size: 20px;
-        color: #444444;
+        color: #a0a0a0;
     }
 
     .stock{
         font-size: 16px;
-        color: #555555;
+        color: gray;
     }
 }
 
@@ -98,7 +98,7 @@ html, body {
     h2{
         font-size: 32px;
         text-align: left;
-        border-bottom: solid 1px #666666;
+        border-bottom: solid 1px #3d3d3d;
     }
 }
 
@@ -115,7 +115,7 @@ html, body {
 
 #total{
     font-size: 40px;
-    color: black;
+    color: white;
     text-align: center;
     padding-top: 3vh;
     margin:0;
@@ -124,8 +124,8 @@ html, body {
 }
 
 #checkout{
-    background-color: #c0c0c0;
-    color: black;
+    background-color: #444444;
+    color: white;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -141,7 +141,7 @@ html, body {
 }
 
 #checkout:hover{
-    background-color: #b0b0b0;
+    background-color: #262626;
 }
 
 #payment{
@@ -151,7 +151,7 @@ html, body {
     width: 50vw;
     height: 50vw;
     overflow: auto;
-    background-color: #efefef;
+    background-color: #1c1c1c;
     border: 1px solid #666666;
     border-radius: 10px;
     position: fixed;
@@ -161,7 +161,7 @@ html, body {
     p{
         font-size: 32px;
         text-align: center;
-        color: black;
+        color: white;
         margin-top: 5vh;
     }
     .paytitle{
@@ -170,7 +170,7 @@ html, body {
 }
 
 #close {
-    color: #666666;
+    color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -192,7 +192,7 @@ html, body {
     width: 40vw;
     border: solid 1px #666666;
     border-radius: 10px;
-    background-color: white;
+    background-color: #1c1c1c;
     margin: auto;
     cursor: pointer;
     display:flex;
@@ -217,7 +217,7 @@ html, body {
     width: 50vw;
     height: 50vw;
     overflow: auto;
-    background-color: #efefef;
+    background-color: #1c1c1c;
     border: 1px solid #666666;
     border-radius: 10px;
     position: fixed;
@@ -226,18 +226,18 @@ html, body {
     transform: translate(-50%, -50%);
     text-align: center;
     #waittitle{
-        color: black;
+        color: white;
         font-size: 40px;
         font-weight: bold;
         margin-top: 4vh;
     }
     #waittotal{
-        color:black;
+        color:white;
         font-size: 32px;
         margin-top: -5vh;
     }
     .waittext h2 {
-        color: black;
+        color: white;
         font-size: 32px;
         margin-bottom: -3vh;
         text-align: center;
@@ -284,15 +284,15 @@ html, body {
         border-radius: 10px;
         font-size: 40px;
         font-weight: 600;
-        color:black;
+        color:white;
         border:none;
         cursor: pointer;
     }
     #payreturn{
-        background-color: #999999;
+        background-color: #444444;
     }
     #payreturn:hover{
-        background-color: #888888;
+        background-color: #333333;
     }
     #paycomplete{
         background-color: #0088ff;
@@ -313,7 +313,7 @@ html, body {
     width: 50vw;
     height: 50vw;
     overflow: auto;
-    background-color: #efefef;
+    background-color: #1c1c1c;
     border: 1px solid #666666;
     border-radius: 10px;
     position: absolute;
@@ -322,7 +322,7 @@ html, body {
     transform: translate(-50%, -50%);
     .wait{
         text-align: center;
-        color: black;
+        color: white;
         font-size: 44px;
         margin-top: 5vh;
         margin-bottom: 10vh;
@@ -388,7 +388,7 @@ html, body {
 }
 
 .wait2{
-    color:black;
+    color:white;
     text-align: center;
     font-size: 50px;
     font-weight: bold;
@@ -397,7 +397,7 @@ html, body {
 }
 
 .wait3{
-    color:black;
+    color:white;
     text-align: center;
     font-size: 32px;
 }
@@ -409,7 +409,7 @@ html, body {
     width: 50vw;
     height: 50vw;
     overflow: auto;
-    background-color: #efefef;
+    background-color: #1c1c1c;
     border: 1px solid #666666;
     border-radius: 10px;
     position: absolute;
@@ -425,7 +425,7 @@ html, body {
     width: 50vw;
     height: 50vw;
     overflow: auto;
-    background-color: #efefef;
+    background-color: #1c1c1c;
     border: 1px solid #666666;
     border-radius: 10px;
     position: absolute;
@@ -433,7 +433,7 @@ html, body {
     left: 50%;
     transform: translate(-50%, -50%);
     p{
-        color:black;
+        color:white;
         text-align: center;
         font-size: 44px;
         font-weight: 500;
@@ -456,10 +456,9 @@ html, body {
     padding:4vh 4vw 4vh 4vw;
     border: none;
     outline: none;
-    background: white;
-    border: 1px solid #666666;
+    background: #666666;
     margin: 4px;
-    color: black;
+    color: white;
     font-size: 48px;
     border-radius: 5px;
     cursor: default;
@@ -488,36 +487,36 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap:2vw;
     margin-top: 3vh;
     margin-bottom: 3vh;
     margin-left: 4.3vw;
     margin-right: 4.3vw;
+    gap:2vw;
     #inputid{
         width: 30vw;
         text-align: center;
         font-size: 50px;
-        color:black;
-        background-color: white;
-        border: 1px solid #666666;
+        color:white;
+        background-color: #666666;
         border-radius: 10px;
+        border:none;
     }
     #Confirmid{
         font-size: 32px;
         padding:2vh;
         width: 10vw;
         border-radius: 10px;
-        color:black;
-        background-color: #c0c0c0;
+        color:white;
+        background-color: #666666;
         border: none;
     }
     #Confirmid:hover{
-        background-color: #b0b0b0;
+        background-color: #444444;
     }
   }
 
-  /*トグルボタンのcss*/
-  .toggle-button {
+/*トグルボタンのcss*/
+.toggle-button {
     margin-top: 3.5vh;
     margin-bottom: -2vh;
     margin-left: 4vw;
