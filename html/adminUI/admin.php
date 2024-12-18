@@ -9,24 +9,24 @@ require $AUTH_FILE_PATH;
 <head>
     <title>Admin</title>
     <link rel="stylesheet" type="text/css" href="admin.css">
+    <link rel="stylesheet" type="text/css" href="../common.css">
     <script src="admin.js"></script>
     <meta charset="utf-8">
 </head>
 
 <body>
+    <div class="header">
+        <h1>Admin</h1>
+        <nav id="top-menu" class="menu">
+            <a href="#product-editor">商品の追加-編集</a>
+            <a href="#category-editor">カテゴリの追加-編集</a>
+            <a href="#payment-log">決済履歴-売り上げの表示</a>
+            <a href="#function-toggle">機能の設定</a>
+            <a href="#other-settings">その他</a>
+        </nav>
+    </div>
+
     <div class="container">
-        <div class="header">
-            <h1>Admin</h1>
-            <nav id="top-menu" class="menu">
-                <a href="#product-editor">商品の追加-編集</a>
-                <a href="#category-editor">カテゴリの追加-編集</a>
-                <a href="#payment-log">決済履歴-売り上げの表示</a>
-                <a href="#function-toggle">機能の設定</a>
-                <a href="#other-settings">その他</a>
-            </nav>
-
-
-        </div>
 
         <div id="product-editor" class="dashbord-content hidden">
             <h2>商品の追加-編集</h2>
@@ -45,7 +45,7 @@ require $AUTH_FILE_PATH;
                     <!-- ここに商品の行が追加されるよ -->
                 </tbody>
             </table>
-            <button id="add-product">商品の追加</button>
+            <button id="add-product" class="btn-green full-width">商品の追加</button>
             <script src="js/product.js"></script>
         </div>
 
@@ -53,14 +53,14 @@ require $AUTH_FILE_PATH;
             <h2>カテゴリの追加-編集</h2>
             <ul id="category-list"></ul>
             <script src="js/category.js"></script>
-            <button id="save-categories" onclick="saveCategories()">全て保存</button>
+            <button id="save-categories" class="btn-blue full-width" onclick="saveCategories()">全て保存</button>
             <!-- カテゴリ追加フォーム -->
             <h3>新しいカテゴリを追加</h3>
             <div id="new-category-form">
                 <input type="text" id="new-category-name" class="category-add-item" placeholder="カテゴリ名" />
                 <input type="number" id="new-category-weight" class="category-add-item" placeholder="重み" />
             </div>
-            <button id="add-category" onclick="addCategory()">カテゴリ追加</button>
+            <button id="add-category" class="btn-green full-width" onclick="addCategory()">カテゴリ追加</button>
         </div>
 
         <div id="payment-log" class="dashbord-content hidden">
@@ -75,7 +75,7 @@ require $AUTH_FILE_PATH;
             <!-- 支払い方法のチェックボックスエリア -->
             <h2>機能の設定</h2>
             <!-- 更新ボタン -->
-            <button id="updateSettings" onclick="updateSettings()">更新</button>
+            <button id="updateSettings" class="btn-green" onclick="updateSettings()">更新</button>
             <div id="settings-container">
                 <div id="settings-A">
                     <div id="paytype-settings">
@@ -100,22 +100,22 @@ require $AUTH_FILE_PATH;
                 <!-- 環境設定のセクション -->
                 <div id="settings-B">
                     <label for="store-name">店舗名:</label>
-                    <input type="text" id="store-name" name="store-name" />
+                    <input type="text" id="store-name" class="input full-width" name="store-name" />
 
                     <label for="token">TOKEN: <button id="token-toggle" class="hide" type="button"
                             onclick="toggleVisibility('token')">表示</button></label>
                     <div class="input-container">
-                        <input type="password" id="token" name="token" />
+                        <input type="password" id="token" class="input full-width" name="token" />
                     </div>
 
                     <label for="device-id">DEVICE ID: <button id="device-id-toggle" class="hide" type="button"
                             onclick="toggleVisibility('device-id')">表示</button></label>
                     <div class="input-container">
-                        <input type="password" id="device-id" name="device-id" />
+                        <input type="password" id="device-id" class="input full-width" name="device-id" />
                     </div>
 
                     <label for="printer-ip">Printer IP:</label>
-                    <input type="text" id="printer-ip" name="printer-ip" />
+                    <input type="text" id="printer-ip" class="input full-width" name="printer-ip" />
                     <a id="printer-ip-test" href="javascript:void(0)" onclick="testPrinterIP()">印刷テスト</a>
                 </div>
 
@@ -147,9 +147,9 @@ require $AUTH_FILE_PATH;
         </div>
 
         <br>
-        <div class="footer">
-            <p>Admin Panel</p>
-        </div>
+    </div>
+    <div class="footer">
+        <p>Admin Panel</p>
     </div>
 </body>
 

@@ -29,9 +29,9 @@ function fetchCategories() {
                 const listItem = document.createElement('li');
                 listItem.classList.add('category-item');
                 listItem.innerHTML = `
-                    <input type="text" class="category-name" value="${category.name}" data-index="${category.originalIndex}" />
-                    <input type="number" class="category-weight" value="${category.weight}" data-index="${category.originalIndex}" />
-                    <button onclick="deleteCategory(${category.originalIndex})">削除</button>
+                    <input type="text" class="input category-name" value="${category.name}" data-index="${category.originalIndex}" />
+                    <input type="number" class="input category-weight" value="${category.weight}" data-index="${category.originalIndex}" />
+                    <button class="button btn-red" onclick="deleteCategory(${category.originalIndex})">削除</button>
                 `;
                 categoryList.appendChild(listItem);
             });
