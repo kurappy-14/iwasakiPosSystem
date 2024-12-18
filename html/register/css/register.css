@@ -1,22 +1,20 @@
 html, body {
     margin: 0px;
     padding: 0px;
-    background-color: black;
+    background-color: #efefef;
 }
 
 .color1 {
-    color:white;
+    color:black;
     margin-bottom: 10vh;
 }
 
 .title{
     font-size: 48px;
-    text-align: left;
-    margin:auto;
+    margin-left: 30vw;
     margin-top: 3.5vh;
     margin-bottom: -2vh;
     font-weight: 100;
-    margin-left: 43vw;
 }
 
 .grid{
@@ -33,9 +31,9 @@ html, body {
 .box{
     height: 100px;
     width: 29vw;
-    border: solid 1px #3d3d3d;
+    border: solid 1px #666666;
     border-radius: 15px;
-    background-color: #1c1c1c;
+    background-color: white;
     display:flex;
     justify-content: space-between;
     .boxitem1{
@@ -58,14 +56,14 @@ html, body {
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #3d3d3d;
-            color: white;
+            background-color: #d0d0d0;
+            color: black;
             border-radius: 50%;
             transition: background-color 0.3s ease;
             border:none;
         }
         button:hover{
-            background-color: #262626;
+            background-color: #b9b9b9;
         }
         
         .minus{
@@ -85,12 +83,12 @@ html, body {
 
     .price{
         font-size: 20px;
-        color: #a0a0a0;
+        color: #444444;
     }
 
     .stock{
         font-size: 16px;
-        color: gray;
+        color: #555555;
     }
 }
 
@@ -100,13 +98,16 @@ html, body {
     h2{
         font-size: 32px;
         text-align: left;
-        border-bottom: solid 1px #3d3d3d;
+        border-bottom: solid 1px #666666;
     }
 }
 
 #header{
     display:flex;
     justify-content: space-between;
+    #header1{
+        display:flex;
+    }
     #header2{
         display: flex;
     }
@@ -114,7 +115,7 @@ html, body {
 
 #total{
     font-size: 40px;
-    color: white;
+    color: black;
     text-align: center;
     padding-top: 3vh;
     margin:0;
@@ -123,8 +124,8 @@ html, body {
 }
 
 #checkout{
-    background-color: #444444;
-    color: white;
+    background-color: #c0c0c0;
+    color: black;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -140,7 +141,7 @@ html, body {
 }
 
 #checkout:hover{
-    background-color: #262626;
+    background-color: #b0b0b0;
 }
 
 #payment{
@@ -150,7 +151,7 @@ html, body {
     width: 50vw;
     height: 50vw;
     overflow: auto;
-    background-color: #1c1c1c;
+    background-color: #efefef;
     border: 1px solid #666666;
     border-radius: 10px;
     position: fixed;
@@ -160,7 +161,7 @@ html, body {
     p{
         font-size: 32px;
         text-align: center;
-        color: white;
+        color: black;
         margin-top: 5vh;
     }
     .paytitle{
@@ -169,7 +170,7 @@ html, body {
 }
 
 #close {
-    color: #aaa;
+    color: #666666;
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -191,7 +192,7 @@ html, body {
     width: 40vw;
     border: solid 1px #666666;
     border-radius: 10px;
-    background-color: #1c1c1c;
+    background-color: white;
     margin: auto;
     cursor: pointer;
     display:flex;
@@ -216,7 +217,7 @@ html, body {
     width: 50vw;
     height: 50vw;
     overflow: auto;
-    background-color: #1c1c1c;
+    background-color: #efefef;
     border: 1px solid #666666;
     border-radius: 10px;
     position: fixed;
@@ -225,18 +226,18 @@ html, body {
     transform: translate(-50%, -50%);
     text-align: center;
     #waittitle{
-        color: white;
+        color: black;
         font-size: 40px;
         font-weight: bold;
         margin-top: 4vh;
     }
     #waittotal{
-        color:white;
+        color:black;
         font-size: 32px;
         margin-top: -5vh;
     }
     .waittext h2 {
-        color: white;
+        color: black;
         font-size: 32px;
         margin-bottom: -3vh;
         text-align: center;
@@ -283,15 +284,15 @@ html, body {
         border-radius: 10px;
         font-size: 40px;
         font-weight: 600;
-        color:white;
+        color:black;
         border:none;
         cursor: pointer;
     }
     #payreturn{
-        background-color: #444444;
+        background-color: #999999;
     }
     #payreturn:hover{
-        background-color: #333333;
+        background-color: #888888;
     }
     #paycomplete{
         background-color: #0088ff;
@@ -312,7 +313,7 @@ html, body {
     width: 50vw;
     height: 50vw;
     overflow: auto;
-    background-color: #1c1c1c;
+    background-color: #efefef;
     border: 1px solid #666666;
     border-radius: 10px;
     position: absolute;
@@ -321,7 +322,7 @@ html, body {
     transform: translate(-50%, -50%);
     .wait{
         text-align: center;
-        color: white;
+        color: black;
         font-size: 44px;
         margin-top: 5vh;
         margin-bottom: 10vh;
@@ -337,8 +338,8 @@ html, body {
         border: 4px solid #1a1a1a;
         border-top: 4px solid #00aaff;
         border-radius: 50%;
-        width: 400px;
-        height: 400px;
+        width: 380px;
+        height: 380px;
         animation: spin 1s linear infinite;
     }
       
@@ -387,7 +388,7 @@ html, body {
 }
 
 .wait2{
-    color:white;
+    color:black;
     text-align: center;
     font-size: 50px;
     font-weight: bold;
@@ -396,7 +397,7 @@ html, body {
 }
 
 .wait3{
-    color:white;
+    color:black;
     text-align: center;
     font-size: 32px;
 }
@@ -408,7 +409,7 @@ html, body {
     width: 50vw;
     height: 50vw;
     overflow: auto;
-    background-color: #1c1c1c;
+    background-color: #efefef;
     border: 1px solid #666666;
     border-radius: 10px;
     position: absolute;
@@ -424,7 +425,7 @@ html, body {
     width: 50vw;
     height: 50vw;
     overflow: auto;
-    background-color: #1c1c1c;
+    background-color: #efefef;
     border: 1px solid #666666;
     border-radius: 10px;
     position: absolute;
@@ -432,9 +433,9 @@ html, body {
     left: 50%;
     transform: translate(-50%, -50%);
     p{
-        color:white;
+        color:black;
         text-align: center;
-        font-size: 48px;
+        font-size: 44px;
         font-weight: 500;
     }
 }
@@ -455,9 +456,10 @@ html, body {
     padding:4vh 4vw 4vh 4vw;
     border: none;
     outline: none;
-    background: #666666;
+    background: white;
+    border: 1px solid #666666;
     margin: 4px;
-    color: white;
+    color: black;
     font-size: 48px;
     border-radius: 5px;
     cursor: default;
@@ -486,6 +488,7 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap:2vw;
     margin-top: 3vh;
     margin-bottom: 3vh;
     margin-left: 4.3vw;
@@ -493,22 +496,65 @@ html, body {
     #inputid{
         width: 30vw;
         text-align: center;
-        font-size: 60px;
-        color:white;
-        background-color: #666666;
+        font-size: 50px;
+        color:black;
+        background-color: white;
+        border: 1px solid #666666;
         border-radius: 10px;
-        border:none;
     }
     #Confirmid{
         font-size: 32px;
         padding:2vh;
         width: 10vw;
         border-radius: 10px;
-        color:white;
-        background-color: #666666;
+        color:black;
+        background-color: #c0c0c0;
         border: none;
     }
     #Confirmid:hover{
-        background-color: #444444;
+        background-color: #b0b0b0;
     }
   }
+
+  /*トグルボタンのcss*/
+  .toggle-button {
+    margin-top: 3.5vh;
+    margin-bottom: -2vh;
+    margin-left: 4vw;
+    display: inline-block;
+    position: relative;
+    width: 100px;
+    height: 50px;
+    border-radius: 50px;
+    border: 3px solid #cfcfcf;
+    box-sizing: content-box;
+    cursor: pointer;
+    transition: border-color .4s;
+}
+
+.toggle-button:has(:checked) {
+    border-color: #cfcfcf;
+    background-color: #000000;
+}
+
+.toggle-button::after {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: #cfcfcf;
+    content: '';
+    transition: left .4s;
+}
+
+.toggle-button:has(:checked)::after {
+    left: 50px;
+    background-color: #ffffff;
+}
+
+.toggle-button input {
+    display: none;
+}

@@ -102,18 +102,21 @@ require $AUTH_FILE_PATH;
                     <label for="store-name">店舗名:</label>
                     <input type="text" id="store-name" name="store-name" />
 
-                    <label for="token">TOKEN: <button id="token-toggle" class="hide" type="button" onclick="toggleVisibility('token')">表示</button></label>
+                    <label for="token">TOKEN: <button id="token-toggle" class="hide" type="button"
+                            onclick="toggleVisibility('token')">表示</button></label>
                     <div class="input-container">
                         <input type="password" id="token" name="token" />
                     </div>
 
-                    <label for="device-id">DEVICE ID: <button id="device-id-toggle" class="hide" type="button" onclick="toggleVisibility('device-id')">表示</button></label>
+                    <label for="device-id">DEVICE ID: <button id="device-id-toggle" class="hide" type="button"
+                            onclick="toggleVisibility('device-id')">表示</button></label>
                     <div class="input-container">
                         <input type="password" id="device-id" name="device-id" />
                     </div>
 
                     <label for="printer-ip">Printer IP:</label>
                     <input type="text" id="printer-ip" name="printer-ip" />
+                    <a id="printer-ip-test" href="javascript:void(0)" onclick="testPrinterIP()">印刷テスト</a>
                 </div>
 
 
@@ -129,7 +132,20 @@ require $AUTH_FILE_PATH;
                 <li><a href="adminAPI/csv_ouput/productscsv.php">productscsv</a></li>
                 <li><a href="adminAPI/csv_ouput/purchasecsv.php">purchasecsv</a></li>
             </ul>
+            <hr>
+            <h2>設定ファイルのエクスポート</h2>
+            <a href="../setting.json" download="export.json">設定ファイルのエクスポート</a>
+            <h2>設定ファイルのインポート</h2>
+            <input type="file" id="import" accept=".json" />
+            <button id="import-button" onclick="importSetting()">インポート</button>
+            <hr>
+            <details>
+                <summary>データベースのリセット</summary>
+                <button id="reset-db" onclick="resetDB()">実行</button>
+            </details>
+
         </div>
+
         <br>
         <div class="footer">
             <p>Admin Panel</p>

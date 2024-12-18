@@ -8,12 +8,13 @@ require $AUTH_FILE_PATH;
     <head>
         <meta charset="UTF-8">
         <title>Cash register</title>
-        <link rel="stylesheet" href="css/register.css">
+        <link rel="stylesheet" href="css/registerB.css" id="css">
     </head>
     <body>
         <div class="color1">
             <div id="header">
                 <div id="header1">
+                    <label class="toggle-button"><input type="checkbox"  id="toggle"/></label>
                     <h1 class="title">メニュー</h1>
                 </div>
                 <div id="header2"></div>
