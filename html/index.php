@@ -1,4 +1,10 @@
+<?php
+$AUTH_FILE_PATH = getenv('AUTH_FILE_PATH');
+require $AUTH_FILE_PATH;
+?>
+
 <!-- ここに各種画面への導線を用意 -->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +21,8 @@
             align-items: center;
         }
         a{
+            text-align: center;
+            width: 16em;
             margin: 10px;
             padding: 10px;
             border: 1px solid black;
@@ -27,11 +35,11 @@
 <body>
     <h1>中継</h1>
     <nav id="top-menu" class="menu">
-        <a href="adminUI/admin.html">管理者画面</a>
-        <a href="announcementPanel/index.html">呼び出しパネル（大）</a>
-        <a href="announcementPanel/division1.html">呼び出しパネル（小1）</a>
-        <a href="announcementPanel/division2.html">呼び出しパネル（小2）</a>
-        <a href="kitchenUI/kitchen.html">キッチン画面</a>
-        <a href="register/register.html">レジ画面</a>
+        <a href="adminUI/admin.php">管理者画面</a>
+        <a href="announcementPanel/full.php">呼び出しパネル（大）</a>
+        <a href="announcementPanel/division1.php">呼び出しパネル（小1）</a>
+        <a href="announcementPanel/division2.php">呼び出しパネル（小2）</a>
+        <a href="kitchenUI/kitchen_mng.php">キッチン画面</a>
+        <a href="register/register.php">レジ画面</a>
     </nav>
 </html>
