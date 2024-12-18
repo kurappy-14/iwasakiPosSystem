@@ -22,12 +22,14 @@
         "iD": true,
         "IC": true,
         "PayPay": true,
-        "others": false
+        "others": true
     },
     "printer": true,
     "environment": {
         "TOKEN": "ここにトークンを入力",
         "DEVICE": "ここにデバイスIDを入力",
-        "PrinterIP": "192.168.137.25"
-    }
+        "PrinterIP": "ここにプリンターのIPを入力"
+    },
+    "enableVoiceVoxSpeak": true,
+    "isZundamon": true
 }
