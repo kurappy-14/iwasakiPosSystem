@@ -19,6 +19,8 @@ if ($data) {
         $settings['printer'] = $data['printer'];
         $settings['STORENAME'] = $data['STORENAME'];  // STORENAMEの更新
         $settings['environment'] = $data['environment'];
+        $settings['isZundamon'] = $data['isZundamon'];  // isZundamonの更新
+        $settings['enableVoiceVoxSpeak'] = $data['enableVoiceVoxSpeak'];  // enableVoiceVoxSpeakの更新
 
         // 更新されたデータを設定ファイルに書き込む
         file_put_contents($jsonFilePath, json_encode($settings, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE));
