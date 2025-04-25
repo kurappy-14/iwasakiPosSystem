@@ -59,6 +59,10 @@ function loadSettings() {
             // プリンター設定
             document.getElementById('printer').checked = data.printer;
 
+            // / 音声合成の設定
+            document.getElementById('enableVoiceVoxSpeak').checked = data.enableVoiceVoxSpeak;
+            document.getElementById('isZundamon').checked = data.isZundamon;
+
             // 環境設定
             document.getElementById('store-name').value = data.STORENAME;
             document.getElementById('token').value = data.environment.TOKEN;
@@ -87,7 +91,9 @@ function updateSettings() {
             TOKEN: document.getElementById('token').value,
             DEVICE: document.getElementById('device-id').value,
             PrinterIP: document.getElementById('printer-ip').value,
-        }
+        },
+        enableVoiceVoxSpeak: document.getElementById('enableVoiceVoxSpeak').checked,
+        isZundamon: document.getElementById('isZundamon').checked,
     };
 
     fetch('adminAPI/settings_io/settings_update.php', {

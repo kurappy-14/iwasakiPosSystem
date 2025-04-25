@@ -95,6 +95,12 @@ require $AUTH_FILE_PATH;
                         <label>プリンター設定:</label>
                         <label><input type="checkbox" id="printer" /> サーマルプリンターを使用</label>
                     </div>
+                    <hr>
+                    <!-- 
+                                        "enableVoiceVoxSpeak": true,
+                                        "isZundamon": true -->
+                                        <label for="enableVoiceVoxSpeak"><input type="checkbox" id="enableVoiceVoxSpeak" />音声合成</label>
+                                        <label><input type="checkbox" id="isZundamon" />ずんだもん</label>
                 </div>
 
                 <!-- 環境設定のセクション -->
