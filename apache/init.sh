@@ -39,4 +39,6 @@ else
   echo "ログイン機能は無効です。"
 fi
 
+chmod 777 /var/www/html/setting.json
+composer install
 exec apache2-foreground

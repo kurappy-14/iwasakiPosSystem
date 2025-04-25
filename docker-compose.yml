@@ -14,8 +14,7 @@ services:
       - ./html:/var/www/html
     depends_on:
       - db
-    command: > 
-      bash -c "composer install && chmod 777 /var/www/html/setting.json "
+    
     entrypoint: ["/usr/local/bin/init.sh"]
 
 
