@@ -1,0 +1,560 @@
+html, body {
+    margin: 0px;
+    padding: 0px;
+    background-color: #efefef;
+}
+
+.color1 {
+    color:black;
+    margin-bottom: 10vh;
+}
+
+.title{
+    font-size: 48px;
+    margin-left: 30vw;
+    margin-top: 3.5vh;
+    margin-bottom: -2vh;
+    font-weight: 100;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap:15px;
+    column-gap: 10px;
+    justify-content: center;
+    align-items: center;
+    max-width: 90vw;
+    margin: 0 auto;
+}
+
+.box{
+    height: 100px;
+    width: 29vw;
+    border: solid 1px #666666;
+    border-radius: 15px;
+    background-color: white;
+    display:flex;
+    justify-content: space-between;
+    .boxitem1{
+        padding-left: 1vw;
+        padding-top: 1vh;
+        p{
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+    }
+    
+    .boxitem2{
+        display: flex;
+        align-items: center;
+        padding-right: 2vw;
+        button{
+            font-size: 32px;
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #d0d0d0;
+            color: black;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+            border:none;
+        }
+        button:hover{
+            background-color: #b9b9b9;
+        }
+        
+        .minus{
+            padding-bottom: 5px;
+        }
+
+        span{
+            font-size: 32px;
+            margin-left: 1vw;
+            margin-right: 1vw;
+        }
+    }
+
+    .productname{
+        font-size: 24px;
+    }
+
+    .price{
+        font-size: 20px;
+        color: #444444;
+    }
+
+    .stock{
+        font-size: 16px;
+        color: #555555;
+    }
+}
+
+#menu{
+    margin-left:50px;
+    margin-right:50px;
+    h2{
+        font-size: 32px;
+        text-align: left;
+        border-bottom: solid 1px #666666;
+    }
+}
+
+#header{
+    display:flex;
+    justify-content: space-between;
+    #header1{
+        display:flex;
+    }
+    #header2{
+        display: flex;
+    }
+}
+
+#total{
+    font-size: 40px;
+    color: black;
+    text-align: center;
+    padding-top: 3vh;
+    margin:0;
+    margin-top: 1.5vh;
+    margin-right: 1vw;
+}
+
+#checkout{
+    background-color: #c0c0c0;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    height: 80px;
+    width: 10vw;
+    font-size: 28px;
+    border:none;
+    text-align: center;
+    margin:0;
+    margin-top: 3vh;
+    margin-right: 1vw;
+}
+
+#checkout:hover{
+    background-color: #b0b0b0;
+}
+
+#payment{
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 50vw;
+    height: 50vw;
+    overflow: auto;
+    background-color: #efefef;
+    border: 1px solid #666666;
+    border-radius: 10px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    p{
+        font-size: 32px;
+        text-align: center;
+        color: black;
+        margin-top: 5vh;
+    }
+    .paytitle{
+        margin-left: 3vw;
+    }
+}
+
+#close {
+    color: #666666;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    margin-right: 2%;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+#close:hover{
+    color: #262626;
+}
+
+.hidden{
+    display: none;
+}
+
+.paybox{
+    height: 7vh;
+    width: 40vw;
+    border: solid 1px #666666;
+    border-radius: 10px;
+    background-color: white;
+    margin: auto;
+    cursor: pointer;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+    p{
+        margin-bottom: 5vh;
+        font-size: 24px;
+    }
+    margin-bottom: 1vh;
+}
+
+.paybox:hover{
+    border-color: aquamarine;
+}
+
+#paywait{
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 50vw;
+    height: 50vw;
+    overflow: auto;
+    background-color: #efefef;
+    border: 1px solid #666666;
+    border-radius: 10px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    #waittitle{
+        color: black;
+        font-size: 40px;
+        font-weight: bold;
+        margin-top: 4vh;
+    }
+    #waittotal{
+        color:black;
+        font-size: 32px;
+        margin-top: -5vh;
+    }
+    .waittext h2 {
+        color: black;
+        font-size: 32px;
+        margin-bottom: -3vh;
+        text-align: center;
+        font-weight: 500;
+    }
+    .waittext p {
+        color: #888;
+        font-size: 28px;
+    }
+}
+  
+  .spin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+  
+  .circle {
+    border: 4px solid #1a1a1a;
+    border-top: 4px solid #00aaff;
+    border-radius: 50%;
+    width: 300px;
+    height: 300px;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+.waitbutton{
+    display:flex;
+    margin-top: 6vh;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    button{
+        width: 20vw;
+        height: 100px;
+        margin-left: 1vw;
+        margin-right: 1vw;
+        border-radius: 10px;
+        font-size: 40px;
+        font-weight: 600;
+        color:black;
+        border:none;
+        cursor: pointer;
+    }
+    #payreturn{
+        background-color: #999999;
+    }
+    #payreturn:hover{
+        background-color: #888888;
+    }
+    #paycomplete{
+        background-color: #0088ff;
+    }
+    #paycomplete:hover{
+        background-color: #0066ff;
+    }
+}
+
+
+
+/*接続中css*/
+
+#waitingfor{
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 50vw;
+    height: 50vw;
+    overflow: auto;
+    background-color: #efefef;
+    border: 1px solid #666666;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    .wait{
+        text-align: center;
+        color: black;
+        font-size: 44px;
+        margin-top: 5vh;
+        margin-bottom: 10vh;
+    }
+    .spin {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 24px;
+    }
+      
+    .circle {
+        border: 4px solid #1a1a1a;
+        border-top: 4px solid #00aaff;
+        border-radius: 50%;
+        width: 380px;
+        height: 380px;
+        animation: spin 1s linear infinite;
+    }
+      
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+}
+
+
+/*完了画面のcss*/
+.dli-check-circle {
+    display: inline-block;
+    vertical-align: middle;
+    color: #00ccff;
+    line-height: 1;
+    position: relative;
+    width: 20em;
+    height: 20em;
+    border: 2em solid currentColor;
+    border-radius: 50%;
+    box-sizing: content-box;
+}
+
+.dli-check-circle>span {
+    width: 11.6em;
+    height: 5.22em;
+    border: 2em solid currentColor;
+    border-top: 0;
+    border-right: 0;
+    box-sizing: border-box;
+    transform: translateY(-25%) rotate(-45deg);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.circle2 {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.wait2{
+    color:black;
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    margin-top: 10vh;
+    margin-bottom: -5vh;
+}
+
+.wait3{
+    color:black;
+    text-align: center;
+    font-size: 32px;
+}
+
+#purchase{
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 50vw;
+    height: 50vw;
+    overflow: auto;
+    background-color: #efefef;
+    border: 1px solid #666666;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#callidinput{
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 50vw;
+    height: 50vw;
+    overflow: auto;
+    background-color: #efefef;
+    border: 1px solid #666666;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    p{
+        color:black;
+        text-align: center;
+        font-size: 44px;
+        font-weight: 500;
+    }
+}
+
+/*キーパッドのcss*/
+.keybord-wrapper {
+    min-width: 80%;
+    max-width: 80%;
+    padding: 15px;
+    margin: 0 auto;
+  }
+  .keybord-wrapper .keys {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .keybord-wrapper .keys input {
+    padding:4vh 4vw 4vh 4vw;
+    border: none;
+    outline: none;
+    background: white;
+    border: 1px solid #666666;
+    margin: 4px;
+    color: black;
+    font-size: 48px;
+    border-radius: 5px;
+    cursor: default;
+  }
+  /* ボタンが押された時 */
+  .keybord-wrapper .keys input:focus {
+    font-size: 48px;
+    font-weight: bold;
+    color: aquamarine;
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.5),
+      inset -3px -3px 7px rgba(255, 255, 255, 0.05);
+  }
+  .keybord-wrapper .keys input[value="C"] {
+    padding:4vh 3.8vw 4vh 3.8vw;
+  }
+  .keybord-wrapper .keys input[value="←"] {
+    padding:4vh 3.4vw 4vh 3.4vw;
+  }
+  @media (max-width: 480px) {
+    .keybord-wrapper {
+      padding: 6px;
+    }
+  }
+
+  .inputcell{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap:2vw;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+    margin-left: 4.3vw;
+    margin-right: 4.3vw;
+    #inputid{
+        width: 30vw;
+        text-align: center;
+        font-size: 50px;
+        color:black;
+        background-color: white;
+        border: 1px solid #666666;
+        border-radius: 10px;
+    }
+    #Confirmid{
+        font-size: 32px;
+        padding:2vh;
+        width: 10vw;
+        border-radius: 10px;
+        color:black;
+        background-color: #c0c0c0;
+        border: none;
+    }
+    #Confirmid:hover{
+        background-color: #b0b0b0;
+    }
+  }
+
+  /*トグルボタンのcss*/
+  .toggle-button {
+    margin-top: 3.5vh;
+    margin-bottom: -2vh;
+    margin-left: 4vw;
+    display: inline-block;
+    position: relative;
+    width: 100px;
+    height: 50px;
+    border-radius: 50px;
+    border: 3px solid #cfcfcf;
+    box-sizing: content-box;
+    cursor: pointer;
+    transition: border-color .4s;
+}
+
+.toggle-button:has(:checked) {
+    border-color: #cfcfcf;
+    background-color: #000000;
+}
+
+.toggle-button::after {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: #cfcfcf;
+    content: '';
+    transition: left .4s;
+}
+
+.toggle-button:has(:checked)::after {
+    left: 50px;
+    background-color: #ffffff;
+}
+
+.toggle-button input {
+    display: none;
+}

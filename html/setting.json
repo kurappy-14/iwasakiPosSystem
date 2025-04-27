@@ -1,0 +1,35 @@
+{
+    "STORENAME": "ここに店名を入力",
+    "Category": [
+        {
+            "name": "飲み物",
+            "weight": 1
+        },
+        {
+            "name": "食べ物",
+            "weight": 2
+        },
+        {
+            "name": "非表示",
+            "weight": 0
+        }
+    ],
+    "paytype": {
+        "cash": true,
+        "JCB": true,
+        "Visa": true,
+        "QUICPay": true,
+        "iD": true,
+        "IC": true,
+        "PayPay": true,
+        "others": true
+    },
+    "printer": true,
+    "environment": {
+        "TOKEN": "ここにトークンを入力",
+        "DEVICE": "ここにデバイスIDを入力",
+        "PrinterIP": "ここにプリンターのIPを入力"
+    },
+    "enableVoiceVoxSpeak": true,
+    "isZundamon": true
+}

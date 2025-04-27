@@ -1,16 +1,21 @@
 services:
   web:
     build: ./apache
-    container_name: php-apache
+    container_name: apache
     tty: true
     ports:
       - "8080:80"
+    environment:
+      - LOGIN_ENABLED=${LOGIN_ENABLED}
+      - LOGIN_USER=${LOGIN_USER}
+      - LOGIN_PASSWORD=${LOGIN_PASSWORD}
+      - AUTH_FILE_PATH=${AUTH_FILE_PATH}
     volumes:
       - ./html:/var/www/html
     depends_on:
       - db
-    command: > 
-      bash -c "composer install && apache2-foreground"
+    
+    entrypoint: ["/usr/local/bin/init.sh"]
 
 
   db:
