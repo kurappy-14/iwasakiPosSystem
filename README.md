@@ -31,15 +31,15 @@
     docker compose up 
     ```
 
-ブラウザで `http://localhost:8080` にアクセスしてシステムを利用してください。
+ブラウザで<http://localhost:8080>にアクセスしてシステムを利用してください。  
 
 ## ドキュメント関連
 
 画面単位仕様  
-> `screenUnitSpecification.md`  
+> [./screenUnitSpecification/screenUnitSpecification.md](./screenUnitSpecification/screenUnitSpecification.md)  
 
 取扱説明書  
-> `operatingInstructions.md`
+> [./operatingInstructions/operatingInstructions.md](./operatingInstructions/operatingInstructions.md)  
 
 ## ライセンス
 
