@@ -69,12 +69,12 @@
 
 webページへアクセスする
 
-### 5.2. メイン画面の説明
+### 5.2. HOME画面の説明
 
-中継についての説明
+HOMEについての説明
 
-![alt text](images/image.png)
-[メイン画面の構成要素を図 (`![メイン画面](images/main_screen.png)`) と共に説明。各領域の名称や役割]
+![alt text](images/image-1.png)  
+[メイン画面の構成要素を図 (`![メイン画面](images/main_screen.png)`) と共に説明。各領域の名称や役割]  
 
 ---
 
@@ -102,17 +102,17 @@ URL > <http://localhost:8080/adminUI/admin.php#other-settings>
 
 ---
 
-## 7. 学園祭の説明
+## 7. 呼び出しパネルの説明
 
 ### 7.1. 呼び出しパネル(大)
 
 URL > <http://localhost:8080/announcementPanel/full.php>  
 
-### 7.2. 呼び出しパネル(小1)
+### 7.2. 呼び出しパネル(調理中)
 
 URL > <http://localhost:8080/announcementPanel/division1.php>
 
-### 7.3. 呼び出しパネル(小2)  
+### 7.3. 呼び出しパネル(完了)  
 
 URL > <http://localhost:8080/announcementPanel/division2.php>  
 
