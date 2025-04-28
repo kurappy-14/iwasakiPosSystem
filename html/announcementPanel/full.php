@@ -8,7 +8,7 @@ require $AUTH_FILE_PATH;
 
 <head>
     <meta charset="utf-8">
-    <title>学園祭</title>
+    <title>呼び出しパネル</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
