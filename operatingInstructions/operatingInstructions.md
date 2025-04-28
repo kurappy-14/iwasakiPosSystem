@@ -73,7 +73,7 @@ webページへアクセスする
 
 HOMEについての説明
 
-![alt text](images/image.png)  
+![alt text](images/image-1.png)  
 [メイン画面の構成要素を図 (`![メイン画面](images/main_screen.png)`) と共に説明。各領域の名称や役割]  
 
 ---

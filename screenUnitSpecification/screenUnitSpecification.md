@@ -27,7 +27,7 @@
 
 URL > `localhost:8080`
 
-![alt text](images/image.png)
+![alt text](images/image-1.png)
 
 ## Adminの説明
 
