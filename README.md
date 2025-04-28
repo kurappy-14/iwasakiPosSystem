@@ -1,16 +1,46 @@
-first
+# IwaPos
 
-### ログインページについて
+## 概要
 
-- 設定について
-.envに環境変数があるのでこれで制御している見たらわかる
+このプロジェクトは、学園祭などの小規模な物販で販売時点管理をするシステムです。在庫管理、売上追跡、電子決済導入などの機能を提供します。
 
-- 新しくページを追加する際にはセッションを生成していないユーザーをログイン画面にリダイレクトためにauth.phpをインクルードさせてください
-phpの頭にこれ追加するだけなので
+## 特徴
 
-```php
-<?php
-$AUTH_FILE_PATH = getenv('AUTH_FILE_PATH');
-require $AUTH_FILE_PATH;
-?>
-```
+- 簡単に操作できるインターフェースで迅速な取引が可能。
+- リアルタイムでの在庫更新。
+- 電子決済の導入。
+- 完成時の呼び出し機能。
+
+## 使用方法
+
+1. リポジトリをクローンします:
+
+    ```bash
+    git clone https://github.com/kurappy-14/iwasakiPosSystem.git
+    ```
+
+2. プロジェクトディレクトリに移動します:
+
+    ```bash
+    cd iwasakiPosSystem
+    ```
+
+3. dockerを起動します:
+
+    ```bash
+    docker compose up 
+    ```
+
+ブラウザで `http://localhost:8080` にアクセスしてシステムを利用してください。
+
+## ドキュメント関連
+
+画面単位仕様  
+> `screenUnitSpecification.md`  
+
+取扱説明書  
+> `operatingInstructions.md`
+
+## ライセンス
+
+<!-- このプロジェクトは temp ライセンスの下でライセンスされています。詳細は `LICENSE` ファイルをご覧ください。 -->
