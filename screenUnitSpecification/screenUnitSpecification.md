@@ -9,27 +9,27 @@
 - [画面単位技術仕様](#画面単位技術仕様)
   - [概要](#概要)
   - [目次](#目次)
-  - [中継](#中継)
-  - [Admin](#admin)
+  - [HOMEの説明](#homeの説明)
+  - [Adminの説明](#adminの説明)
     - [商品の追加-編集](#商品の追加-編集)
     - [カテゴリの追加-編集](#カテゴリの追加-編集)
     - [決済履歴-売り上げの表示](#決済履歴-売り上げの表示)
     - [機能の設定](#機能の設定)
     - [その他](#その他)
-  - [学園祭](#学園祭)
-    - [呼び出しパネル(大)](#呼び出しパネル大)
-    - [呼び出しパネル(小1)](#呼び出しパネル小1)
-    - [呼び出しパネル(小2)](#呼び出しパネル小2)
-  - [キッチン管理画面](#キッチン管理画面)
+  - [呼び出しパネルの説明](#呼び出しパネルの説明)
+    - [呼び出しパネル](#呼び出しパネル)
+    - [呼び出しパネル(調理中)](#呼び出しパネル調理中)
+    - [呼び出しパネル(完了)](#呼び出しパネル完了)
+  - [キッチン管理画面の説明](#キッチン管理画面の説明)
   - [Cash register](#cash-register)
 
-## 中継
+## HOMEの説明
 
 URL > `localhost:8080`
 
 ![alt text](images/image.png)
 
-## Admin
+## Adminの説明
 
 URL > `localhost:8080/adminUI/admin.php`  
 
@@ -53,21 +53,21 @@ URL > `localhost:8080/adminUI/admin.php#function-toggle`
 
 URL > `localhost:8080/adminUI/admin.php#other-settings`  
 
-## 学園祭
+## 呼び出しパネルの説明
 
-### 呼び出しパネル(大)
+### 呼び出しパネル
 
 URL > `localhost:8080/announcementPanel/full.php`
 
-### 呼び出しパネル(小1)
+### 呼び出しパネル(調理中)
 
 URL > `localhost:8080/announcementPanel/division1.php`
 
-### 呼び出しパネル(小2)
+### 呼び出しパネル(完了)
 
 URL > `localhost:8080/announcementPanel/division2.php`
 
-## キッチン管理画面
+## キッチン管理画面の説明
 
 URL > `localhost:8080/kitchenUI/kitchen_mng.php`
 
