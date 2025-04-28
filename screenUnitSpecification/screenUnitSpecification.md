@@ -27,6 +27,8 @@
 
 URL > `localhost:8080`
 
+![alt text](images/image.png)
+
 ## Admin
 
 URL > `localhost:8080/adminUI/admin.php`  
