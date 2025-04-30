@@ -82,12 +82,12 @@ URL > <http://localhost:8080/>
 ## 7. Adminの説明
 
 ### 7.1. 商品の追加-編集
-
 URL > <http://localhost:8080/adminUI/admin.php#product-editor>  
 
-### 7.2. カテゴリの追加-編集
 
+### 7.2. カテゴリの追加-編集
 URL > <http://localhost:8080/adminUI/admin.php#category-editor>
+
 
 ### 7.3. 決済履歴-売り上げの表示
 
