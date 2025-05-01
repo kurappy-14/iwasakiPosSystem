@@ -294,7 +294,7 @@ path `./html/kitchenUI`にある`himari`or`zundamon`の音声ファイルを差�
 ## 13. FAQ (よくある質問)
 
 Q: \[質問1]  
-なぜサーマルプリンタの接続がEthernet何ですか？  
+なぜサーマルプリンタの接続がEthernetなんですか？  
 A: \[回答1]  
 
 * 安かったから
