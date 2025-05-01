@@ -194,7 +194,7 @@ URL > <http://localhost:8080/adminUI/admin.php#other-settings>
 ### 8.1. 呼び出しパネル(大)
 
 URL > <http://localhost:8080/announcementPanel/full.php>  
-
+![alt text](images/8.image-3.png)
 現在の調理状況を表示します  
 キッチン管理画面から調理状況は変更できます  
 ※画面の大きさによってある程度文字の配列は変わりますが極端に大きい・小さい場合意図しない動きをする場合があります
@@ -202,15 +202,15 @@ URL > <http://localhost:8080/announcementPanel/full.php>
 ### 8.2. 呼び出しパネル(調理中)
 
 URL > <http://localhost:8080/announcementPanel/division1.php>
-
-呼び出しパネル(大)の縮小版です。24inモニタなどにご利用ください。
+![alt text](images/8.image-1.png)
+呼び出しパネル(大)の縮小版です。24inモニタなどにご利用ください。  
 表示されるものは`調理中`のみです。
 
 ### 8.3. 呼び出しパネル(完了)  
 
 URL > <http://localhost:8080/announcementPanel/division2.php>  
-
-呼び出しパネル(大)の縮小版です。24inモニタなどにご利用ください。
+![alt text](images/8.image-2.png)
+呼び出しパネル(大)の縮小版です。24inモニタなどにご利用ください。  
 表示されるものは`完了`のみです。
 
 ---
