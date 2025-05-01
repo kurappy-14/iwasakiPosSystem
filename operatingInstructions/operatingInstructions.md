@@ -73,7 +73,7 @@ webページへアクセスする
 ## 6. HOME画面の説明
 
 URL > <http://localhost:8080/>  
-![alt text](images/6.image.png)  
+<img src="images/6.image.png" alt="home画面" width="300px">  
 こちらのページでは管理者画面やキッチン画面へ飛ぶためのショートカットを提供します。  
 遷移先については各セクションを参照してください。  
 
@@ -118,7 +118,7 @@ URL > <http://localhost:8080/adminUI/admin.php#payment-log>
 
 #### 詳細ポップアップ
 
-<img src="images/7.image-5.png" alt="詳細ポップアップ" width="200px">
+<img src="images/7.image-5.png" alt="詳細ポップアップ" width="250px">
 
 * 注文ID：一意な値です。
 * 呼び出し番号：呼び出しパネルに表示される番号です。(一意ではない場合があります)
@@ -147,7 +147,7 @@ URL > <http://localhost:8080/adminUI/admin.php#function-toggle>
 ### 7.5. その他  
 
 URL > <http://localhost:8080/adminUI/admin.php#other-settings>
-![alt text](images/7.image-7.png)
+<img src="images/7.image-7.png" alt="その他画像" width="500">
 
 * csv出力：データベース内の各テーブルをCSV形式で出力します。
 * 設定ファイルのエクスポート：設定ファイルをjson形式でエクスポートします。
