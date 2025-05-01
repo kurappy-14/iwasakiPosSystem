@@ -179,7 +179,7 @@ URL > <http://localhost:8080/adminUI/admin.php#function-toggle>
 
 ### 7.5. その他  
 
-URL > <http://localhost:8080/adminUI/admin.php#other-settings>
+URL > <http://localhost:8080/adminUI/admin.php#other-settings>  
 <img src="images/7.image-7.png" alt="その他画像" width="500">
 
 * csv出力：データベース内の各テーブルをCSV形式で出力します。
