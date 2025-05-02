@@ -186,6 +186,15 @@ URL > <http://localhost:8080/announcementPanel/division2.php>
 ### 9.1. キッチン管理画面
 
 URL > <http://localhost:8080/kitchenUI/kitchen_mng.php>
+![alt text](image.png)
+次へ、戻すボタンで状態を切り替えます。
+
+準備中と提供待ちは呼び出し側で調理中として表示されます。
+
+提供待ちにした際に設定で有効ならずんだもんが読み上げます。
+提供待ちから次へを押すと完了に移行し表示されなくなります。
+
+
 
 ---
 
