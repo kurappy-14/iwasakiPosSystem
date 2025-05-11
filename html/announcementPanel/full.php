@@ -46,8 +46,11 @@ require $AUTH_FILE_PATH;
             if(windowHeight<1000){
                 calcHeight = Math.floor(windowHeight / 120);
                 fontHeight = Math.floor(windowHeight / 110);
+            }else if(2000 < windowHeight){
+                calcHeight = Math.floor(windowHeight / 150);
+                fontHeight = Math.floor(windowHeight / 40);
             }else if(1500 < windowHeight){
-                fontHeight = Math.floor(windowHeight / 80);
+                fontHeight = Math.floor(windowHeight/80);
             }
             //フォントサイズ変更
             document.documentElement.style.setProperty('--li-font-size',70+fontHeight+'px');
