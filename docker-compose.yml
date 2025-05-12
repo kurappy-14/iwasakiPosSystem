@@ -6,10 +6,10 @@ services:
     ports:
       - "8080:80"
     environment:
-      - LOGIN_ENABLED=${LOGIN_ENABLED}
-      - LOGIN_USER=${LOGIN_USER}
-      - LOGIN_PASSWORD=${LOGIN_PASSWORD}
-      - AUTH_FILE_PATH=${AUTH_FILE_PATH}
+      LOGIN_ENABLED: ${LOGIN_ENABLED}
+      LOGIN_USER: ${LOGIN_USER}
+      LOGIN_PASSWORD: ${LOGIN_PASSWORD}
+      AUTH_FILE_PATH: /var/www/html/auth.php
     volumes:
       - ./html:/var/www/html
     depends_on:
