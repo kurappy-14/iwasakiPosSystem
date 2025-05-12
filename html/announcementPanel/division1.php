@@ -46,6 +46,8 @@ require $AUTH_FILE_PATH;
             //フォントサイズ変更
             document.documentElement.style.setProperty('--li-font-size',70+fontHeight+'px');
             document.querySelector('ul').style.gridTemplateRows = `repeat(${calcHeight}, 1fr)`;
+            document.documentElement.style.setProperty('--h1-font-size',(62+calcHeight)+"px");
+            document.documentElement.style.setProperty('--h2-font-size',(46+calcHeight)+"px");
             fetch('../setting.json')
             .then(response => response.json())
             .then(data => {

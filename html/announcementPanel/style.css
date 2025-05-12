@@ -1,17 +1,19 @@
 :root{
     --li-font-size:60px;    /*フォントサイズ*/
+    --h1-font-size:64px;
+    --h2-font-size:48px;
 }
 
 h2{
     text-align: center;
-    font-size: 48px;
+    font-size: var(--h2-font-size);
     margin-top: -1px;
     margin-bottom: -5px;
 }
 
 h1{
     text-align: center;
-    font-size: 64px;
+    font-size: var(--h1-font-size);
     margin:0;
 }
 .container {
