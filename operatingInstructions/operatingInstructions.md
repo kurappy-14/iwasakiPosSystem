@@ -287,7 +287,7 @@ URL > <http://localhost:8080/register/register.php>
 
 ![alt text](images/10.image-1.png)
 
-* 会計するボタンを押すとAdmin-機能設定で設定された支払い方法が表示されます  
+* 会計するボタンを押すとAdmin-機能設定で設定された支払い方法が表示されます
 
 ![alt text](images/10.image-2.png)
 
@@ -302,7 +302,7 @@ URL > <http://localhost:8080/register/register.php>
 
 ![alt text](images/10.image-4.png)
 
-* プリンターがない場合は案内番号(任意)を入力した後完了となります  
+* プリンターがない場合は呼び出し番号(任意)を入力した後完了となります  
 
 > **注:** 指定した番号と紙等で渡す番号は間違えないよう注意してください
 
