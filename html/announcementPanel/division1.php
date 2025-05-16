@@ -29,58 +29,37 @@ require $AUTH_FILE_PATH;
     </div>
 
     <script>
-        //画面サイズに合わせて動的に行数を変更
-        function changerow(){
-            let windowHeight = window.innerHeight;
-            calcHeight = Math.floor(windowHeight / 110);
-            fontHeight = Math.floor(windowHeight / 100);
-            if(windowHeight<1000){
-                calcHeight = Math.floor(windowHeight / 120);
-                fontHeight = Math.floor(windowHeight / 110);
-            }else if(2000 < windowHeight){
-                calcHeight = Math.floor(windowHeight / 150);
-                fontHeight = Math.floor(windowHeight / 40);
-            }else if(1500 < windowHeight){
-                fontHeight = Math.floor(windowHeight/80);
-            }
-            //フォントサイズ変更
-            document.documentElement.style.setProperty('--li-font-size',70+fontHeight+'px');
-            document.querySelector('ul').style.gridTemplateRows = `repeat(${calcHeight}, 1fr)`;
-            document.documentElement.style.setProperty('--h1-font-size',(62+calcHeight)+"px");
-            document.documentElement.style.setProperty('--h2-font-size',(46+calcHeight)+"px");
-            fetch('../setting.json')
-            .then(response => response.json())
-            .then(data => {
-                STORENAME = data.STORENAME;
-                document.getElementById("STORENAME").textContent = STORENAME;
-            })
-            .catch(error => console.error('Error', error));
-        }
-
         function updateLists() {
+            let STORENAME;
+            let windowHeight = window.innerHeight;
+            document.documentElement.style.setProperty('--grid-object',`repeat(${Math.floor(windowHeight/150)}, 1fr)`);
             fetch('read.php')
                 .then(response => response.json())
                 .then(data => {
                     // 調理中のリストを更新
                     const cookingList = document.getElementById('cooking-items');
                     cookingList.innerHTML = ''; // クリアする
-                    data.cooking.forEach(item => {
+                    for (let i = 0; i < Math.min(data.cooking.length, Math.floor(windowHeight/150)*6); i++) {
                         const li = document.createElement('li');
-                        li.textContent = item;
+                        li.textContent = data.cooking[i];
                         cookingList.appendChild(li);
-                    });
+                    }
                 })
                 .catch(error => console.error('Error:', error));
+            fetch('../setting.json')
+                .then(response => response.json())
+                .then(data => {
+                    STORENAME = data.STORENAME;
+                    document.getElementById("STORENAME").textContent = STORENAME;
+            })
         }
 
         // n秒ごとにリストを更新
-        const updateInterval = 500; // 例えば5秒ごと
+        const updateInterval = 500;
         setInterval(updateLists, updateInterval);
-        setInterval(changerow, updateInterval);
 
         // 初回のリスト更新
         updateLists();
-        changerow();
     </script>
 
 </body>
