@@ -1,7 +1,7 @@
 :root{
-    --li-font-size:60px;    /*フォントサイズ*/
-    --h1-font-size:64px;
-    --h2-font-size:48px;
+    --h1-font-size:calc(56px + 1vw);
+    --h2-font-size:calc(36px + 1vw);
+    --grid-object:repeat(7, 1fr);
 }
 
 h2{
@@ -25,7 +25,8 @@ h1{
     .border{
         width: 45%;
         padding: 10px;
-        height: 80vh;
+        height: 100%;
+        margin-bottom: 0;
     }
     li{
         font-weight: bold;
@@ -157,13 +158,12 @@ h1{
 
 ul{
     display: grid;
-    grid-template-rows: repeat(10, 1fr);
+    grid-template-rows: var(--grid-object);
     grid-auto-flow: column;
     list-style: none;
-    height: 100%;
     padding-left: 0;
 }
 
 li{
-    font-size: var(--li-font-size);
+    font-size: calc(40px + 3vw);
 }
