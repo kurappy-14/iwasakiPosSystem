@@ -35,11 +35,11 @@
 
 ## ドキュメント関連
 
-画面単位仕様  
-> [./screenUnitSpecification/screenUnitSpecification.md](./screenUnitSpecification/screenUnitSpecification.md)  
-
 取扱説明書  
-> [./operatingInstructions/operatingInstructions.md](./operatingInstructions/operatingInstructions.md)  
+> [./document/取扱説明書/README.md](./document/取扱説明書/README.md)  
+
+画面単位仕様  
+> [./document/画面単位仕様書/README.md](./document/画面単位仕様書/README.md)  
 
 ## ライセンス
 
