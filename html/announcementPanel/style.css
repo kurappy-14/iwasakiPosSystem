@@ -1,13 +1,19 @@
+:root{
+    --h1-font-size:calc(56px + 1vw);
+    --h2-font-size:calc(36px + 1vw);
+    --grid-object:repeat(7, 1fr);
+}
+
 h2{
     text-align: center;
-    font-size: 48px;
+    font-size: var(--h2-font-size);
     margin-top: -1px;
     margin-bottom: -5px;
 }
 
 h1{
     text-align: center;
-    font-size: 64px;
+    font-size: var(--h1-font-size);
     margin:0;
 }
 .container {
@@ -19,29 +25,30 @@ h1{
     .border{
         width: 45%;
         padding: 10px;
-        height: 80vh;
+        height: 100%;
+        margin-bottom: 0;
     }
-    
     li{
-        font-size: 72px;
         font-weight: bold;
         margin-bottom: -2.5vh;
+        width: 100%;
+        text-align: center;
     }
-    
     hr{
         width: 90%;
     }
-    
     .textborder1{
         border:solid 1px black;
         background-color: gray;
         color:white;
+        padding-bottom:1%;
     }
     
     .textborder2{
         border:solid 1px black;
         background-color: green;
         color:white;
+        padding-bottom:1%;
     }
     
     #cooking-list{
@@ -64,11 +71,14 @@ h1{
         padding: 10px;
         height: 80vh;
     }
-    
+    ul{
+        padding-left: 0;
+    }
     li{
-        font-size: 72px;
         font-weight: bold;
         margin-bottom: -2.5vh;
+        width: 100%;
+        text-align: center;
     }
     
     hr{
@@ -79,12 +89,14 @@ h1{
         border:solid 1px black;
         background-color: gray;
         color:white;
+        padding-bottom:1%;
     }
     
     .textborder2{
         border:solid 1px black;
         background-color: green;
         color:white;
+        padding-bottom:1%;
     }
     
     #cooking-list{
@@ -107,42 +119,51 @@ h1{
         padding: 10px;
         height: 80vh;
     }
-    
+    ul{
+        padding-left: 0;
+    }
     li{
-        font-size: 72px;
         font-weight: bold;
         margin-bottom: -2.5vh;
+        width: 100%;
+        text-align: center;
     }
-    
+
     hr{
         width: 90%;
     }
-    
+
     .textborder1{
         border:solid 1px black;
         background-color: gray;
         color:white;
+        padding-bottom:1%;
     }
-    
+
     .textborder2{
         border:solid 1px black;
         background-color: green;
         color:white;
+        padding-bottom:1%;
     }
-    
+
     #cooking-list{
         color:gray;
     }
-    
+
     #done-list{
         color:green;
     }
 }
-    
+
 ul{
     display: grid;
-    grid-template-rows: repeat(10, 1fr);
+    grid-template-rows: var(--grid-object);
     grid-auto-flow: column;
     list-style: none;
-    height: 100%;
+    padding-left: 0;
+}
+
+li{
+    font-size: calc(40px + 3vw);
 }

@@ -77,7 +77,7 @@ require $AUTH_FILE_PATH;
             </div>
         </div>
         <div id="callidinput" class="hidden">
-            <p>案内番号を入力してください</p>
+            <p>呼び出し番号を入力してください</p>
             <div class="inputcell">
                 <input type="input" id="inputid" size="4" maxlength="4" placeholder="CALLID HERE" value="" oninput="this.value = this.value.replace(/[^0-9]/g, '');"></input>
                 <button id="Confirmid">確定</button>

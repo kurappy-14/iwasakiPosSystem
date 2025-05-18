@@ -8,7 +8,7 @@ require $AUTH_FILE_PATH;
 <!DOCTYPE html>
 <html>
 <head>
-    <title>中継</title>
+    <title>HOME</title>
     <meta charset="utf-8">
     <style>
         h1 {
@@ -33,12 +33,12 @@ require $AUTH_FILE_PATH;
     </style>
 </head>
 <body>
-    <h1>中継</h1>
+    <h1>HOME</h1>
     <nav id="top-menu" class="menu">
         <a href="adminUI/admin.php">管理者画面</a>
-        <a href="announcementPanel/full.php">呼び出しパネル（大）</a>
-        <a href="announcementPanel/division1.php">呼び出しパネル（小1）</a>
-        <a href="announcementPanel/division2.php">呼び出しパネル（小2）</a>
+        <a href="announcementPanel/full.php">呼び出しパネル</a>
+        <a href="announcementPanel/division1.php">呼び出しパネル（調理中）</a>
+        <a href="announcementPanel/division2.php">呼び出しパネル（調理完了）</a>
         <a href="kitchenUI/kitchen_mng.php">キッチン画面</a>
         <a href="register/register.php">レジ画面</a>
     </nav>

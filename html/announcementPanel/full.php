@@ -8,7 +8,7 @@ require $AUTH_FILE_PATH;
 
 <head>
     <meta charset="utf-8">
-    <title>学園祭</title>
+    <title>呼び出しパネル</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -37,55 +37,46 @@ require $AUTH_FILE_PATH;
     </div>
 
     <script>
-        //画面サイズに合わせて動的に行数を変更
-        let STORENAME;
-        function changerow(){
-            differenceheight = document.documentElement.clientHeight-1080;
-            newdefaultrow = 10 + Math.floor(differenceheight/80);
-            document.querySelector('ul').style.gridTemplateRows = `repeat(${newdefaultrow}, 1fr)`;
-            document.getElementById('done-items').style.gridTemplateRows = `repeat(${newdefaultrow}, 1fr)`;
-            fetch('../setting.json')
-            .then(response => response.json())
-            .then(data => {
-                STORENAME = data.STORENAME;
-                document.getElementById("STORENAME").textContent = STORENAME;
-            })
-            .catch(error => console.error('Error', error));
-        }
-
         function updateLists() {
+            let STORENAME;
+            let windowHeight = window.innerHeight;
+            document.documentElement.style.setProperty('--grid-object',`repeat(${Math.floor(windowHeight/150)}, 1fr)`);
             fetch('read.php')
                 .then(response => response.json())
                 .then(data => {
                     // 調理中のリストを更新
                     const cookingList = document.getElementById('cooking-items');
                     cookingList.innerHTML = ''; // クリアする
-                    data.cooking.forEach(item => {
+                    for (let i = 0; i < Math.min(data.cooking.length, Math.floor(windowHeight/150)*3); i++) {
                         const li = document.createElement('li');
-                        li.textContent = item;
+                        li.textContent = data.cooking[i];
                         cookingList.appendChild(li);
-                    });
+                    }
 
                     // 完了のリストを更新
                     const doneList = document.getElementById('done-items');
                     doneList.innerHTML = ''; // クリアする
-                    data.completed.forEach(item => {
+                    for (let i = 0; i < Math.min(data.completed.length, Math.floor(windowHeight/150)*3); i++) {
                         const li = document.createElement('li');
-                        li.textContent = item;
+                        li.textContent = data.completed[i];
                         doneList.appendChild(li);
-                    });
+                    }
                 })
                 .catch(error => console.error('Error:', error));
+            fetch('../setting.json')
+                .then(response => response.json())
+                .then(data => {
+                    STORENAME = data.STORENAME;
+                    document.getElementById("STORENAME").textContent = STORENAME;
+            })
         }
 
         // n秒ごとにリストを更新
-        const updateInterval = 500; // 例えば5秒ごと
+        const updateInterval = 500;
         setInterval(updateLists, updateInterval);
-        setInterval(changerow,updateInterval);
 
         // 初回のリスト更新
         updateLists();
-        changerow();
     </script>
 
 </body>
